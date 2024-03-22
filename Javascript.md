@@ -683,6 +683,7 @@ En JavaScript, el alcance de una variable se refiere a dónde en tu código pued
 
 Una variable global es aquella que se declara fuera de cualquier función. Estas variables son accesibles desde cualquier parte del código, tanto dentro como fuera de las funciones.
 
+
 ```javascript
 var nombre = "Juan";
 
@@ -723,56 +724,6 @@ if (true) {
 console.log(mensaje); // Esto lanzará un error, ya que mensaje está fuera de alcance
 ```
 
-
-Por supuesto, aquí tienes una explicación simple sobre el alcance de las variables en JavaScript en formato Markdown:
-
-## Alcance de las variables en JavaScript
-
-En JavaScript, el alcance de una variable se refiere a dónde en tu código puedes acceder y usar esa variable. Aquí te explico los dos tipos principales de alcance de variables:
-
-### Alcance global
-
-Una variable global es aquella que se declara fuera de cualquier función. Estas variables son accesibles desde cualquier parte del código, tanto dentro como fuera de las funciones.
-
-```javascript
-var nombre = "Juan";
-
-function saludar() {
-  console.log("Hola, " + nombre);
-}
-
-saludar(); // Imprimirá "Hola, Juan"
-En este ejemplo, la variable nombre es global, por lo que puede ser usada tanto dentro como fuera de la función saludar.
-
-Alcance local
-Una variable local es aquella que se declara dentro de una función. Estas variables solo son accesibles dentro de la función en la que se declaran.
-
-javascript
-Copy code
-function sumar(a, b) {
-  var resultado = a + b;
-  return resultado;
-}
-
-console.log(resultado); // Esto lanzará un error, ya que resultado no está definido
-En este ejemplo, la variable resultado solo es accesible dentro de la función sumar. Intentar acceder a ella fuera de esa función resultará en un error.
-
-Alcance de bloque (a partir de ES6)
-Con la introducción de ECMAScript 6 (también conocido como ES6), JavaScript introdujo el alcance de bloque con las palabras clave let y const. Las variables declaradas con let y const tienen un alcance de bloque, lo que significa que solo son accesibles dentro del bloque de código en el que se declaran.
-
-javascript
-Copy code
-if (true) {
-  let mensaje = "Hola";
-  console.log(mensaje); // Imprimirá "Hola"
-}
-
-console.log(mensaje); // Esto lanzará un error, ya que mensaje está fuera de alcance
-```
-En este ejemplo, la variable mensaje solo es accesible dentro del bloque if.
-
-No se recomienda hacer un uso extensivo de variables globales en JavaScript. Es preferible limitar su uso y, en su lugar, utilizar variables locales siempre que sea posible.
-
 Algunas razones por las que:
 
 1. __Evita Colisiones de Nombres:__ Con variables globales, existe el riesgo de que se produzcan colisiones de nombres, especialmente en proyectos grandes donde múltiples partes del código pueden estar interactuando. Esto puede hacer que sea difícil depurar y entender el código.
@@ -780,6 +731,342 @@ Algunas razones por las que:
 2. __Mantenimiento Más Difícil:__ Las variables globales pueden ser modificadas desde cualquier parte del código, lo que hace más difícil rastrear y entender cómo se están utilizando. Esto puede dificultar el mantenimiento del código a largo plazo.
 
 3. __Facilita el Reuso:__ Las variables locales son más fáciles de reutilizar y refactorizar, ya que están limitadas al contexto de la función en la que se declaran. Esto promueve un diseño más modular y flexible del código.
+
+
+## Paso de argumentos
+
+En JavaScript, un paso de argumentos se refiere a cómo se pasan los valores a una función cuando se llama. Cuando llamas a una función en JavaScript, puedes enviarle datos que la función puede usar para realizar alguna tarea. Estos datos se denominan argumentos de la función.
+
+Por ejemplo, considera la siguiente función:
+
+```javascript
+function suma(a, b) {
+  return a + b;
+}
+// LLamamos a la función guardando el valor que devuelve en la variable resultado
+var resultado = suma(2, 3);
+```
+
+### Paso de argumentos como valor o referencia
+
+En JavaScript, los argumentos pueden pasarse por valor o por referencia, dependiendo del tipo de dato que estés manipulando. Aquí tienes una breve explicación de ambos conceptos con ejemplos:
+
+#### Paso por valor:
+
+En el paso por valor, se pasa una copia del valor original a la función, por lo que cualquier modificación hecha dentro de la función no afectará al valor original fuera de ella.
+
+Ejemplo:
+
+```javascript
+function duplicar(x) {
+  x = x * 2;
+  return x;
+}
+
+let numero = 5;
+console.log(duplicar(numero)); // Output: 10
+console.log(numero); // Output: 5 (el valor original no se modifica)
+```
+#### Paso por referencia:
+
+En el paso por referencia, se pasa una referencia a la ubicación de memoria del valor original, por lo que cualquier modificación realizada dentro de la función afectará al valor original fuera de ella.
+
+Ejemplo:
+
+```javascript
+function agregarElemento(arr) {
+  arr.push(4);
+  return arr;
+}
+
+let array = [1, 2, 3];
+console.log(agregarElemento(array)); // Output: [1, 2, 3, 4]
+console.log(array); // Output: [1, 2, 3, 4] (el valor original se modifica)
+```
+
+Puedes evitar que un objeto se modifique dentro de una función al pasar una copia del objeto en lugar de una referencia directa. Puedes lograr esto usando técnicas como la desestructuración o creando un nuevo objeto y copiando las propiedades del original. Aquí te muestro dos formas comunes de lograrlo:
+
+Usando la desestructuración para crear una copia del objeto:
+
+```javascript
+var someUser = {
+    name: 'Jordan'
+}
+
+function nameFormatter (userName) {
+    return userName = 'Oops';
+}
+//Modificado
+someUser.name; // "Oops"
+
+function nameFormatter (userName) {
+    return userName = 'Oops';
+}
+
+nameFormatter(someUser.name); // "Oops"
+//No modifica el original
+someUser.name; // "Kristine"
+```
+
+### Cierres de Javascript (Clousures)
+
+Los closures en JavaScript son un concepto un poco abstracto, pero te daré una explicación sencilla.
+
+Imagina que tienes una caja que contiene un regalo. Esta caja también tiene una llave especial que solo tú tienes. Cuando le das la llave a otra persona, esa persona puede abrir la caja y ver el regalo, pero solo tú puedes cambiar lo que está dentro de la caja. En este caso, la caja sería el closure, la llave es la función que lo crea y el regalo es el contexto interno de la función que se "encierra".
+
+Veamos un ejemplo de código:
+
+```javascript
+function saludar(nombre) {
+  var mensaje = '¡Hola, ' + nombre + '!';
+  function decirHola() {
+    console.log(mensaje);
+  }
+  return decirHola;
+}
+
+var saludarJuan = saludar('Juan');
+var saludarMaría = saludar('María');
+
+saludarJuan(); // Imprime: ¡Hola, Juan!
+saludarMaría(); // Imprime: ¡Hola, María!
+```
+En este ejemplo, la función saludar devuelve otra función, decirHola, que tiene acceso al contexto de saludar, incluido el parámetro nombre y la variable mensaje. Cuando llamamos a saludar('Juan'), creamos un closure donde mensaje se establece como '¡Hola, Juan!'. Lo mismo sucede con saludar('María'), donde mensaje es '¡Hola, María!'. Aunque las variables locales de saludar no son accesibles desde fuera, la función interna decirHola todavía tiene acceso a ellas gracias al closure.
+
+En resumen, los closures en JavaScript permiten que una función acceda a las variables de su ámbito externo incluso después de que la función haya terminado de ejecutarse. Esto es útil para mantener datos privados y crear funciones especializadas que puedan acceder a esos datos.
+
+Otro ejemplo:
+
+```javascript
+function battingAverage () {
+  var hits = 100;
+  var atBats = 300;
+
+  return {
+    getCurrentAverage: function () {
+      return (hits/atBats);
+    },
+    updateHitsAndAtBats: function (hit, atBat) {
+      hits += hit;
+      atBats += atBat;
+    }
+  }
+}
+
+var altuve = battingAverage();
+console.log(altuve.getCurrentAverage());
+altuve.updateHitsAndAtBats(0, 20);
+console.log(altuve.getCurrentAverage());
+```
+## This en Javascript
+
+La palabra clave this en JavaScript se refiere al contexto de ejecución actual. En otras palabras, this hace referencia al objeto al que pertenece la función en la que se utiliza.
+
+La forma en que this se comporta depende de cómo se invoca la función en la que se utiliza. Aquí hay algunos escenarios comunes:
+
+En el contexto global: Si this se utiliza fuera de cualquier función, hace referencia al objeto global en el navegador (por ejemplo, window).
+
+En el contexto de un objeto: Si this se utiliza dentro de un método de un objeto, hace referencia al objeto mismo al que pertenece el método.
+
+En el contexto de una función: Si this se utiliza dentro de una función, su valor depende de cómo se llama a esa función. Si se llama directamente, this puede hacer referencia al objeto global o a undefined (en modo estricto), pero si se utiliza en una función dentro de un objeto, puede hacer referencia al objeto que contiene esa función.
+
+Un ejemplo sencillo:
+
+```javascript
+class Person {
+  constructor(name){
+    this.name = name;
+  }
+}
+
+const yourPerson = new Person('Jordan');
+```
+Otro ejemplo:
+
+```javascript
+var seats = {
+  seats: 50,
+  seatsSold: 28,
+  remainingSeats: function(){
+    return (this.seats - this.seatsSold)
+    },
+  enoughSeats: function(){
+    if(this.remainingSeats() > 0){
+      return this.remainingSeats();
+    }
+  }
+}
+
+
+seats.enoughSeats()
+```
+
+## Arrays
+
+En JavaScript, un array es una estructura de datos que permite almacenar una colección ordenada de elementos. Los elementos dentro de un array pueden ser de cualquier tipo de datos, como números, cadenas, objetos, u otros arrays. Un array se define utilizando corchetes [ ] y los elementos se separan por comas.
+
+Por ejemplo:
+
+```javascript
+let miArray = [1, 2, 3, 4, 5];
+```
+```javascript
+let miArray = [
+    42,                           // Número
+    "Hola Mundo",                 // Cadena de texto
+    function() {                  // Función anónima
+        console.log("¡Hola!");
+    },
+    {                             // Objeto
+        nombre: "Juan",
+        edad: 30
+    },
+    [1, 2, 3]                     // Otro array
+];
+
+// Accediendo a los elementos del array
+console.log(miArray[0]); // Salida: 42
+console.log(miArray[1]); // Salida: "Hola Mundo"
+miArray[2]();            // Salida en la consola: ¡Hola!
+
+// Accediendo a las propiedades del objeto dentro del array
+console.log(miArray[3].nombre); // Salida: "Juan"
+console.log(miArray[3].edad);   // Salida: 30
+
+// Accediendo a los elementos del array dentro del array
+console.log(miArray[4][0]); // Salida: 1
+console.log(miArray[4][1]); // Salida: 2
+```
+
+### Insertar elementos:
+
+Al final del array:
+
+Para agregar elementos al final del array, puedes usar el método push():
+
+```javascript
+miArray.push(6); // Agrega el elemento 6 al final del array
+```
+
+Al inicio del array:
+
+Para agregar elementos al inicio del array, puedes usar el método unshift():
+
+```javascript
+miArray.unshift(0); // Agrega el elemento 0 al inicio del array
+```
+
+### Eliminar elementos:
+
+Al final del array:
+
+Para eliminar el último elemento del array, puedes usar el método pop():
+
+```javascript
+miArray.pop(); // Elimina el último elemento del array
+```
+
+Al inicio del array:
+
+Para eliminar el primer elemento del array, puedes usar el método shift():
+
+```javascript
+miArray.shift(); // Elimina el primer elemento del array
+```
+
+Ejemplo completo:
+
+```javascript
+let miArray = [1, 2, 3, 4, 5];
+
+// Insertar elementos
+miArray.push(6);   // [1, 2, 3, 4, 5, 6]
+miArray.unshift(0); // [0, 1, 2, 3, 4, 5, 6]
+
+// Eliminar elementos
+miArray.pop();   // [0, 1, 2, 3, 4, 5]
+miArray.shift(); // [1, 2, 3, 4, 5]
+```
+
+Elemento dentro del array que no es ni el primero ni el último:
+
+Para eliminar el elemento Correa del array, puedes usar el método slice():
+
+```javascript
+var arr = ['Altuve', 'Bregman', 'Correa', 'Springer'];
+// El primer número es el index de Correa y el segundo número es el número de elementos a eleminar
+arr.slice(2,1);
+//Si no sél el índice donde está el elemento a eliminar lo busco consigo con indexOg
+var foundElement = arr.indexOf('Correa');
+
+foundElement; // 2
+
+arr.splice(foundElement, 1); // ["Correa"]
+
+console.log(arr); // ["Altuve", "Bregman", "Springer"]
+
+arr.splice(1, 2); // ["Bregman", "Springer"]
+
+console.log(arr);  // ["Altuve"]
+
+```
+
+## Bucles For
+
+1. Bucle for:
+El bucle for es un bucle clásico que se utiliza para iterar sobre una secuencia de valores. Se compone de tres partes: la inicialización, la condición de continuación y la expresión de incremento/decremento.
+
+```javascript
+for (inicialización; condición; expresión de incremento/decremento) {
+  // Código a ejecutar en cada iteración
+}
+for (let i = 0; i < 5; i++) {
+  console.log(i); // Imprime los números del 0 al 4
+}
+```
+2. Bucle for...in:
+El bucle for...in se utiliza para iterar sobre las propiedades de un objeto. En cada iteración, el bucle asigna el nombre de una propiedad del objeto a una variable.
+
+```javascript
+for (variable in objeto) {
+  // Código a ejecutar en cada iteración
+}
+const persona = {
+  nombre: 'Juan',
+  edad: 30,
+  ciudad: 'Madrid'
+};
+
+for (let propiedad in persona) {
+  console.log(propiedad + ': ' + persona[propiedad]);
+}
+// Salida:
+// nombre: Juan
+// edad: 30
+// ciudad: Madrid
+```
+
+3. Método forEach:
+forEach es un método proporcionado por los arrays en JavaScript, que ejecuta una función proporcionada una vez por cada elemento del array.
+
+```javascript
+array.forEach(function(elemento, índice, array) {
+  // Código a ejecutar en cada iteración
+});
+
+const numeros = [1, 2, 3, 4, 5];
+
+numeros.forEach(function(numero) {
+  console.log(numero * 2); // Imprime el doble de cada número
+});
+// Salida:
+// 2
+// 4
+// 6
+// 8
+// 10
+```
+
 
 ## Programas Utilizados
 
