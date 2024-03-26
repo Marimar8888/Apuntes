@@ -1,5 +1,194 @@
 # APUNTES JAVASCRIPT
 
+## ¿Qué diferencia a Javascript de cualquier otro lenguaje de programación?
+
+Algunas de las diferencias entre JavaScript y otros lenguajes:
+
+__1.-__ Es un __lenguaje de programación interpretado__ que se ejecuta en el navegador del cliente, lo que lo convierte en un lenguaje fundamental para el desarrollo web.
+
+Un lenguaje interpretado es aquel cuyas instrucciones son ejecutadas directamente por un programa llamado intérprete. En este proceso, el intérprete lee línea por línea el código fuente y lo traduce a instrucciones ejecutables de forma inmediata. Esto significa que no se necesita compilar el código antes de ejecutarlo, lo que facilita el proceso de desarrollo y depuración.
+
+Por otro lado, existen los lenguajes compilados. Son lenguajes cuyo código fuente se traduce por completo a un lenguaje de máquina específico para el hardware de la computadora mediante un programa llamado compilador. Este proceso genera un archivo ejecutable que puede ser ejecutado posteriormente sin necesidad de volver a traducir el código fuente. Los lenguajes compilados tienden a ser más rápidos en la ejecución, pero a menudo requieren más pasos y tiempo de desarrollo debido al proceso de compilación.
+
+__2.-__ Es un __lenguaje multiparadigma__, lo que significa que soporta programación orientada a objetos, programación funcional y programación imperativa.
+  
+#### `Programación Orientada a Objetos (POO):`
+
+En la programación orientada a objetos, organizamos nuestro código en "objetos", que son como bloques de construcción. Construimos nuestro código utilizando "objetos" como unidades fundamentales. 
+
+Imagina que estás construyendo una casa con bloques de Lego. Cada bloque de Lego es como un objeto en la programación orientada a objetos. Puedes tener bloques de diferentes formas, tamaños y colores, y los ensamblas para construir una estructura más grande y compleja, como una casa. Cada objeto tiene propiedades (cosas que describe) y métodos (acciones que puede realizar). Piensa en los objetos como objetos del mundo real: un coche, una persona o una casa. Cada uno tiene características específicas y puede hacer ciertas cosas.
+
+Por ejemplo, podríamos tener un objeto "Coche" con propiedades como color, marca y modelo, y métodos como "arrancar" o "detenerse". Este enfoque nos permite organizar nuestro código de manera más intuitiva y reutilizable.
+
+Ejemplo en JavaScript:
+
+```javascript
+// Definición de una clase Persona
+class Persona {
+  constructor(nombre, edad) {
+    this.nombre = nombre;
+    this.edad = edad;
+  }
+// Método que define lo que hace una persona cuando saluda y se presenta
+  saludar() {
+    console.log(`Hola, mi nombre es ${this.nombre} y tengo ${this.edad} años.`);
+  }
+}
+// Creación de un objeto persona
+const persona1 = new Persona("Juan", 30);
+
+// Llamada a método saludar()
+persona1.saludar();
+```
+
+#### `Programación Funcional:`
+
+La programación funcional se centra en el uso de funciones como bloques de construcción fundamentales. En este estilo de programación, las funciones son tratadas como valores y pueden pasarse como argumentos a otras funciones o devolverse como resultados de funciones. Las funciones en la programación funcional son "puras", lo que significa que siempre producen el mismo resultado para los mismos datos de entrada y no tienen efectos secundarios.
+
+Por ejemplo, podríamos tener una función "duplicar" que toma un número como entrada y devuelve el doble de ese número. Esta función no cambia ningún estado ni tiene efectos secundarios, simplemente realiza una operación basada en su entrada y devuelve un resultado.
+
+Ejemplo en JavaScript:
+
+
+```javascript
+// Función que suma dos números
+function suma(a, b) {
+  return a + b;
+}
+
+// Función que multiplica dos números
+function multiplicar(a, b) {
+  return a * b;
+}
+
+// Uso de funciones como argumentos
+function operacion(a, b, callback) {
+  return callback(a, b);
+}
+
+// Uso de la función operacion con las funciones suma y multiplicar
+console.log(operacion(5, 3, suma)); // Output: 8
+console.log(operacion(5, 3, multiplicar)); // Output: 15
+```
+
+#### `Programación Imperativa:`
+
+La programación imperativa se basa en la ejecución de instrucciones paso a paso. En este estilo de programación, escribimos código que especifica exactamente cómo se deben realizar las operaciones. Nos centramos en "cómo" se deben hacer las cosas en lugar de en "qué" se debe hacer.
+
+Por ejemplo, podríamos tener un conjunto de instrucciones que describen cómo hacer una taza de té: "calentar el agua", "poner la bolsita de té en la taza", "verter el agua caliente sobre la bolsita de té", etc. Cada instrucción se ejecuta secuencialmente y cambia el estado del programa a medida que avanza.
+
+Ejemplo en JavaScript:
+
+```javascript
+// Función que calcula el factorial de un número de forma imperativa
+function factorial(n) {
+  let resultado = 1;
+  for (let i = 1; i <= n; i++) {
+    resultado *= i;
+  }
+  return resultado;
+}
+
+// Uso de la función factorial
+console.log(factorial(5)); // Output: 120
+```
+
+__3.-__ Es un __lenguaje de tipado dinámico,__ lo que significa que las variables no están asociadas a un tipo de dato específico y pueden cambiar de tipo durante la ejecución del programa. No necesitas declarar explícitamente el tipo de una variable al crearla. El tipo de la variable se determina automáticamente en tiempo de ejecución, según el valor que se le asigna en ese momento.
+
+Un ejemplo simple:
+
+```javascript
+// Declaración de una variable 'x' sin especificar su tipo
+let x;
+
+// Asignación de un valor entero a la variable 'x'
+x = 5;
+
+// La variable 'x' ahora es de tipo número (integer)
+console.log(typeof x); // Output: number
+
+// Asignación de un valor string a la variable 'x'
+x = "Hola mundo";
+
+// La variable 'x' ahora es de tipo string
+console.log(typeof x); // Output: string
+```
+
+__4.-__ Es un __lenguaje que sigue el modelo de eventos y callback,__ lo que lo hace especialmente adecuado para la creación de aplicaciones web interactivas y asincrónicas.
+
+__`Modelo de Eventos en JavaScript:`__
+
+JavaScript es un lenguaje de programación basado en eventos. Esto significa que gran parte de la programación en JavaScript implica esperar y responder a eventos que ocurren en el navegador (como hacer clic en un botón, cargar una página, mover el mouse, etc.). En lugar de ejecutar instrucciones de manera secuencial de arriba a abajo, el código JavaScript espera eventos y responde a ellos.
+
+__`Callbacks en JavaScript:`__
+
+Los callbacks son funciones que se pasan como argumentos a otras funciones. Estas funciones se ejecutarán una vez que se complete una operación asíncrona o un evento ocurra. En JavaScript, los callbacks son una forma común de manejar operaciones asíncronas.
+
+Ejemplo: Manejando un evento de clic con un Callback en JavaScript:
+
+Supongamos que tenemos un botón en nuestro HTML con el id "miBoton" y queremos ejecutar una función cuando se haga clic en ese botón.
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ejemplo de Callbacks en JavaScript</title>
+</head>
+<body>
+
+<button id="miBoton">Haz clic aquí</button>
+
+<script>
+    <!--Definimos una función que será nuestro callback-->
+    function manejarClic() {
+        console.log("¡El botón fue clickeado!");
+    }
+
+    <!--Seleccionamos el botón y agregamos un event listener-->
+    document.getElementById("miBoton").addEventListener("click", manejarClic);
+</script>
+
+</body>
+</html>
+```
+
+En este ejemplo:
+
+* Definimos una función llamada manejarClic que lo que hace es imprimir un mensaje en la consola cuando se llama.
+* Seleccionamos el botón con el ID "miBoton" usando document.getElementById.
+* Utilizamos el método addEventListener para adjuntar un event listener al botón. Este método escucha el evento de clic y llama a la función manejarClic cuando se produce el evento.
+  
+
+__5.-__ Dispone de una __amplia gama de bibliotecas y frameworks,__ como Node.js, React.js, Angular.js, entre otros, que permiten extender sus capacidades y facilitar el desarrollo de aplicaciones complejas.
+
+__Bibliotecas en JavaScript:__
+
+Una biblioteca en JavaScript es un conjunto de funciones y métodos predefinidos que se pueden utilizar para realizar tareas específicas de manera más fácil y eficiente. Estas funciones suelen abordar problemas comunes en el desarrollo web, como manipulación del DOM (Document Object Model), animaciones, manejo de eventos, comunicación con servidores, entre otros. Ejemplos populares de bibliotecas JavaScript incluyen jQuery, lodash, moment.js, Axios, entre otros. Estas bibliotecas simplifican el desarrollo al proporcionar una interfaz consistente y funcionalidades probadas que se pueden reutilizar en múltiples proyectos.
+
+__Frameworks en JavaScript:__
+
+Un framework en JavaScript es un conjunto más completo de herramientas, patrones y convenciones para el desarrollo de aplicaciones web. A menudo, los frameworks ofrecen una estructura y arquitectura predefinida para organizar el código, manejar el enrutamiento, gestionar el estado de la aplicación, realizar solicitudes al servidor, entre otras tareas. Los frameworks en JavaScript son especialmente útiles para el desarrollo de aplicaciones web complejas y de gran escala. Ejemplos populares de frameworks JavaScript incluyen AngularJS, React.js, Vue.js, Express.js, entre otros.
+
+__Diferencias:__
+
+La principal diferencia entre una biblioteca y un framework radica en el control que tienen sobre el flujo de la aplicación. Con una biblioteca, el desarrollador tiene más control y decide cuándo y cómo utilizar las funciones proporcionadas por la biblioteca. En cambio, con un framework, el desarrollador debe seguir la estructura y las convenciones establecidas por el framework, lo que puede limitar la flexibilidad pero simplificar el desarrollo al proporcionar una guía clara sobre cómo construir la aplicación.
+
+__6.-__ Es __ampliamente utilizado en el desarrollo de aplicaciones web,__ desde la creación de páginas estáticas hasta aplicaciones web dinámicas y complejas. Es ampliamente utilizado, debido a su versatilidad y su capacidad para interactuar dinámicamente con el contenido de una página web. Aquí hay algunos conceptos y tecnologías relacionadas con el desarrollo web en JavaScript que son ampliamente utilizados:
+
+* `DOM Manipulation (Manipulación del DOM):` El DOM (Document Object Model) es una representación del contenido de un documento HTML/XML que JavaScript puede manipular dinámicamente para cambiar la estructura, el estilo y el contenido de una página web. La manipulación del DOM es fundamental para crear interacciones dinámicas en una página web, como actualizar elementos en respuesta a eventos del usuario.
+
+* `AJAX (Asynchronous JavaScript and XML):` AJAX es una técnica que permite enviar y recibir datos desde un servidor en segundo plano, sin interferir con la navegación y la visualización de la página web. Permite actualizar partes específicas de una página sin tener que recargarla por completo. Esto se logra utilizando objetos como XMLHttpRequest o, más recientemente, utilizando las funciones de la API Fetch.
+
+* `Frameworks de Frontend:` Los frameworks de frontend proporcionan una estructura y un conjunto de herramientas para facilitar el desarrollo de aplicaciones web complejas. Algunos de los frameworks de frontend más populares son:
+
+  1. __React.js:__ Desarrollado por Facebook, React.js es una biblioteca de JavaScript para construir interfaces de usuario interactivas y reutilizables.. 
+  2. __AngularJS/Angular:__ Mantenido por Google, Angular es un framework de desarrollo de aplicaciones web y móviles que ofrece una solución completa para la construcción de aplicaciones frontend.
+  3. __Vue.js:__ Vue.js es un framework progresivo de JavaScript para la construcción de interfaces de usuario interactivas. Es conocido por su enfoque incremental y su facilidad de integración con proyectos existentes.
+
+* `Gestión de Estado:` En aplicaciones web complejas, puede ser necesario gestionar el estado de la aplicación de manera eficiente. Para esto, se utilizan bibliotecas y patrones de gestión de estado como Redux (para React.js), Vuex (para Vue.js), y RxJS (para Angular), entre otros.
+
+* `Herramientas de Desarrollo:` Existen numerosas herramientas de desarrollo en JavaScript que facilitan la escritura, prueba y depuración de código, así como la optimización del rendimiento de las aplicaciones web. Algunas de estas herramientas incluyen webpack para empaquetar y optimizar recursos, Babel para transpilar código, ESLint para análisis estático de código, y muchas otras.
+
 ## Hoisting
 
 hoisting es un comportamiento en el que las declaraciones de variables (ya sea con var, let o const) y funciones son movidas al inicio de su ámbito actual durante la fase de compilación, pero su asignación de valor permanece en su lugar original. Esto puede causar comportamientos inesperados si no se comprende correctamente.
@@ -20,7 +209,84 @@ var age = 33;
 
 ```
 
-## Variables
+## ¿Cuáles son algunos tipos de datos JS?
+
+1. **Primitivos:**
+   - __Number:__ Representa números, tanto enteros como de punto flotante.
+     ```javascript
+     let edad = 25;
+     let precio = 10.99;
+     ```
+
+   - __String:__ Representa cadenas de texto.
+     ```javascript
+     let nombre = "Juan";
+     let mensaje = 'Hola, mundo!';
+     ```
+
+   - __Boolean:__ Representa un valor lógico verdadero o falso.
+     ```javascript
+     let esMayor = true;
+     let esMenor = false;
+     ```
+
+   - __Null:__ Representa un valor nulo o vacío.
+     ```javascript
+     let valor = null;
+     ```
+
+   - __Undefined:__ Representa un valor no definido.
+     ```javascript
+     let variableNoDefinida;
+     ```
+
+   - __Symbol:__ (Añadido en ECMAScript 6) Representa un identificador único e inmutable.
+     ```javascript
+     const simbolo = Symbol('descripcion');
+     ```
+
+2. __Objetos:__
+   - __Object:__ Representa un objeto, que puede contener propiedades y métodos.
+     ```javascript
+     let persona = { nombre: "Ana", edad: 30 };
+     ```
+
+   - __Array:__ Representa una lista ordenada de elementos.
+     ```javascript
+     let numeros = [1, 2, 3, 4, 5];
+     ```
+
+   - __Function:__ Representa una función en JavaScript.
+     ```javascript
+     function saludar(nombre) {
+         console.log("Hola, " + nombre + "!");
+     }
+     ```
+
+   - __Date:__ Representa una fecha y hora.
+     ```javascript
+     let fechaActual = new Date();
+     ```
+
+   - __RegExp:__ Representa una expresión regular para buscar patrones en cadenas de texto.
+     ```javascript
+     let expresionRegular = /[a-z]+/g;
+     ```
+
+   - __Map:__ Representa una colección de pares clave/valor.
+     ```javascript
+     let mapa = new Map();
+     mapa.set("clave", "valor");
+     ```
+
+   - __Set:__ Representa una colección de valores únicos.
+     ```javascript
+     let conjunto = new Set();
+     conjunto.add(1);
+     conjunto.add(2);
+     ```
+
+## Declaración de Variables
 
 __var:__ Esta fue la forma original de declarar variables en JavaScript. Sin embargo, debido a algunas características no deseadas de var, como el hoisting y el alcance de función, se recomienda usar let o const en su lugar.
 
@@ -28,48 +294,11 @@ __let:__ Introducida en ECMAScript 6 (también conocido como ES6 o ES2015), let 
 
 __const:__ También introducida en ECMAScript 6, const se utiliza para declarar variables cuyos valores no cambiarán. Una vez que se asigna un valor a una variable const, no se puede reasignar a otro valor.
 
-Estos tipos de variables pueden almacenar diferentes tipos de datos en JavaScript:
-
-__Number:__ Para representar números, tanto enteros como de punto flotante.
-
-```javascript
-let age = 25;
-let temperature = 98.6;
-```
-
-__String:__ Para representar texto.
-
-```javascript
-let name = "John Doe";
-```
-__Boolean:__ Para representar valores verdaderos o falsos.
-
-```javascript
-let isLogged = true;
-```
-
-__Array:__ Para almacenar una colección de elementos.
-
-```javascript
-let colors = ["red", "green", "blue"];
-```
-
-__Object:__ Para representar una colección de propiedades.
-
-```javascript
-let person = {
-    name: "John",
-    age: 30,
-    city: "New York"
-};
-```
-
 __Undefined:__ Para representar una variable que no tiene un valor asignado.
 
 ```javascript
 let x;
 ```
-
 __Null:__ Para representar la ausencia de valor.
 
 ```javascript
@@ -447,6 +676,8 @@ const getAverage = arr => { // Para recorrer el array
 
 ## Condicionales
 
+Un condicional en programación es una estructura de control que permite ejecutar cierto bloque de código si se cumple una condición especificada. Si la condición es verdadera, se ejecuta un bloque de código; si es falsa, se puede ejecutar otro bloque de código alternativo o simplemente no se ejecuta nada.
+
 1. Condicionales básicos (if-else):
 
    - if: Es como preguntar algo. Si la respuesta es "sí", haces algo.
@@ -498,7 +729,7 @@ const getAverage = arr => { // Para recorrer el array
 
     ```
 
-Nota importante: En la condición es muy importante tener en cuenta el número de signos de =.
+__`Nota importante:`__ En la condición es muy importante tener en cuenta el número de signos de =.
 
 ```javascript
 Con dos == no tendrá en cuenta el tipo de dato si coincide o no entre las dos variables de la condición. Si Resulta que age es string y lo comparas con un number no tendrá en cuenta que age es un string.
@@ -609,6 +840,10 @@ const userOne = {
 
 adminControls(userOne); //"showing admin controls"
 ```
+- Si el usuario __está logueado__ y cumple que valor en el atributo admin __true__ le saldra un mensaje que dirá `*showing admin controls*` y le mostrará el contenido al que quiere acceder.
+- Si el usuario __está logueado__ y tiene como valor __false__ le saldrá un mensaje que dirá `*You need to be an admin*` y __no__ le dejará ver el contenido al que quiere acceder.
+- Si __no se ha logueado,__ e intenta entrar en un contenido o hacer una operación como puede ser procesar lo que hay en un carrito de la compra, le saldrá el mensaje `*showing admin controls*` y no le permitirá hacer lo que pretendía.
+  
 
 ## Funciones en JavaScript
 
@@ -638,9 +873,17 @@ console.log(mensaje); // Imprimirá "¡Hola, Juan!"
 También puedes crear funciones como expresiones asignándolas a variables.
 
 ```javascript
-var sumar = function(a, b) {
-  return a + b;
-};
+// Same function written as function declaration
+function fullName (fName, lName) { 
+  console.log(`${lName}, ${fName}`);
+}
+fullName('Tiffany', 'Hudgens');
+
+// Same function written as function expression similar a arrow functions multiples (más adelante)
+fullName = (fName, lName) => { 
+  console.log(`${lName}, ${fName}`);
+}
+fullName('Kristine', 'Hudgens');
 ```
 
 ### Funciones flecha (Arrow functions)
@@ -651,19 +894,94 @@ Una forma más reciente de definir funciones es mediante las funciones flecha.
 var duplicar = (numero) => {
   return numero * 2;
 };
-```
 
-Esto es equivalente a:
+///Esto es equivalente a:
 
-```javascript
 function duplicar(numero) {
   return numero * 2;
 }
 ```
 
+```javascript
+// Basic arrow function
+helloWorld = () => { console.log("Hi there"); }
+helloWorld();
+
+// Arrow function with shorthand function argument for single arguments
+firstName = fname => { console.log(fname.toUpperCase()); }
+firstName('Jordan');
+
+// Arrow function with multiple arguments
+fullName = (fName, lName) => { console.log(`${lName}, ${fName}`); }
+fullName('Kristine', 'Hudgens');
+```
+
 ### Uso de funciones
 
 Las funciones en JavaScript son muy flexibles y poderosas. Puedes usarlas para modularizar tu código, reutilizar la lógica y realizar tareas específicas de manera eficiente.
+
+## ¿Cuál es la diferencia entre una declaración de función y una expresión de función?
+
+La diferencia entre una declaración de función y una expresión de función en JavaScript radica en cómo se crean y se comportan en el código.
+
+### Declaración de funciones
+
+- Una declaración de función se realiza utilizando la palabra clave `function` seguida por el nombre de la función y un bloque de código entre llaves `{}` que contiene las instrucciones que la función ejecutará cuando sea llamada.
+- Las declaraciones de función se pueden llamar antes de que se declaren en el código, ya que son "elevadas" al principio del ámbito en el que se declaran. Esto significa que puedes llamar a la función antes de su declaración en el código.
+
+```javascript
+// Declaración de función
+function saludar() {
+    console.log("Hola mundo");
+}
+
+// Llamando a la función
+saludar(); // Imprime "Hola mundo"
+```
+
+### Expresiones de funciones
+
+- Una expresión de función es una función que se asigna a una variable o se utiliza como parte de una expresión más grande.
+- En una expresión de función, el nombre de la función es opcional (función anónima), pero se puede asignar a una variable para su posterior uso.
+- Las expresiones de función no se "elevan" al principio del ámbito como las declaraciones de función. Por lo tanto, deben declararse antes de ser llamadas en el código.
+
+```javascript
+// Expresión de función
+let saludar = function() {
+    console.log("Hola mundo");
+};
+
+// Llamando a la función
+saludar(); // Imprime "Hola mundo"
+```
+
+Una expresión también se puede evalúa dentro del cuerpo de una función. Esto podría incluir cualquier expresión que se utilice para asignar valores a variables, realizar operaciones aritméticas, llamar a otras funciones, etc.
+
+Las expresiones dentro de una función tienen acceso a las variables locales de esa función, así como a las variables globales y a las variables en cualquier ámbito externo en el que se haya definido la función.
+
+Un ejemplo para ilustrar esto:
+
+```javascript
+function operacionMatematica(a, b) {
+    let sumar = function(x, y) {
+        return x + y;
+    };
+
+    let resultado = sumar(a, b); // Expresión dentro de la función operacionMatematica
+
+    console.log("La suma es: " + resultado);
+}
+
+operacionMatematica(10, 5); // Llamada a la función operacionMatematica
+```
+
+En este ejemplo:
+
+- Una función llamada operacionMatematica toma dos parámetros a y b.
+- Dentro de la función operacionMatematica, definimos una expresión de función sumar utilizando la sintaxis de asignación de función.
+- La expresión resultado = sumar(a, b) se evalúa dentro de la función operacionMatematica, utilizando la función sumar que está definida dentro de ella.
+- La función sumar realiza una operación de suma y devuelve el resultado.
+- Finalmente, imprimimos el resultado de la suma en la consola.
 
 ### ¿Cuándo usar declaraciones o expresiones de función?
 
@@ -860,15 +1178,15 @@ console.log(altuve.getCurrentAverage());
 ```
 ## This en Javascript
 
-La palabra clave this en JavaScript se refiere al contexto de ejecución actual. En otras palabras, this hace referencia al objeto al que pertenece la función en la que se utiliza.
+La palabra clave __`this`__ en JavaScript se refiere al contexto de ejecución actual. En otras palabras, __`this`__ hace referencia al objeto al que pertenece la función en la que se utiliza.
 
-La forma en que this se comporta depende de cómo se invoca la función en la que se utiliza. Aquí hay algunos escenarios comunes:
+La forma en que __`this`__ se comporta depende de cómo se invoca la función en la que se utiliza. Aquí hay algunos escenarios comunes:
 
-En el contexto global: Si this se utiliza fuera de cualquier función, hace referencia al objeto global en el navegador (por ejemplo, window).
+- En el __contexto global:__ Si __`this`__ se utiliza fuera de cualquier función, hace referencia al objeto global en el navegador (por ejemplo, window).
 
-En el contexto de un objeto: Si this se utiliza dentro de un método de un objeto, hace referencia al objeto mismo al que pertenece el método.
+- En el __contexto de un objeto:__ Si __`this`__ se utiliza dentro de un método de un objeto, hace referencia al objeto mismo al que pertenece el método.
 
-En el contexto de una función: Si this se utiliza dentro de una función, su valor depende de cómo se llama a esa función. Si se llama directamente, this puede hacer referencia al objeto global o a undefined (en modo estricto), pero si se utiliza en una función dentro de un objeto, puede hacer referencia al objeto que contiene esa función.
+- En el __contexto de una función:__ Si __`this`__ se utiliza dentro de una función, su valor depende de cómo se llama a esa función. Si se llama directamente, __`this`__ puede hacer referencia al objeto global o a undefined (en modo estricto), pero si se utiliza en una función dentro de un objeto, puede hacer referencia al objeto que contiene esa función.
 
 Un ejemplo sencillo:
 
@@ -1067,6 +1385,211 @@ numeros.forEach(function(numero) {
 // 10
 ```
 
+## Bucles while y do-while
+
+El bucle while y do-while son estructuras de control en JavaScript (y en muchos otros lenguajes de programación) que te permiten ejecutar un bloque de código repetidamente mientras se cumpla una condición específica. La diferencia principal entre while y do-while es cuándo se evalúa la condición.
+
+### While Loop
+
+En un bucle while, la condición se evalúa antes de que se ejecute el bloque de código. Si la condición es verdadera, el bloque de código se ejecuta. Si la condición es falsa desde el principio, el bloque de código nunca se ejecutará.
+
+Sintaxis:
+
+```javascript
+while (condición) {
+  // Bloque de código a ejecutar
+}
+```
+
+Ejemplo:
+
+```javascript
+let contador = 0;
+
+while (contador < 5) {
+  console.log(contador);
+  contador++;
+}
+```
+En este ejemplo, se imprimirá en la consola los números del 0 al 4.
+
+### do-While Loop
+
+En un bucle do-while, el bloque de código se ejecuta al menos una vez, y luego la condición se evalúa. Si la condición es verdadera, el bloque de código se ejecutará nuevamente. Esto garantiza que el bloque de código se ejecute al menos una vez, incluso si la condición es falsa desde el principio.
+
+Sintaxis:
+
+```javascript
+do {
+  // Bloque de código a ejecutar
+} while (condición);
+```
+
+Ejemplo:
+
+```javascript
+let contador = 0;
+
+do {
+  console.log(contador);
+  contador++;
+} while (contador < 5);
+```
+Este ejemplo produce el mismo resultado que el ejemplo anterior, pero utilizando un bucle do-while.
+
+## Tipos de Declaraciones de Variables en JavaScript
+
+En JavaScript, existen tres tipos de declaraciones de variables: `var`, `const`, y `let`. Cada uno tiene características específicas y ámbitos de aplicación que los hacen útiles en diferentes situaciones.
+
+### Declaración de Variables en JavaScript: var
+
+La declaración `var` se utilizaba antes de la introducción de `const` y `let`. Aunque sigue siendo compatible con versiones anteriores de JavaScript, su uso se ha desaconsejado en favor de `const` y `let` debido a su peculiaridad en cuanto al ámbito y al hoisting.
+
+- **Ámbito de Aplicación**: El ámbito de las variables declaradas con `var` es la función en la que están definidas, o el ámbito global si están declaradas fuera de cualquier función.
+
+- **Características**:
+  - Se puede reasignar.
+  - Se puede redeclarar en el mismo ámbito.
+  - Sufre hoisting, lo que significa que puede ser utilizado antes de ser declarado, aunque su valor será `undefined` si se accede a él antes de la declaración.
+
+- **Uso**:
+  - Cuando se necesita una variable con ámbito de función o global y se requiere compatibilidad con versiones anteriores de JavaScript.
+
+```javascript
+function example() {
+  var x = 10;
+  if (true) {
+    var y = 20;
+    console.log(x); // 10
+  }
+  console.log(y); // 20
+}
+
+example();
+```
+
+### Declaración de Variables en JavaScript: let
+
+La declaración `let` fue introducida en ECMAScript 6 (ES6) y se utiliza para declarar variables con ámbito de bloque.
+
+- **Ámbito de Aplicación**: El ámbito de las variables declaradas con `let` es el bloque en el que están definidas, como un bloque `if`, `for`, o `while`, o cualquier otro bloque delimitado por llaves `{}`.
+
+- **Características**:
+  - Se puede reasignar, pero no redeclarar en el mismo ámbito.
+  - No sufre hoisting, por lo que no puede ser utilizado antes de ser declarado dentro de su ámbito.
+
+- **Uso**:
+  - Cuando se necesita una variable con ámbito de bloque y no se necesita redeclarar la variable en el mismo ámbito.
+
+Ejemplo de uso de `let`:
+
+```javascript
+function example() {
+  let x = 10;
+  if (true) {
+    let y = 20;
+    console.log(x); // 10
+    console.log(y); // 20
+  }
+  console.log(x); // 10
+  // console.log(y); // Error: y is not defined
+}
+
+example();
+```
+
+### Declaración de Variables con `const` en JavaScript
+
+En JavaScript, `const` se utiliza para declarar variables cuyo valor es constante y no cambiará a lo largo del programa. A continuación, se detallan sus características y su uso adecuado.
+
+- **Características**:
+
+  - **Inmutabilidad**: Una vez que se asigna un valor a una variable `const`, no se puede cambiar.
+
+  - **Ámbito de Aplicación**: El ámbito de las variables declaradas con `const` es similar al de `let`, es decir, el bloque en el que están   definidas.
+
+  - **Hoisting**: Al igual que `let`, `const` no sufre hoisting, por lo que no puede ser utilizado antes de ser declarado dentro de su ámbito.
+
+  - **Reasignación**: A diferencia de `let`, las variables `const` no pueden ser reasignadas. Sin embargo, si la variable es un objeto, su contenido mutable aún puede cambiar.
+
+- **Uso adecuado de **`const`**:
+
+  - Se debe utilizar `const` cuando se necesita que una variable tenga un valor inmutable a lo largo del programa.
+
+Ejemplo:
+
+```javascript
+const PI = 3.14159;
+const person = { name: "John", age: 30 };
+
+console.log(PI); // 3.14159
+console.log(person.name); // John
+
+// Esto dará un error, ya que no se puede reasignar una variable constante
+// PI = 3.14; // Error: Assignment to constant variable
+
+// Sin embargo, si la variable constante es un objeto, su contenido puede cambiar
+person.age = 31;
+console.log(person.age); // 31
+
+```
+
+## Interpolación de Variables en JavaScript
+
+JavaScript ofrece varias formas de intercalar variables dentro de una cadena de texto. A continuación, se presentan tres métodos comunes:
+
+### 1. Concatenación de Cadenas
+
+La concatenación de cadenas es el método más básico para intercalar variables en una cadena de texto, pero el menos usado en la actualidad.
+
+```javascript
+let name = "John";
+let age = 30;
+let message = "Hello, my name is " + name + " and I am " + age + " years old.";
+console.log(message); // Output: Hello, my name is John and I am 30 years old.
+```
+
+### 2. Template Literals (plantillas de texto)
+
+Las plantillas de texto (template literals) son una forma más moderna y flexible de intercalar variables en una cadena de texto, utilizando la sintaxis de comillas invertidas (\`\`).
+
+```javascript
+let name = "John";
+let age = 30;
+let message = `Hello, my name is ${name} and I am ${age} years old.`;
+console.log(message); // Output: Hello, my name is John and I am 30 years old.
+```
+### 3. Método `String.prototype.concat()`
+
+El método `concat()` de la clase String también se puede utilizar para concatenar cadenas, aunque es menos comúnmente utilizado debido a su sintaxis menos legible.
+
+```javascript
+let name = "John";
+let age = 30;
+let message = "Hello, my name is ".concat(name, " and I am ", age, " years old.");
+console.log(message); // Output: Hello, my name is John and I am 30 years old.
+```
+## Integración de condicionales en cadenas
+
+La interpolación se realizaría con los operadores ternarios. 
+
+Ejemplo:
+
+```javascript
+página constante = 'Home';
+console.log(`class=${ page === 'Home' ? 'master-layout' : 'secondary-layout' }`); // class='master-layout'
+```
+## Construir un heading HTML con Javascript
+
+```javascript
+const headingGenerator = (title, typeOfHeading) => {
+  return `
+    <h${typeOfHeading}>${title}</h${typeOfHeading}>
+  `
+}
+
+headingGenerator('Greetings', 1);
+``` 
 
 ## Programas Utilizados
 
@@ -1083,4 +1606,34 @@ __VSC__
 
 ## Bibliografía
 
-Reduce -> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
+### Reduce 
+
+- [Mozilla Developer Network (MDN) - reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)
+
+### Diferencias entre JavaScript y otros lenguajes de programación:
+
+- [Mozilla Developer Network (MDN) - Introducción a JavaScript](https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Introduction)
+
+### Tipos de datos en JavaScript:
+
+- [W3Schools - JavaScript Data Types](https://www.w3schools.com/js/js_datatypes.asp)
+
+### Funciones de cadena en JavaScript:
+
+- [W3Schools - JavaScript String Methods](https://www.w3schools.com/js/js_string_methods.asp)
+
+### Condicional en JavaScript:
+
+- [MDN - Introducción a las estructuras de control de flujo en JavaScript](https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Control_de_flujo_y_manejo_de_errores)
+
+### Operador ternario en JavaScript:
+
+- [MDN - Operador condicional (ternario)](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Operators/Conditional_Operator)
+
+### Diferencia entre declaración de función y expresión de función:
+
+- [MDN Web Docs - Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions)
+
+### La palabra clave "this" en JavaScript:
+
+- [MDN - this](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Operators/this)
