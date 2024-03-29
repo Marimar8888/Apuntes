@@ -993,6 +993,111 @@ __Expresiones de Función:__ Son útiles cuando necesitas asignar una función a
 
 En resumen, las declaraciones de funciones son más útiles para funciones que deben estar disponibles en todo el ámbito de su contexto de ejecución, mientras que las expresiones de función son más útiles cuando necesitas más control sobre dónde y cuándo se define la función.
 
+## This en Javascript
+
+La palabra clave __`this`__ en JavaScript se refiere al contexto de ejecución actual. En otras palabras, __`this`__ hace referencia al objeto al que pertenece la función en la que se utiliza.
+
+La forma en que __`this`__ se comporta depende de cómo se invoca la función en la que se utiliza. Aquí hay algunos escenarios comunes:
+
+- En el __contexto global:__ Si __`this`__ se utiliza fuera de cualquier función, hace referencia al objeto global en el navegador (por ejemplo, window).
+
+- En el __contexto de un objeto:__ Si __`this`__ se utiliza dentro de un método de un objeto, hace referencia al objeto mismo al que pertenece el método.
+
+- En el __contexto de una función:__ Si __`this`__ se utiliza dentro de una función, su valor depende de cómo se llama a esa función. Si se llama directamente, __`this`__ puede hacer referencia al objeto global o a undefined (en modo estricto), pero si se utiliza en una función dentro de un objeto, puede hacer referencia al objeto que contiene esa función.
+
+Un ejemplo sencillo:
+
+```javascript
+class Person {
+  constructor(name){
+    this.name = name;
+  }
+}
+
+const yourPerson = new Person('Jordan');
+```
+Otro ejemplo:
+
+```javascript
+var seats = {
+  seats: 50,
+  seatsSold: 28,
+  remainingSeats: function(){
+    return (this.seats - this.seatsSold)
+    },
+  enoughSeats: function(){
+    if(this.remainingSeats() > 0){
+      return this.remainingSeats();
+    }
+  }
+}
+
+
+seats.enoughSeats()
+```
+
+## `This` Según la función
+
+### En funciones normales
+
+En las funciones normales, this se refiere al objeto que invoca la función. Si la función se invoca como un método de un objeto, this se refiere a ese objeto. Sin embargo, si la función se invoca en otro contexto, this puede apuntar a diferentes objetos o incluso ser undefined.
+
+```javascript
+function Invoice(subTotal) {
+  this.taxRate = 0.06;
+}
+
+const inv = new Invoice();
+console.log(inv);
+```
+En este código, this dentro de la función Invoice se refiere al objeto creado mediante new Invoice(), lo que significa que this.taxRate se agrega al objeto inv.
+
+### En funciones de expresion
+
+Las funciones de expresión siguen el mismo comportamiento que las funciones normales en cuanto a this.
+
+```javascript
+function Invoice(subTotal) {
+  this.taxRate = 0.06;
+  this.subTotal = subTotal;
+
+  this.total = setInterval(function() {
+    console.log((this.taxRate * this.subTotal) + this.subTotal);
+  }, 2000);
+}
+
+const inv = new Invoice(200);
+inv.total();
+```
+En este caso, dentro de la función que pasa como argumento a setInterval, this no se refiere al objeto inv, sino al contexto global o a undefined, dependiendo del modo estricto (strict mode) o no. Esto conduce a un error porque this.taxRate y this.subTotal son undefined.
+
+### Funciones Arrow
+
+Las funciones flecha no tienen su propio this. En cambio, heredan this del contexto en el que fueron definidas.
+
+```javascript
+function Invoice(subTotal) {
+  this.taxRate = 0.06;
+  this.subTotal = subTotal;
+
+  this.total = setInterval(() => {
+    console.log((this.taxRate * this.subTotal) + this.subTotal);
+  }, 2000);
+}
+
+const inv = new Invoice(200);
+inv.total();
+```
+
+En este caso, la función de flecha dentro de setInterval hereda this de su contexto externo, que es el objeto inv. Por lo tanto, this.taxRate y this.subTotal se refieren a las propiedades del objeto inv.
+
+#### Resumen:
+
+- En funciones normales y de expresión, this se refiere al objeto que invoca la función.
+- En funciones arrow, this se hereda del contexto en el que se definió la función flecha.
+- El uso de funciones arrow puede prevenir errores comunes asociados con this, especialmente en situaciones donde las funciones se utilizan como argumentos de otras funciones como en setInterval, setTimeout, addEventListener, etc.
+
+
 ## Alcance de las variables en JavaScript
 
 En JavaScript, el alcance de una variable se refiere a dónde en tu código puedes acceder y usar esa variable. Los dos tipos principales de alcance de variables:
@@ -1000,7 +1105,6 @@ En JavaScript, el alcance de una variable se refiere a dónde en tu código pued
 ### Alcance global
 
 Una variable global es aquella que se declara fuera de cualquier función. Estas variables son accesibles desde cualquier parte del código, tanto dentro como fuera de las funciones.
-
 
 ```javascript
 var nombre = "Juan";
@@ -1176,48 +1280,79 @@ console.log(altuve.getCurrentAverage());
 altuve.updateHitsAndAtBats(0, 20);
 console.log(altuve.getCurrentAverage());
 ```
-## This en Javascript
 
-La palabra clave __`this`__ en JavaScript se refiere al contexto de ejecución actual. En otras palabras, __`this`__ hace referencia al objeto al que pertenece la función en la que se utiliza.
+## Cómo intercambiar valores de variables en JavaScript con deconstrucción de variables
 
-La forma en que __`this`__ se comporta depende de cómo se invoca la función en la que se utiliza. Aquí hay algunos escenarios comunes:
+Hace pocos años, para poder hacer una decostrucción había que hacer un entercambio de variables usando una variable temporal, ya que como puede apreciarse en el siguiente ejemplo de asignación directa, el resultado no es el esperado.
 
-- En el __contexto global:__ Si __`this`__ se utiliza fuera de cualquier función, hace referencia al objeto global en el navegador (por ejemplo, window).
+1. Asignación directa sin deconstrucción:
+  
+  ```javascript
+  let playerOne = 'Tiffany';
+  let playerTwo = 'Kristine';
 
-- En el __contexto de un objeto:__ Si __`this`__ se utiliza dentro de un método de un objeto, hace referencia al objeto mismo al que pertenece el método.
+  playerOne = playerTwo;
+  playerTwo = playerOne;
 
-- En el __contexto de una función:__ Si __`this`__ se utiliza dentro de una función, su valor depende de cómo se llama a esa función. Si se llama directamente, __`this`__ puede hacer referencia al objeto global o a undefined (en modo estricto), pero si se utiliza en una función dentro de un objeto, puede hacer referencia al objeto que contiene esa función.
+  console.log(`
+  Player One: ${playerOne} 
+  Player Two: ${playerTwo} 
+  `);
+  ```
+Aquí, inicialmente playerOne tiene el valor 'Tiffany' y playerTwo tiene el valor 'Kristine'. Luego, playerOne se establece como el valor de playerTwo, lo que hace que ambos tengan el valor 'Kristine'. Esto significa que ambos jugadores tienen el mismo nombre ahora, y la salida será:
 
-Un ejemplo sencillo:
+  ```javascript
+  Player One: Kristine
+  Player Two: Kristine
+  ```
+Por eso había que hacerlo a través de una variable temporal.
+
+2. Intercambio de variables utilizando una variable temporal:
 
 ```javascript
-class Person {
-  constructor(name){
-    this.name = name;
-  }
-}
+  let playerOne = 'Tiffany';
+  let playerTwo = 'Kristine';
 
-const yourPerson = new Person('Jordan');
+  let tempPlayerOne = playerOne;
+  let tempPlayerTwo = playerTwo;
+
+  playerOne = tempPlayerTwo;
+  playerTwo = tempPlayerOne;
+
+  console.log(`
+  Player One: ${playerOne}
+  Player Two: ${playerTwo}
+  `);
 ```
-Otro ejemplo:
+
+Aquí, estamos utilizando una variable temporal (tempPlayerOne y tempPlayerTwo) para almacenar los valores originales de playerOne y playerTwo antes de intercambiarlos. Después del intercambio, la salida será:
 
 ```javascript
-var seats = {
-  seats: 50,
-  seatsSold: 28,
-  remainingSeats: function(){
-    return (this.seats - this.seatsSold)
-    },
-  enoughSeats: function(){
-    if(this.remainingSeats() > 0){
-      return this.remainingSeats();
-    }
-  }
-}
-
-
-seats.enoughSeats()
+  Player One: Kristine
+  Player Two: Tiffany
 ```
+3. Intercambio de variables utilizando deconstrucción:
+
+Desde hace dos o tres años, se puede decosntruir sin crear variables temporales. Es muy parecido a otros lenguajes, pero hay que añadir los conchetes para que funcion.
+
+```javascript
+  let playerOne = 'Tiffany';
+  let playerTwo = 'Kristine';
+
+  [playerOne, playerTwo] = [playerTwo, playerOne]; // Deconstrucción directa sin variables temporales
+
+  console.log(`
+  Player One: ${playerOne}
+  Player Two: ${playerTwo}
+  `);
+```
+Aquí, estamos utilizando la deconstrucción de variables [playerOne, playerTwo] = [playerTwo, playerOne] para intercambiar los valores de playerOne y playerTwo directamente. Después del intercambio, la salida será la misma que en el segundo caso:
+
+```javascript
+  Player One: Kristine
+  Player Two: Tiffany
+```
+Este método es más conciso y claro, ya que no necesitas una variable temporal adicional para realizar el intercambio.
 
 ## Arrays
 
@@ -1328,6 +1463,74 @@ arr.splice(1, 2); // ["Bregman", "Springer"]
 console.log(arr);  // ["Altuve"]
 
 ```
+### La desestructuración de matrices 
+
+Se está utilizando la desestructuración de arrays para asignar los valores de un array llamado apiList a tres variables diferentes: posts, repos y profile.
+
+```javascript
+const apiList = [
+  'https://api.dailysmarty.com/posts',
+  'https://api.github.com/users/jordanhudgens/repos',
+  'https://api.github.com/users/jordanhudgens'
+]
+
+// Cuarda en cada uno de las variables que hay entre los corchetes 
+const [posts, repos, profile] = apiList; // Esta es una forma abreviada de asignar los valores del array apiList a tres variables diferentes
+
+console.log(posts); // "https://api.dailysmarty.com/posts"
+console.log(repos); // "https://api.github.com/users/jordanhudgens/repos"
+console.log(profile); // "https://api.github.com/users/jordanhudgens"
+```
+
+### La deconstrucción de objetos
+
+Como deconstrucir un objeto.
+
+```javascript
+  const user = {
+    name: 'Kristine',
+    email: 'kristine@devcamp.com'
+  }
+
+  const renderUser = ({ name, email }) => {
+    console.log(`${name}: ${email}`);
+  }
+
+  renderUser(user);
+```
+
+Esta es una función que acepta un objeto como argumento. Pero en lugar de pasar el objeto completo, se utiliza la desestructuración de objetos en la lista de parámetros de la función ({ name, email }). Esto significa que la función espera un objeto que tenga propiedades name y email, y extraerá esas propiedades del objeto pasado como argumento.
+
+### La deconstrucción de un objeto con valores por defecto
+
+Esta pieza de código es un ejemplo de deconstrucción de objeto en JavaScript.
+
+```javascript
+const blog = {
+  title: 'My great post',
+  summary: 'Summary of my post'
+}
+
+const openGraphMetadata = ({ title, summary = 'A DailySmarty Post' }) => {
+  console.log(`
+    og-title=${title}
+    og-description=${summary}
+  `);
+}
+
+openGraphMetadata(blog);
+```
+
+Se define un objeto llamado blog con dos propiedades:
+
+title: que tiene el valor 'My great post'.
+summary: que tiene el valor 'Summary of my post'.
+
+Se define una función llamada openGraphMetadata que acepta un objeto como argumento. Esta función utiliza la deconstrucción de objetos en la declaración de parámetros de la función para extraer las propiedades title y summary del objeto que se pasa como argumento. Aquí, summary tiene un valor predeterminado de 'A DailySmarty Post', lo que significa que si el objeto pasado como argumento no tiene una propiedad summary, se usará ese valor predeterminado.
+
+Dentro de la función openGraphMetadata, se utiliza console.log para imprimir en la consola dos líneas de texto. Estas líneas de texto representan las propiedades title y summary del objeto que se pasó como argumento, formateadas específicamente para ser utilizadas como metadatos de Open Graph en una página web.
+
+Finalmente, se llama a la función openGraphMetadata pasando el objeto blog como argumento. Como resultado, se imprimirán en la consola las líneas de texto que contienen el título y el resumen del blog, extraídos del objeto blog. Si el objeto blog no tuviera una propiedad summary, se utilizaría el valor predeterminado 'A DailySmarty Post' en su lugar.
 
 ## Bucles For
 
@@ -1591,6 +1794,324 @@ const headingGenerator = (title, typeOfHeading) => {
 headingGenerator('Greetings', 1);
 ``` 
 
+## Operador de Expansión 
+
+La sintaxis para esto va a ser tres puntos seguidos de algún tipo de palabra (...palabra) y esa es la sintaxis que vas a ver.
+
+## Ejemplos de Uso
+
+### Primer ejemplo de para qué se puede usar el operador de expansión 
+
+Creo Una variable llamada `carritoDeCompras` y dentro de esta variable, simplemente tenemos varios IDs de productos. Si estás construyendo algún tipo de aplicación en React o Angular, podrías tener un tipo de funcionalidad donde un usuario puede hacer clic en un botón de agregar al carrito y luego lo cargarías en algún tipo de colección como esta.
+
+```javascript
+// Combinando Arrays
+let carritoDeCompras = [345, 375, 765, 123];
+```
+Imaginemos que tu carrito de compras está lleno de estos cuatro IDs de productos y luego digamos que el usuario dice que quiere seguir comprando. Y así que tienen una nueva variable llamada `nuevosItems` y voy a establecerla simplemente en unos cuantos IDs de productos más, así:
+
+```javascript
+let nuevosItems = [98, 123];
+```
+Si el usuario quisiera agregar todos estos nuevos artículos al carrito, hay varias formas de hacderlo:
+
+__Formas antiguas__ 
+
+```javascript
+shoppingCart.push(nuevosItems);
+
+shoppingCart.push(nuevosItems);
+console.log(shoppingCart); // [ 345, 375, 765, 123, [ 93, 123 ] ]
+```
+
+Lo que hace push hace es agregar un nuevo elemento a un array. Pero los arrays de JavaScript puedes tener múltiples tipos de datos. Arrays anidados, objetos y todo tipo de elementos diferentes. Por eso JavaScript no entiende cuando quieres agregar un nuevo array. No se da cuenta de que simplemente quieres agregar algunos elementos más. Y ahí es donde puede entrar en juego el operador de expansión y permitirte hacer eso.
+
+```javascript
+shoppingCart.push(...newItems);
+console.log(shoppingCart);  //[345, 375, 765, 123, 98, 123]
+```
+Ahora ha tomado estos elementos y los distribuye para expandirlos.  Y en lugar de estar dentro de este array, simplemente busca los elementos en el array y los agrega.
+
+### Segundo ejemplo sería copiar arrays. 
+
+Un proceso muy común dentro de programas basados en React o Angular es que no se supone que debes hacer cambios en una estructura de datos. En otras palabras, si tienes una estructura, una vez más, como `shoppingCart`. Si digo `const shoppingCart` y simplemente voy a tomar mis IDs de productos del primer `shoppingCart`.
+
+```javascript
+const shoppingCart = [345, 375, 765, 123];
+```
+La convención común es que ni siquiera harías cambios en `shoppingCart`. Y esa es parte de la razón por la que se debería usar variables `let` en lugar de una variable `const`.
+
+Pero en un programa como uno que construirías con React o Angular, la convención común es que no cambiarías `shoppingCart`, sino que crearías un nuevo `shoppingCart` y luego agregarías los nuevos elementos a ese. Y parte de la razón es que quieres que tu programa tenga la menor cantidad posible de efectos secundarios. Y si haces un cambio en una estructura de datos existente, entonces si alguna otra parte del programa llama a esa estructura de datos y no se da cuenta de que has hecho cambios en ella, podrías encontrarte con algunos errores bastante desagradables.
+
+Por ejemplo, si agregaste algún tipo de string o algo así al `shoppingCart` y luego alguna otra parte del programa pensó que el `shoppingCart` solo tenía enteros y luego ejecutó un proceso sobre él que solo funciona con enteros, entonces encontraría un error.
+
+Si quieres usar una estructura de datos y luego hacer cambios en ella, lo que quieres hacer es hacer una copia de ella. Hay dos formas que funcionan y una que no. 
+
+__Forma que no funciona__
+
+```javascript
+const shoppingCart = [345, 375, 765, 123];
+const updatedCart = shoppingCart;
+updatedCart.push(5);
+console.log(updatedCart);    // [345, 375, 765, 123, 5]
+console.log(shoppingCart);    // [345, 375, 765, 123, 5]
+```
+
+En este caso no funciona, porque realmente no estoy haciendo un acopia del array, sino que le estoy pasando una referencia del originarl `shoppingCart` y es por eso que modifica el original y el nuevo. Y esto es lo que no hay que hacer.
+
+__Forma que funciona__ antigua (slice())
+
+```javascript
+const shoppingCart = [345, 375, 765, 123];
+const updatedCart = shoppingCart.slice();
+updatedCart.push(5);
+console.log(updatedCart);    // [345, 375, 765, 123, 5]
+console.log(shoppingCart);    // [345, 375, 765, 123]
+```
+Es una forma antigua de usar, pero todavía hay muchos desarrolladores que la utilizan. Slice realiza una copia exacta del original y por eso no la modifica.
+
+__Forma que funciona__  moderna con operador de expansión
+
+```javascript
+const shoppingCart = [345, 375, 765, 123];
+const updatedCart = [...shoppingCart];
+updatedCart.push(5);
+console.log(updatedCart);    // [345, 375, 765, 123, 5]
+console.log(shoppingCart);    // [345, 375, 765, 123]
+```
+### Tercer ejemplo usar con los argumentos de funciones
+
+Usando por ejemplo la biblioteca `Math`.
+
+```javascript
+console.log(Math.max(1, 5, 1, 10, 2, 3));   //10
+```
+
+Ahora, si tuvieras una gran colección de valores y quisieras ver cuál es el más alto.
+
+```javascript
+const orderTotals = [1, 5, 1, 10, 2, 3];
+```
+Y queremos ver cuál es el más grande y intentamos pasar la variable que tiene dicha colección, nos dará un error.
+
+```javascript
+const orderTotals = [1, 5, 1, 10, 2, 3];
+console.log(Math.max(orderTotals));  // NaN "no es un número"
+```
+
+Lo que estamos haciendo con `orderTotals` es que solo estamos pasando un argumento. Solo estamos pasando un argumento y ni siquiera es un número, es un array. Y por eso `Math.max` no sabe qué hacer con él. Y esa es la razón por la que no es un número.
+
+Con el operador de expansión, lo que va a hacer es tomar este array y lo va a expandir. Va a tomar cada elemento en el array y luego lo convertirá en un conjunto de argumentos de función. Así que si guardo y ejecuto, verás que ahora volvemos a obtener el valor correcto.
+
+```javascript
+const orderTotals = [1, 5, 1, 10, 2, 3];
+console.log(Math.max(...orderTotals));
+```
+
+### Cuarto ejemplo usar el operador de expansión para trabajar con la deconstrucción de objetos. 
+
+Crear un objeto con una alineación de béisbol:
+
+```javascript
+const pitchers = {
+  starter: 'Verlander',
+  closer: 'Giles',
+  relief_1: 'Morton',
+  relief_2: 'Gregerson'
+}
+```
+Y existe la posibilidad de que podamos tener cualquier cantidad de lanzadores de relevo (relief) si estás construyendo esto para una aplicación de registro de puntuaciones o algo así. Entonces no vas a saber cuántos lanzadores de relevo tienes en un equipo dado, cambia prácticamente a diario. Así que no puedes codificar esto, sabes que vas a tener un titular, sabes que vas a tener un cerrador y tienes algunas reglas fijas y sólidas. Pero luego hay una serie de elementos que van a ser variables, que van a cambiar cada vez. Y ahí es donde el operador de expansión puede ayudarnos a realizar la deconstrucción. 
+
+A grego llaves delante y así es como podemos realizar la deconstrucción de objetos, hemos hablado sobre la construcción de variables y arrays. Esto es específicamente cómo podemos trabajar con la deconstrucción de objetos. Agregando las claves starter y closer y lo imprimo por consola:
+
+```javascript
+const { starter, closer, ...relieves } = {
+  starter: 'Verlander',
+  closer: 'Giles',
+  relief_1: 'Morton',
+  relief_2: 'Gregerson'
+}
+
+console.log(starter);
+console.log(closer);
+console.log(relieves);
+// "Verlander"
+// "Giles"
+// { relief_1: 'Morton', relief_2: 'Gregerson' }
+```
+
+##  La función bind() 
+
+Se utiliza para crear una nueva función que, cuando se llama, tiene un valor de this predefinido. Es útil cuando deseas enlazar una función a un contexto específico, lo que significa que puedes garantizar qué objeto será tratado como this cuando la función sea invocada.
+
+Ejemplo 1. Supongamos que tienes un objeto llamado person con una propiedad name y una función sayName():
+
+```javascript
+const person = {
+  name: 'John',
+  sayName: function() {
+    console.log(`Hello, my name is ${this.name}.`);
+  }
+};
+```
+Si intentas llamar person.sayName(), funcionará bien porque this se refiere al objeto person y this.name se evaluará como 'John'.
+
+Sin embargo, si intentas almacenar la función person.sayName en una variable y luego llamarla, tendrás un problema con this:
+
+```javascript
+const sayNameFunction = person.sayName;
+sayNameFunction(); // Esto dará como resultado "Hello, my name is undefined."
+```
+Esto ocurre, porque cuando llamas sayNameFunction(), el contexto de this ya no está asociado con el objeto person, y por lo tanto this.name es undefined.
+
+Aquí es donde bind() entra en juego. Puedes usar bind() para fijar el valor de this a un objeto específico:
+
+```javascript
+const sayNameFunctionBound = person.sayName.bind(person);
+sayNameFunctionBound(); // Esto dará como resultado "Hello, my name is John."
+```
+En este ejemplo, bind(person) devuelve una nueva función enlazada donde this siempre será el objeto person, independientemente de cómo se llame la función sayNameFunctionBound().
+
+En resumen, bind() es útil cuando deseas asegurarte de que una función se ejecute con un contexto específico, garantizando que this se refiera al objeto que deseas.
+
+Otro ejemplo:
+
+```javascript
+const userOne = {
+  firstName: "Kristine",
+  lastName: "Hudgens"
+};
+
+const userTwo = {
+  firstName: "Tiffany",
+  lastName: "Hudgens"
+};
+
+// Function expression
+const fullName = function() {
+  return `${this.lastName}, ${this.firstName}`;
+};
+
+const kristine = fullName.bind(userOne);
+const tiffany = fullName.bind(userTwo);
+
+console.log(kristine()); // Hudgens, Kristine
+console.log(tiffany()); // Hudgens, Tiffany
+```
+Une la función `fullName()` con los objetos `unerOne` y `userTwo` y el `this` referencia al objeto concreto.
+
+## Comprogar si dos objetos son iguales
+
+Cuando los objetos a comparar son simples y no tienen dentro del mismo diferentes tipos o estructuras de datos, podríamos crear una función que compruebe si tiene el mismo números de claves:valor y si los valores son iguales como este ejemplo
+
+```javascript
+const obj1 = {
+    name: "Kristine",
+    age: 13
+    
+};
+    
+const obj2 = {
+    name: "Kristine",
+    age: 13
+};
+
+const isEqual = (obj1, obj2) => {
+    const obj1Keys = Object.keys(obj1);
+    const obj2Keys = Object.keys(obj2);
+
+    if (obj1Keys.length !== obj2Keys.length) { // Diferente número de claves
+        return false;
+    }
+
+    for (let objKey of obj1Keys) { // Recorre cada valor y lo compara
+        if (obj1[objKey] !== obj2[objKey]) {
+            return false;
+        }
+        
+    }
+        return true;
+};
+
+
+console.log(isEqual(obj1, obj2)); 
+```
+En el caso de tener objetos con diferentes estructura es muy útil usar la función isEqual de la lodash library. 
+Para poder utilizar todos sus métodos hay que instalar mediante la terminal `npm install lodash` e importar la función `isEqual` 
+const _ = require('lodash');
+
+```javascript
+const _ = require('lodash');
+const obj1 = {
+    name: "Kristine",
+    age: 13,
+    favorites: {
+      food: "Pizza",
+      vacation: "Disneyland"
+    }
+  };
+  
+  const obj2 = {
+    name: "Kristine",
+    age: 13,
+    favorites: {
+      food: "Pizza",
+      vacation: "Disneyland"
+    }
+  };
+  
+console.log( _.isEqual(obj1, obj2)); 
+```
+
+## Javascript orientado a objetos
+
+### Crear clase, constructor e instanciar
+
+En JavaScript, puedes crear una clase utilizando la sintaxis class. Dentro de una clase, puedes definir un método especial llamado constructor. Este método se llama automáticamente cuando creas una nueva instancia de la clase. Puedes usar el constructor para inicializar propiedades de la instancia.
+
+Un ejemplo:
+
+```javascript
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+}
+
+// Instanciación
+const person1 = new Person('John');
+console.log(person1.name); // Esto imprimirá "John"
+```
+
+La palabra clave `this` en JavaScript se refiere al contexto actual de ejecución. Dentro del contexto de un objeto, como una clase o un método de objeto, `this` hace referencia al propio objeto. En el contexto global, this hace referencia al objeto global (window en un navegador o global en Node.js). En resumen, this siempre se refiere al objeto que está siendo manipulado o afectado en el momento en que se invoca.
+
+### Crear métodos entro de la clase
+
+Los métodos de una clase en JavaScript sirven para definir funciones que están asociadas a esa clase. Estas funciones pueden realizar operaciones específicas utilizando los datos de la instancia de la clase (propiedades), o pueden realizar operaciones más generales que no están directamente relacionadas con los datos de la instancia. Los métodos permiten encapsular la lógica y el comportamiento relacionado con la clase, lo que facilita el manejo y la manipulación de los objetos creados a partir de esa clase.
+
+Un ejemplo de ello:
+
+```javascript
+class Instructor {
+  constructor({ name, role = 'assistant' }) {
+    this.name = name;
+    this.role = role;
+  }
+
+  renderDetails() {
+    console.log(`${this.name}: ${this.role}`);
+  }
+}
+
+const jon = new Instructor({name: 'Jon Snow'});
+const brayden = new Instructor({name: 'Brayden', role: 'teacher'});
+jon.renderDetails();
+brayden.renderDetails();
+```
+
+El método renderDetails: Simplemente especifica como deben imprimirse los detalles del instructor en la consola. Toma las propiedades name y role del objeto actual (this) y las imprime en una cadena de texto formateada. Este método se puede llamar en cualquier instancia de la clase Instructor.
+
+
 ## Programas Utilizados
 
 - Visual Studio Code
@@ -1637,3 +2158,7 @@ __VSC__
 ### La palabra clave "this" en JavaScript:
 
 - [MDN - this](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Operators/this)
+  
+### Lodash library 
+
+- [Lodash - isEqual](https://lodash.com/docs/4.17.15#isEqual)
