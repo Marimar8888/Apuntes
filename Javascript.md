@@ -1,6 +1,6 @@
 # APUNTES JAVASCRIPT
 
-## ¿Qué diferencia a Javascript de cualquier otro lenguaje de programación?
+## 1.- ¿Qué diferencia a Javascript de cualquier otro lenguaje de programación?
 
 Algunas de las diferencias entre JavaScript y otros lenguajes:
 
@@ -189,7 +189,7 @@ __6.-__ Es __ampliamente utilizado en el desarrollo de aplicaciones web,__ desde
 
 * `Herramientas de Desarrollo:` Existen numerosas herramientas de desarrollo en JavaScript que facilitan la escritura, prueba y depuración de código, así como la optimización del rendimiento de las aplicaciones web. Algunas de estas herramientas incluyen webpack para empaquetar y optimizar recursos, Babel para transpilar código, ESLint para análisis estático de código, y muchas otras.
 
-## Hoisting
+## 2.- Hoisting
 
 hoisting es un comportamiento en el que las declaraciones de variables (ya sea con var, let o const) y funciones son movidas al inicio de su ámbito actual durante la fase de compilación, pero su asignación de valor permanece en su lugar original. Esto puede causar comportamientos inesperados si no se comprende correctamente.
 
@@ -209,7 +209,7 @@ var age = 33;
 
 ```
 
-## ¿Cuáles son algunos tipos de datos JS?
+## 3.- ¿Cuáles son algunos tipos de datos JS?
 
 1. **Primitivos:**
    - __Number:__ Representa números, tanto enteros como de punto flotante.
@@ -286,7 +286,7 @@ var age = 33;
      conjunto.add(2);
      ```
 
-## Declaración de Variables
+## 4.- Declaración de Variables
 
 __var:__ Esta fue la forma original de declarar variables en JavaScript. Sin embargo, debido a algunas características no deseadas de var, como el hoisting y el alcance de función, se recomienda usar let o const en su lugar.
 
@@ -312,7 +312,7 @@ const mySymbol = Symbol();
 ```
 Estos son algunos de los tipos de variables y datos más comunes en JavaScript.
 
-## Conocer el tipo de dato que es 
+## 5.- Conocer el tipo de dato que es 
 
 ```javascript
 typeof 12; // "number"
@@ -335,7 +335,7 @@ Nota: Para imprimir por consola console.log(typeof nombre_variable);
 
 ```
 
-## Operaciones con dos variables:
+## 6.- Operaciones con dos variables:
 
 __Dos variables del mismo tipo__
 
@@ -418,7 +418,7 @@ let cadena = "3";
 let modulo = num % cadena; // Resultado: 1 (cadena se convierte en número y se toma el módulo de num)
 ```
 
-## Transformar variables (Cambio de tipos)
+## 7.- Transformar variables (Cambio de tipos)
 
 ### Transformar un número a una cadena:
 
@@ -577,7 +577,7 @@ var messyString = '    Hi there    ';
 messyString.trim(); // "Hi there"
 ```
 
-## Operadores matemáticos 
+## 8.- Operadores matemáticos 
 
 | Descripción          | Operador resumido | Operador normal |
 |----------------------|-------------------|-----------------|
@@ -642,7 +642,7 @@ var convertedNum = + strNum;
 
 convertedNum; // 100
 ```
-## Orden de las operaciones en matemáticas
+## 9.- Orden de las operaciones en matemáticas
 
 __PEMDAS__ -> __PEDMAS__
 
@@ -655,7 +655,7 @@ __PEMDAS__ -> __PEDMAS__
 - **A**ddition (Adición)
 - **S**ubtraction (Sustracción)
 
-## Procesar un Array a través de la Función reduce()
+## 10.- Procesar un Array a través de la Función reduce()
 
 La función reduce() es una función muy poderosa en JavaScript que se utiliza para procesar un array y devolver un único valor. Se puede utilizar para realizar operaciones como sumar todos los elementos de un array, encontrar el valor máximo o mínimo, concatenar strings, entre otras cosas.
 
@@ -674,7 +674,7 @@ const getAverage = arr => { // Para recorrer el array
  
 ```
 
-## Condicionales
+## 11.- Condicionales
 
 Un condicional en programación es una estructura de control que permite ejecutar cierto bloque de código si se cumple una condición especificada. Si la condición es verdadera, se ejecuta un bloque de código; si es falsa, se puede ejecutar otro bloque de código alternativo o simplemente no se ejecuta nada.
 
@@ -767,7 +767,7 @@ var age = 30;
     }
 
 ```
-## Bucle switch
+## 12.- Bucle switch
 
 Forma de tomar decisiones basadas en el valor de una expresión. 
 
@@ -790,7 +790,7 @@ Forma de tomar decisiones basadas en el valor de una expresión.
 
 ```
 
-## Operador ternario
+## 13.- Operador ternario
 
 Forma concisa de escribir una instrucción condicional. Tiene la siguiente estructura:
 
@@ -845,7 +845,7 @@ adminControls(userOne); //"showing admin controls"
 - Si __no se ha logueado,__ e intenta entrar en un contenido o hacer una operación como puede ser procesar lo que hay en un carrito de la compra, le saldrá el mensaje `*showing admin controls*` y no le permitirá hacer lo que pretendía.
   
 
-## Funciones en JavaScript
+## 14.- Funciones en JavaScript
 
 En JavaScript, una función es un bloque de código reutilizable que realiza una tarea específica. Como se crean:
 
@@ -920,7 +920,7 @@ fullName('Kristine', 'Hudgens');
 
 Las funciones en JavaScript son muy flexibles y poderosas. Puedes usarlas para modularizar tu código, reutilizar la lógica y realizar tareas específicas de manera eficiente.
 
-## ¿Cuál es la diferencia entre una declaración de función y una expresión de función?
+## 15.- ¿Cuál es la diferencia entre una declaración de función y una expresión de función?
 
 La diferencia entre una declaración de función y una expresión de función en JavaScript radica en cómo se crean y se comportan en el código.
 
@@ -993,7 +993,7 @@ __Expresiones de Función:__ Son útiles cuando necesitas asignar una función a
 
 En resumen, las declaraciones de funciones son más útiles para funciones que deben estar disponibles en todo el ámbito de su contexto de ejecución, mientras que las expresiones de función son más útiles cuando necesitas más control sobre dónde y cuándo se define la función.
 
-## This en Javascript
+## 16.- This en Javascript
 
 La palabra clave __`this`__ en JavaScript se refiere al contexto de ejecución actual. En otras palabras, __`this`__ hace referencia al objeto al que pertenece la función en la que se utiliza.
 
@@ -1036,7 +1036,7 @@ var seats = {
 seats.enoughSeats()
 ```
 
-## `This` Según la función
+## 17.- `This` Según la función
 
 ### En funciones normales
 
@@ -1098,7 +1098,7 @@ En este caso, la función de flecha dentro de setInterval hereda this de su cont
 - El uso de funciones arrow puede prevenir errores comunes asociados con this, especialmente en situaciones donde las funciones se utilizan como argumentos de otras funciones como en setInterval, setTimeout, addEventListener, etc.
 
 
-## Alcance de las variables en JavaScript
+## 18.- Alcance de las variables en JavaScript
 
 En JavaScript, el alcance de una variable se refiere a dónde en tu código puedes acceder y usar esa variable. Los dos tipos principales de alcance de variables:
 
@@ -1155,7 +1155,7 @@ Algunas razones por las que:
 3. __Facilita el Reuso:__ Las variables locales son más fáciles de reutilizar y refactorizar, ya que están limitadas al contexto de la función en la que se declaran. Esto promueve un diseño más modular y flexible del código.
 
 
-## Paso de argumentos
+## 19.- Paso de argumentos
 
 En JavaScript, un paso de argumentos se refiere a cómo se pasan los valores a una función cuando se llama. Cuando llamas a una función en JavaScript, puedes enviarle datos que la función puede usar para realizar alguna tarea. Estos datos se denominan argumentos de la función.
 
@@ -1281,7 +1281,7 @@ altuve.updateHitsAndAtBats(0, 20);
 console.log(altuve.getCurrentAverage());
 ```
 
-## Cómo intercambiar valores de variables en JavaScript con deconstrucción de variables
+## 20.- Cómo intercambiar valores de variables en JavaScript con deconstrucción de variables
 
 Hace pocos años, para poder hacer una decostrucción había que hacer un entercambio de variables usando una variable temporal, ya que como puede apreciarse en el siguiente ejemplo de asignación directa, el resultado no es el esperado.
 
@@ -1354,7 +1354,7 @@ Aquí, estamos utilizando la deconstrucción de variables [playerOne, playerTwo]
 ```
 Este método es más conciso y claro, ya que no necesitas una variable temporal adicional para realizar el intercambio.
 
-## Arrays
+## 21.- Arrays
 
 En JavaScript, un array es una estructura de datos que permite almacenar una colección ordenada de elementos. Los elementos dentro de un array pueden ser de cualquier tipo de datos, como números, cadenas, objetos, u otros arrays. Un array se define utilizando corchetes [ ] y los elementos se separan por comas.
 
@@ -1532,7 +1532,7 @@ Dentro de la función openGraphMetadata, se utiliza console.log para imprimir en
 
 Finalmente, se llama a la función openGraphMetadata pasando el objeto blog como argumento. Como resultado, se imprimirán en la consola las líneas de texto que contienen el título y el resumen del blog, extraídos del objeto blog. Si el objeto blog no tuviera una propiedad summary, se utilizaría el valor predeterminado 'A DailySmarty Post' en su lugar.
 
-## Bucles For
+## 22.- Bucles For
 
 1. Bucle for:
 El bucle for es un bucle clásico que se utiliza para iterar sobre una secuencia de valores. Se compone de tres partes: la inicialización, la condición de continuación y la expresión de incremento/decremento.
@@ -1588,7 +1588,7 @@ numeros.forEach(function(numero) {
 // 10
 ```
 
-## Bucles while y do-while
+## 23.- Bucles while y do-while
 
 El bucle while y do-while son estructuras de control en JavaScript (y en muchos otros lenguajes de programación) que te permiten ejecutar un bloque de código repetidamente mientras se cumpla una condición específica. La diferencia principal entre while y do-while es cuándo se evalúa la condición.
 
@@ -1640,7 +1640,7 @@ do {
 ```
 Este ejemplo produce el mismo resultado que el ejemplo anterior, pero utilizando un bucle do-while.
 
-## Tipos de Declaraciones de Variables en JavaScript
+## 24.- Tipos de Declaraciones de Variables en JavaScript
 
 En JavaScript, existen tres tipos de declaraciones de variables: `var`, `const`, y `let`. Cada uno tiene características específicas y ámbitos de aplicación que los hacen útiles en diferentes situaciones.
 
@@ -1737,7 +1737,7 @@ console.log(person.age); // 31
 
 ```
 
-## Interpolación de Variables en JavaScript
+## 25.- Interpolación de Variables en JavaScript
 
 JavaScript ofrece varias formas de intercalar variables dentro de una cadena de texto. A continuación, se presentan tres métodos comunes:
 
@@ -1772,7 +1772,7 @@ let age = 30;
 let message = "Hello, my name is ".concat(name, " and I am ", age, " years old.");
 console.log(message); // Output: Hello, my name is John and I am 30 years old.
 ```
-## Integración de condicionales en cadenas
+## 26.- Integración de condicionales en cadenas
 
 La interpolación se realizaría con los operadores ternarios. 
 
@@ -1782,7 +1782,7 @@ Ejemplo:
 página constante = 'Home';
 console.log(`class=${ page === 'Home' ? 'master-layout' : 'secondary-layout' }`); // class='master-layout'
 ```
-## Construir un heading HTML con Javascript
+## 27.- Construir un heading HTML con Javascript
 
 ```javascript
 const headingGenerator = (title, typeOfHeading) => {
@@ -1794,11 +1794,11 @@ const headingGenerator = (title, typeOfHeading) => {
 headingGenerator('Greetings', 1);
 ``` 
 
-## Operador de Expansión 
+## 28.- Operador de Expansión 
 
 La sintaxis para esto va a ser tres puntos seguidos de algún tipo de palabra (...palabra) y esa es la sintaxis que vas a ver.
 
-## Ejemplos de Uso
+### Ejemplos de Uso
 
 ### Primer ejemplo de para qué se puede usar el operador de expansión 
 
@@ -1940,7 +1940,7 @@ console.log(relieves);
 // { relief_1: 'Morton', relief_2: 'Gregerson' }
 ```
 
-##  La función bind() 
+## 29.- La función bind() 
 
 Se utiliza para crear una nueva función que, cuando se llama, tiene un valor de this predefinido. Es útil cuando deseas enlazar una función a un contexto específico, lo que significa que puedes garantizar qué objeto será tratado como this cuando la función sea invocada.
 
@@ -2000,7 +2000,7 @@ console.log(tiffany()); // Hudgens, Tiffany
 ```
 Une la función `fullName()` con los objetos `unerOne` y `userTwo` y el `this` referencia al objeto concreto.
 
-## Comprogar si dos objetos son iguales
+## 30.- Comprogar si dos objetos son iguales
 
 Cuando los objetos a comparar son simples y no tienen dentro del mismo diferentes tipos o estructuras de datos, podríamos crear una función que compruebe si tiene el mismo números de claves:valor y si los valores son iguales como este ejemplo
 
@@ -2063,7 +2063,7 @@ const obj1 = {
 console.log( _.isEqual(obj1, obj2)); 
 ```
 
-## Javascript orientado a objetos
+## 31.- Javascript orientado a objetos
 
 ### Crear clase, constructor e instanciar
 
@@ -2111,8 +2111,57 @@ brayden.renderDetails();
 
 El método renderDetails: Simplemente especifica como deben imprimirse los detalles del instructor en la consola. Toma las propiedades name y role del objeto actual (this) y las imprime en una cadena de texto formateada. Este método se puede llamar en cualquier instancia de la clase Instructor.
 
+## 32.- Métodos estáticos
 
-## Programas Utilizados
+
+Los métodos estáticos en JavaScript son funciones que se asocian con la clase en sí misma en lugar de con instancias individuales de la clase. Esto significa que pueden ser llamados directamente en la clase sin necesidad de crear una instancia de la misma. Los métodos estáticos son útiles cuando queremos tener funcionalidades que no están relacionadas con instancias particulares de la clase, sino que están asociadas con la clase en general.
+
+Diferencias con los métodos no estáticos:
+
+1. `Asociación`: Los métodos estáticos están asociados con la clase en sí misma, mientras que los métodos no estáticos están asociados con instancias individuales de la clase.
+2. `Uso`: Los métodos estáticos se llaman directamente en la clase, mientras que los métodos no estáticos se llaman en instancias de la clase.
+
+```javascript
+class Instructor {
+    constructor({ name, role = "assistant" }) {
+      this.role = role;
+      this.name = name;
+    }
+    // Base case static method
+    static helloWorld() {
+      console.log('Hi there');
+    }
+  
+    // Static method
+    static canTeach(instructor) {
+      return (instructor.role === 'classroom'); //True si coindice que role es classroom, de lo contrario false
+    }
+
+            // "Alice can teach: true"
+    teach() {
+        console.log(`${seniorInstructor.name} can teach: ${Instructor.canTeach(seniorInstructor)}` // Utilizo la clase para llamar al método startico
+            );
+    }
+  }
+  
+  let juniorInstructor = new Instructor({ 'name' : 'Brian' });
+  let seniorInstructor = new Instructor({ 'name' : 'Alice', "role" : "classroom" });
+  Instructor.teachStatic(juniorInstructor);
+  seniorInstructor.teach();
+```
+Esta clase Instructor tiene un constructor que toma un objeto como parámetro, con propiedades como 'nombre' y 'rol'. La clase tiene dos métodos estáticos, helloWorld(), que simplemente imprime "Hi there". Otro método estático llamado pasandole una instancia canTeach(instructor) y que imprimer un texto por consola usando el método estatico anterior si la instancia tiene como rol classroom el texto saldrá que no puede dar clases (false) y si no imprimirá en la frase creada en el método no estático true.
+
+Al método estático helloWorld() se le llama directamente en la clase. 
+
+Si intentasemos llamar al metodo al método estático helloWorld() con una instancia daría un error:
+
+```javascript
+let jon = new Instructor("name": "Jon");
+jon.helloWorld(); // Daría un error
+```
+Si se utiliza el método estático canTeach(instructor) para verificar si un instructor puede enseñar o no, se le pasa el objeto de la instación  y se imprime el resultado para cada instancia de instructor. 
+
+## 33.- Programas Utilizados
 
 - Visual Studio Code
 - CodePen.io
@@ -2125,7 +2174,7 @@ __VSC__
 * Presiona Ctrl + Shift + P para abrir la paleta de comandos.
 * Escribe "Run Code" y selecciona "Run Code" de las opciones mostradas o simplemente presiona Ctrl + Alt + N.
 
-## Bibliografía
+## 34.- Bibliografía
 
 ### Reduce 
 
