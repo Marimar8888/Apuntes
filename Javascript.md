@@ -674,6 +674,22 @@ const getAverage = arr => { // Para recorrer el array
  
 ```
 
+Otro ejemplo de reduce(), para crear una función que calcule el exponente de un número:
+
+```javascript
+const toThePowerOf = (num, exp) => {
+  const items = Array(exp).fill(num); // Crea un array compuesto por "exp" veces del "num"
+  const reducer = (accumulator, currentValue) => accumulator * currentValue; 
+  return items.reduce(reducer);
+};
+
+console.log(toThePowerOf(2, 3)); // 8
+console.log(toThePowerOf(3, 4)); // 81
+console.log(toThePowerOf(2, 10)); // 100
+```
+
+
+
 ## 11.- Condicionales
 
 Un condicional en programación es una estructura de control que permite ejecutar cierto bloque de código si se cumple una condición especificada. Si la condición es verdadera, se ejecuta un bloque de código; si es falsa, se puede ejecutar otro bloque de código alternativo o simplemente no se ejecuta nada.
@@ -2161,10 +2177,278 @@ jon.helloWorld(); // Daría un error
 ```
 Si se utiliza el método estático canTeach(instructor) para verificar si un instructor puede enseñar o no, se le pasa el objeto de la instación  y se imprime el resultado para cada instancia de instructor. 
 
-## 33.- Programas Utilizados
+## 33.- Promesas - promise
+
+Una promesa es una manera de manejar operaciones asíncronas en JavaScript. En lugar de esperar a que una tarea se complete, puedes crear una promesa que represente la eventual finalización de esa tarea. Entonces, puedes seguir ejecutando otras tareas mientras esperas que la promesa se resuelva (es decir, que la tarea se complete) o se rechace (en caso de error).
+
+```javascript
+// Creamos una promesa que simula la descarga de un archivo
+let promesaDescarga = new Promise((resolve, reject) => {
+  // Simulamos una descarga que toma 2 segundos
+  setTimeout(() => {
+    // Supongamos que la descarga fue exitosa
+    resolve("Archivo descargado correctamente");
+    // Si hubiera ocurrido un error, podríamos haber usado reject()
+  }, 2000);
+});
+
+// Usamos la promesa
+console.log("Descargando archivo...");
+
+// Cuando la promesa se resuelve, ejecutamos el código dentro de then()
+promesaDescarga.then((mensaje) => {
+  console.log(mensaje);
+}).catch((error) => {
+  console.log("Ocurrió un error:", error);
+});
+
+console.log("Mientras tanto, podemos seguir haciendo otras cosas...");
+```
+En este ejemplo, creamos una promesa que simula la descarga de un archivo. Mientras esperamos que se complete la descarga, podemos seguir ejecutando otras tareas. Una vez que la promesa se resuelve (es decir, la descarga se completa), ejecutamos el código dentro de then(). Si hay algún error durante la descarga, podemos manejarlo dentro de catch().
+
+### Fech 
+
+Si lo que queremos es traer una promesa dentro de un fetch este sería el ejemplo:
+
+```javascript
+const postsPromise = fetch('https://api.dailysmarty.com/posts');
+
+postsPromise
+  .then(response => {
+    // Verificamos si la respuesta de la solicitud es exitosa (código de estado 200)
+    if (!response.ok) {
+      throw new Error('Ocurrió un error al obtener los datos');
+    }
+    // Parseamos la respuesta como JSON
+    return response.json();
+  })
+  .then(postsData => {
+    // Iteramos sobre los datos de los posts y mostramos los títulos
+    postsData.posts.forEach(post => {
+      console.log(post.title);
+    });
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+```
+
+Utilizamos fetch para hacer una solicitud a la URL de la API.
+
+Luego, encadenamos métodos .then() para manejar la respuesta de la solicitud. En el primer .then(), verificamos si la respuesta es exitosa y parseamos los datos JSON. En el segundo .then(), iteramos sobre los datos de los posts y mostramos los títulos.
+Utilizamos .catch() para manejar cualquier error que ocurra durante el proceso de obtención de datos.
+
+Este código solicitará los datos de la API, los parseará como JSON y luego imprimirá los títulos de cada post en la consola.
+
+### Agrupando promesas
+
+
+Una agrupación de promesas en JavaScript es cuando tienes un conjunto de promesas y deseas esperar a que todas se resuelvan o se rechacen antes de realizar alguna acción adicional. Se utiliza para coordinar múltiples tareas asíncronas y ejecutar un código una vez que todas esas tareas hayan finalizado.
+
+Un ejemplo común es cuando necesitas hacer varias solicitudes a diferentes endpoints de una API y quieres procesar los resultados solo después de que todas las solicitudes hayan sido completadas.
+
+Aquí tienes un ejemplo de código que utiliza Promise.all() para agrupar promesas:
+
+```javascript
+// Supongamos que tenemos tres funciones que devuelven promesas que representan solicitudes a diferentes endpoints de una API
+const request1 = fetch('https://api.example.com/endpoint1');
+const request2 = fetch('https://api.example.com/endpoint2');
+const request3 = fetch('https://api.example.com/endpoint3');
+
+// Utilizamos Promise.all() para agrupar las promesas
+Promise.all([request1, request2, request3])
+  .then(responses => {
+    // responses es un array que contiene las respuestas de las tres solicitudes
+    // Podemos trabajar con los datos de cada respuesta aquí
+    return Promise.all(responses.map(response => response.json())); // Parseamos cada respuesta como JSON
+  })
+  .then(data => {
+    // data es un array que contiene los datos JSON de las tres respuestas
+    // Podemos trabajar con los datos de cada respuesta aquí
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
+```
+En este ejemplo:
+
+- Creamos tres promesas request1, request2 y request3, que representan solicitudes a diferentes endpoints de una API.
+Utilizamos Promise.all([request1, request2, request3]) para agrupar estas promesas en una sola promesa. Esta nueva promesa se resolverá solo cuando todas las promesas en el array hayan sido resueltas, o se rechazará si alguna de ellas es rechazada.
+
+- En el primer .then(), obtenemos un array responses que contiene las respuestas de las tres solicitudes. Aquí podríamos realizar algún procesamiento adicional si fuera necesario.
+  
+- Luego, usamos responses.map(response => response.json()) para mapear cada respuesta a su método json(), lo que devuelve una promesa para parsear el cuerpo de la respuesta como JSON.
+  
+- Finalmente, en el segundo .then(), obtenemos un array data que contiene los datos JSON de las tres respuestas. Podemos trabajar con estos datos según sea necesario.
+  
+- En resumen, Promise.all() nos permite esperar a que múltiples promesas se resuelvan o se rechacen antes de continuar con la ejecución del código. Esto es útil cuando necesitamos coordinar varias tareas asíncronas y queremos manejarlas de manera eficiente.
+
+### Utilizando Async y await
+
+`async` y `await` se utilizan para simplificar el manejo de operaciones asíncronas en JavaScript. Permiten escribir código que es más legible y fácil de entender, al hacer que las operaciones asíncronas se vean y se comporten de manera similar a las operaciones síncronas. Esto mejora la claridad del código y facilita el manejo de la lógica asíncrona en JavaScript.
+
+
+- `async`: Es una palabra clave que se utiliza para declarar una función asíncrona. Cuando declaras una función como async, esto significa que esa función siempre devolverá una promesa, incluso si no la estás devolviendo explícitamente. Esto facilita el manejo de operaciones asíncronas dentro de la función.
+
+- `await`: Es una palabra clave que se utiliza dentro de una función async para esperar a que una promesa se resuelva antes de continuar con la ejecución del código. Esto hace que el código parezca síncrono, incluso cuando está tratando con operaciones asíncronas.
+
+```javascript
+const login = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('User logged in...');
+    }, 2000);
+  });
+}
+
+const updateAccount = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('Updating last login...');
+    }, 2000);
+  });
+}
+
+async function loginActivities() {
+  const returnedLogin = await login();
+  console.log(returnedLogin);
+
+  const returnedUpdateAccount = await updateAccount();
+  console.log(returnedUpdateAccount);
+}
+
+loginActivities();
+```
+
+#### Async y await usando closures (cierres)
+
+
+Cuando utilizas closures con async y await en JavaScript, estás combinando dos conceptos poderosos para controlar el flujo asíncrono y el ámbito de las variables en tu código.
+
+Un cierre (closure) en JavaScript es una función que tiene acceso al ámbito en el que fue creada, incluso después de que esa función haya salido de ese ámbito. Esto significa que una función dentro de otra función puede acceder a las variables de la función exterior, incluso después de que la función exterior haya terminado de ejecutarse.
+
+Cuando usas async y await dentro de una función que tiene acceso a variables externas (creando así un cierre), estas variables pueden ser utilizadas dentro de las funciones asíncronas con await. Esto es útil porque te permite compartir información entre el ámbito exterior y las funciones asíncronas que estás esperando.
+
+Además, cuando utilizas closures con async y await en situaciones como un login con actualización de cuenta, puedes obtener resultados simultáneos de múltiples promesas, incluso si estás esperando por ellas con await. Es decir no ejecuta el resolve del primer promise y milisegundos después el del segundo. 
+
+Esto se debe a que las funciones asíncronas creadas con async y await son capaces de mantener el contexto y el estado de las variables exteriores a través de los closures. Por lo tanto, aunque estemos esperando a que una operación asíncrona se complete antes de continuar con la ejecución del código, otras operaciones que también están en curso pueden continuar ejecutándose en segundo plano.
+
+```javascript
+const login = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('User logged in...');
+    }, 2000);
+  });
+}
+
+const updateAccount = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('Updating last login...');
+    }, 2000);
+  });
+}
+
+async function loginActivities(login, updateAccount) {
+  const returnedLogin = await login();
+  console.log(returnedLogin);
+
+  const returnedUpdateAccount = await updateAccount();
+  console.log(returnedUpdateAccount);
+}
+
+loginActivities(login(), updateAccount());
+```
+
+#### Async y await con varias consultas a APIs externas
+
+```javascript
+async function queryApis() {
+  const postsPromise = fetch('https://api.dailysmarty.com/posts');
+  const posts = await postsPromise.then(res => res.json());
+  console.log(posts);
+
+  const reposPromise = fetch('https://api.github.com/users/jordanhudgens/repos');
+  const repos = await reposPromise.then(res => res.json());
+  console.log(repos);
+}
+
+queryApis();
+```
+
+Lo lógico es que controlemos los errores. Si una llamada da error nos de el mensaje correspondiente. Es importante encapsular en un try catch todos los procesos que no queramos que ese ejecuten si da error en la llamada a la API. 
+
+En este caso son dos llamadas a APIs y no nos importa si la primera da error queremos que siga y lo intente con la segunda por eso encapsulamos a cada llamada con un try catch.
+
+```javascript
+async function queryApis() {
+  try {
+    const postsPromise = fetch('http://api.dailysmarty.com/posts');
+    const posts = await postsPromise.then(res => res.json());
+    console.log(posts);
+  } catch(err) {
+    console.log(err);
+    console.log('There was an error with the DailySmarty API');
+  }
+
+  try {
+    const reposPromise = fetch('https://api.github.com/users/jordanhudgens/repos');
+    const repos = await reposPromise.then(res => res.json());
+    console.log(repos);
+  } catch(err) {
+    console.log(err);
+    console.log('There was an error with the GitHub API');
+  }
+}
+
+queryApis();
+```
+
+## 34.- Ejercicio aleatorio (loteria - casinos)
+
+```javascript
+const weightedLottery = weights => {
+  let containerArray = [];
+
+  Object.keys(weights).forEach(key => {
+    for (let i = 0; i < weights[key]; i++) {
+      containerArray.push(key);
+    }
+  });
+
+  return containerArray[(Math.random() * containerArray.length) | 0];
+};
+
+const weights = {
+    winning: 1,
+    losing: 1000
+};
+
+weightedLottery(weights);
+```
+
+1º- __const weightedLottery = weights =>__, se define una función llamada weightedLottery que toma un parámetro llamado weights. Este parámetro es un objeto que representa las diferentes opciones disponibles en una lotería ponderada y sus respectivos pesos.
+
+2º- Se crea un array vacío llamado containerArray que se utilizará para almacenar las opciones de la lotería según sus pesos.
+
+3º- Se recorre el objeto weights usando Object.keys() para obtener las claves (opciones de la lotería). Luego, para cada clave, se ejecuta un bucle for que se repetirá tantas veces como el valor asociado a esa clave en weights. Durante cada iteración, se agrega la clave al array containerArray. Esto asegura que las opciones con un peso mayor aparezcan más veces en el array, lo que hace que sean más probables de ser seleccionadas posteriormente.
+
+4º- Se elige aleatoriamente un elemento del array containerArray usando Math.random(). Se multiplica el resultado por la longitud del array para obtener un índice aleatorio. La expresión | 0 se utiliza para convertir el resultado en un entero. Luego, se devuelve el elemento del array en ese índice, lo que representa la opción seleccionada en la lotería ponderada.
+
+5º- Se define un objeto weights que asigna pesos a cada opción de la lotería. En este ejemplo, la opción "winning" tiene un peso de 1, "losing" tiene un peso de 1000. Por cada 1001 tiradas 1000 será losing.
+
+6º Por último se llama a la función weightedLottery(weights) con el objeto weights como argumento, lo que devuelve una opción aleatoria de acuerdo a los pesos especificados.
+
+
+
+##  Programas Utilizados
 
 - Visual Studio Code
 - CodePen.io
+ 
 
 ### Ejecutar código 
 
@@ -2174,7 +2458,7 @@ __VSC__
 * Presiona Ctrl + Shift + P para abrir la paleta de comandos.
 * Escribe "Run Code" y selecciona "Run Code" de las opciones mostradas o simplemente presiona Ctrl + Alt + N.
 
-## 34.- Bibliografía
+## Bibliografía
 
 ### Reduce 
 
