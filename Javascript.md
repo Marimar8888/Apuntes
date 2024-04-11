@@ -2942,7 +2942,272 @@ weightedLottery(weights);
 
 6º Por último se llama a la función weightedLottery(weights) con el objeto weights como argumento, lo que devuelve una opción aleatoria de acuerdo a los pesos especificados.
 
+## 35.- Debbuger
 
+El depurador (o debugger en inglés) en JavaScript es una herramienta que te permite pausar la ejecución de tu código en un punto específico para inspeccionar el estado de las variables, el flujo de ejecución y detectar posibles errores.
+
+Aquí tienes una explicación paso a paso de cómo usar el debugger en JavaScript:
+
+Inserta la declaración debugger: Para activar el depurador en un punto específico de tu código, simplemente inserta la declaración debugger en ese lugar. Por ejemplo:
+
+```javascript
+  function sum(a, b) {
+      debugger;
+      return a + b;
+  }
+
+  let result = sum(2, 3);
+  console.log(result);
+```
+
+![alt text](image-6.png)
+
+1. Abre las herramientas de desarrollador del navegador: Ahora, abre las herramientas de desarrollador de tu navegador. Puedes hacer esto generalmente presionando F12 o haciendo clic derecho en la página y seleccionando "Inspeccionar" (esto puede variar ligeramente dependiendo del navegador que estés utilizando).
+
+2. Selecciona la pestaña de "Depurador": Una vez que hayas abierto las herramientas de desarrollador, busca la pestaña "Depurador" y selecciónala. Aquí es donde verás tu código JavaScript y podrás interactuar con el depurador.
+
+![alt text](image-7.png)
+
+3. Ejecuta tu código: Vuelve a cargar la página o activa el evento que dispare la ejecución del código que contiene la declaración debugger.
+
+4. El depurador se detendrá en la declaración debugger: Una vez que el código alcance la declaración debugger, la ejecución se pausará y verás que el depurador se activa en la línea donde colocaste la declaración. En este punto, puedes inspeccionar el estado de las variables, ejecutar código paso a paso y mucho más.
+
+5. Utiliza las herramientas de depuración: Ahora que el depurador está activo, puedes usar las herramientas proporcionadas por tu navegador para inspeccionar variables, ver la pila de llamadas, avanzar paso a paso en el código, establecer puntos de interrupción adicionales, entre otras cosas.
+
+6. Continúa la ejecución: Una vez que hayas terminado de depurar esa parte de tu código, puedes continuar la ejecución presionando el botón de "Continuar" en las herramientas de depuración o simplemente cerrando las herramientas de desarrollador.
+   
+![alt text](image-8.png)
+
+## 36.- Librería Lodash
+
+Lodash es una biblioteca de utilidades de JavaScript que proporciona funciones de manipulación de datos de alto rendimiento y confiabilidad. Está diseñada para trabajar con matrices, objetos, cadenas, funciones y otros tipos de datos comunes en JavaScript. Lodash se ha vuelto muy popular debido a su eficiencia y a las numerosas funciones que ofrece para simplificar y agilizar el desarrollo de aplicaciones. (https://lodash.com/docs/)
+
+Algunas de las características clave de Lodash incluyen:
+
+Consistencia de API: Lodash ofrece una API coherente y fácil de recordar para todas sus funciones, lo que facilita su uso y aprendizaje.
+
+Optimización de rendimiento: Lodash está altamente optimizado para el rendimiento, lo que significa que las operaciones se realizan de manera eficiente, especialmente en comparación con las implementaciones nativas de JavaScript.
+
+Funciones útiles: Lodash proporciona una amplia gama de funciones útiles que van desde la manipulación de matrices y objetos hasta la manipulación de cadenas y funciones.
+
+La forma de utilizar la librería sería mediante un script de importación en el html:
+
+![alt text](image-5.png)
+
+O mediante la instalación de módulos según los siguientes pasos:
+
+1. Instalar Lodash: Primero, necesitas instalar Lodash en tu proyecto. Para ello, asegúrate de tener npm instalado en tu sistema y luego ejecuta el siguiente comando en la terminal dentro de tu proyecto:
+
+```javascript
+  npm install lodash
+```
+
+2. Importar Lodash: Una vez que hayas instalado Lodash en tu proyecto, puedes importarlo en tu código utilizando alguna de las siguientes sintaxis, dependiendo de tu entorno:
+   
+- Importación de módulo en entornos compatibles con ES6 (ECMAScript 6):
+   
+```javascript
+  import _ from 'lodash';
+```
+
+- Importación de módulo en entornos no compatibles con ES6 (CommonJS):
+
+```javascript
+  const _ = require('lodash');
+```
+
+Ahora, vamos a ver algunos ejemplos de funciones comunes de Lodash:
+
+1. `_.times()`: Esta función crea una matriz de longitud especificada y llama a una función proporcionada con un argumento en cada índice. Esto es útil cuando necesitas ejecutar una función un número específico de veces.
+
+```javascript
+    // times
+    randNumber = () => {
+      return Math.round(Math.random() * 100);
+    }
+
+    const sampleNumbers = _.times(5, randNumber); // devuelve 5 números aleatoreos entre el 1 y el 100
+```
+
+2. `_.filter()`: Esta función crea un nuevo arreglo con todos los elementos que pasan un test (función proporcionada). Es útil para filtrar elementos de un arreglo basado en ciertos criterios.
+
+```javascript
+  const _ = require('lodash');
+
+  const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+  const evenNumbers = _.filter(numbers, num => num % 2 === 0);
+  console.log(evenNumbers);
+
+  // Salida: [2, 4, 6, 8, 10], números pares
+```
+3. `_.keyBy()`. La función keyBy() en Lodash es útil para crear un objeto indexado por una clave generada a partir de los elementos de una colección. Proporciona una forma conveniente de acceder rápidamente a los elementos de la colección utilizando una clave única.
+
+```javascript
+_.keyBy(collection, iteratee)
+```
+
+Un Ejemplo:
+
+```javascript
+    // keyBy
+    const roster = [
+      { position: '3B', name: 'Bregman, A' },
+      { position: '2B', name: 'Altuve, J' },
+      { position: 'CF', name: 'Springer, G' },
+      { position: '1B', name: 'Gurriel, Y' },
+      { position: 'LF', name: 'Gonzalez, M' }
+    ]
+
+    const positions = _.keyBy(roster, 'position');
+
+    const secondBase = positions['2B'];
+```
+
+4. `_.reduce()` en Lodash es una función de la biblioteca Lodash que se utiliza para reducir una colección de valores a un solo valor, aplicando una función acumuladora a cada elemento de la colección.
+
+```javascript
+ // reduce
+    const sum = _.reduce([1, 2, 3], function(total, num) {
+      return total + num;
+    }, 0);
+
+    const homerunStats = [
+      { name: 'Bregman, A',  hr: 19 },
+      { name: 'Altuve, J',   hr: 24 },
+      { name: 'Springer, G', hr: 34 },
+      { name: 'Gurriel, Y',  hr: 18 },
+      { name: 'Gonzalez, M', hr: 23 }
+    ];
+
+    const totalHomeruns = _.reduce(homerunStats, function(total, player) {
+      return total + player.hr;
+    }, 0);
+
+    const links = [
+      "https://google.com",
+      "https://devcamp.com",
+      "https://airbnb.com"
+    ];
+
+    const webLinks = _.reduce(links, function(content, link) {
+      return `<a href='${link}'>${link}</a><br>`.concat(content);
+    }, '');
+``` 
+
+
+4. _.random() en Lodash es una función que genera un número aleatorio dentro de un rango especificado. Tiene la siguiente sintaxis:
+   
+```javascript
+  _.random([lower=0], [upper=1], [floating])
+``` 
+Utilizando el ejemplo anterior usado para times(), se puede simplificar el código de esta manera:
+
+```javascript
+    // random
+    lodashRandNumber = () => {
+      return _.random(1, 100);
+    }
+    const lodashSampleNumbers = _.times(5, lodashRandNumber);
+    console.log(lodashSampleNumbers);
+```
+
+## 37.- Herramienta Quokka.js
+
+Quokka.js es una extensión para Visual Studio Code (VSC) que proporciona una experiencia de desarrollo más interactiva y productiva para JavaScript y TypeScript. Esta extensión ejecuta tu código en tiempo real mientras escribes, mostrando los resultados de manera inmediata en el editor. Aquí tienes una explicación más detallada:
+
+1. __Ejecución en tiempo real:__ Una de las características más destacadas de Quokka.js es su capacidad para ejecutar tu código en tiempo real mientras lo escribes. Esto significa que puedes ver los resultados de tu código directamente en el editor de VSC, sin necesidad de ejecutar un archivo por separado o abrir una consola.
+
+2. __Visualización de resultados:__ Quokka.js muestra los resultados de tu código justo al lado de las líneas correspondientes en el editor. Esto te permite identificar errores más rápidamente y comprender cómo se están procesando tus datos en tiempo real.
+
+3. __Soporte para múltiples lenguajes:__ Aunque Quokka.js es conocido principalmente por su soporte para JavaScript y TypeScript, también es compatible con otros lenguajes como CoffeeScript y JSX.
+
+4. __Inspección de variables:__ Quokka.js te permite inspeccionar el valor de las variables en diferentes puntos de tu código mientras se ejecuta. Esto es útil para entender cómo cambian los datos a medida que tu programa avanza.
+
+5. __Exploración de código:__ Además de ejecutar tu código, Quokka.js también te permite explorar diferentes partes de tu proyecto sin tener que abrir múltiples archivos o cambiar de contexto.
+
+Para la forma de pago poniendo al final de la línea //? se consigue que nos dé el resultado de la operación en cuestión. Para la licencia gratuita tendremos que envolver la llamada a la función con como lo hacíamos para verlo desde la consola del navegador con console.log().
+
+Ejemplo:
+
+```javascript
+  function sum(num1, num2) {
+    return num1 + num2;
+  }
+  //Para la versión de pago
+  sum(5,2); //? 7
+
+  //Para la versión gratuita
+  console.log(sum(5,2)); // automáticamente saldrá el resultado en este caso un 7
+```
+Para instalarlo ir a extensiones de VSC. Buscar Quokka.js e instalar.
+
+Para crear un archivo con Quokka Ctrl + Shift + P saldra la paleta de comandaos y escribir Quokka.js new file.
+
+## 38.- Herramienta Lint
+
+Las herramientas de linting son programas diseñados para analizar el código fuente en busca de posibles problemas, errores de estilo, prácticas no recomendadas y otros problemas que podrían llevar a errores o dificultades de mantenimiento en el código. El término "lint" proviene de un programa de Unix que examinaba el texto en busca de errores comunes de programación.
+
+Aquí tienes una explicación más detallada sobre las herramientas de linting y su importancia:
+
+1. __Identificación de errores tempranos:__ Las herramientas de linting pueden identificar errores en el código fuente antes de que se ejecute el programa. Esto ayuda a reducir el tiempo necesario para depurar y solucionar problemas, ya que los errores se detectan en etapas tempranas del desarrollo.
+
+2. __Mantenimiento del código:__ El código bien escrito y formateado es más fácil de leer y mantener. Las herramientas de linting pueden ayudar a mantener un estilo de código consistente dentro de un proyecto, lo que facilita la colaboración entre desarrolladores y reduce la probabilidad de introducir errores durante el proceso de desarrollo.
+
+3. __Adherencia a estándares de codificación:__ Muchos proyectos y equipos de desarrollo tienen estándares de codificación específicos que deben seguirse para garantizar la coherencia y la calidad del código. Las herramientas de linting pueden ayudar a garantizar que el código cumpla con estos estándares al identificar desviaciones y sugerir correcciones.
+
+4. __Personalización y configuración:__ La mayoría de las herramientas de linting permiten la personalización de reglas y configuraciones para adaptarse a las necesidades específicas de un proyecto o equipo de desarrollo. Esto permite a los desarrolladores establecer sus propias preferencias y requisitos de codificación.
+
+5. __Integración con flujos de trabajo de desarrollo:__ Las herramientas de linting suelen integrarse fácilmente con flujos de trabajo de desarrollo existentes, como sistemas de control de versiones, entornos de desarrollo integrado (IDE) y sistemas de construcción. Esto facilita la incorporación del linting en el proceso de desarrollo y lo convierte en una parte natural del ciclo de desarrollo de software.
+
+Algunas de las herramientas de linting más populares en el ecosistema de JavaScript incluyen ESLint, JSHint y StandardJS. Cada una de estas herramientas tiene sus propias características y configuraciones, pero todas comparten el objetivo común de mejorar la calidad y la consistencia del código fuente.
+
+Existen varias alternativas de terceros que proporcionan funcionalidades similares y te permiten probar ESLint en línea.
+
+Una opción popular es utilizar herramientas de linting en línea que admiten ESLint, como la demo oficial de ESLint (https://eslint.org/demo) que te permite pegar tu código y ejecutar ESLint para obtener resultados inmediatos en el navegador.
+
+Otra forma instalandolo en el mismo editor como es VSC:
+
+1. Instala ESLint de forma global o localmente en tu proyecto: Puedes instalar ESLint de forma global o local en tu proyecto, dependiendo de tus preferencias y requisitos del proyecto. Para instalarlo globalmente, puedes usar npm con el siguiente comando en tu terminal:
+
+```terminal
+  npm install -g eslint
+```
+Si prefieres instalarlo localmente en tu proyecto, navega hasta la raíz de tu proyecto y ejecuta:
+
+```terminal
+  npm install eslint --save-dev
+```
+
+Esto instalará ESLint como una dependencia de desarrollo en tu proyecto y lo agregará al archivo package.json.
+
+2. Configura ESLint: Después de instalar ESLint, necesitas configurarlo para que se ajuste a las reglas de estilo y convenciones de tu proyecto. Puedes hacerlo creando un archivo de configuración .eslintrc en la raíz de tu proyecto. Puedes optar por un archivo de configuración JavaScript, JSON o YAML. Por ejemplo, un archivo .eslintrc.js podría verse así:
+```javascript
+module.exports = {
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "rules": {
+        // Aquí puedes personalizar las reglas de ESLint
+    }
+};
+```
+Configura las reglas: En el archivo de configuración, puedes personalizar las reglas de ESLint según tus preferencias. Por ejemplo, puedes establecer reglas para el estilo de código, la prevención de errores y más.
+
+Ejecuta ESLint en tu código: Una vez que hayas configurado ESLint, puedes ejecutarlo en tu código utilizando la línea de comandos o integrándolo con tu IDE o editor de texto. Para ejecutar ESLint desde la línea de comandos, simplemente navega hasta la raíz de tu proyecto y ejecuta:
+
+eslint <archivo_o_directorio>
+Esto ejecutará ESLint en el archivo o directorio especificado y mostrará los resultados y las advertencias en la consola.
+
+Integración con tu editor: Para una experiencia de desarrollo más fluida, puedes integrar ESLint con tu editor de texto o IDE. Muchos editores populares como Visual Studio Code, Atom y Sublime Text tienen extensiones disponibles que te permiten ejecutar ESLint en tiempo real mientras escribes código.
+
+Corrige los problemas identificados por ESLint: Después de ejecutar ESLint en tu código, revisa los problemas identificados y haz las correcciones necesarias para cumplir con las reglas y convenciones establecidas.
 
 ##  Programas Utilizados
 
