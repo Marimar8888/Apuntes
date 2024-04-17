@@ -3209,6 +3209,110 @@ Integración con tu editor: Para una experiencia de desarrollo más fluida, pued
 
 Corrige los problemas identificados por ESLint: Después de ejecutar ESLint en tu código, revisa los problemas identificados y haz las correcciones necesarias para cumplir con las reglas y convenciones establecidas.
 
+## 39.- Captura de errores
+
+Las capturas de errores en JavaScript son fundamentales para manejar situaciones inesperadas que puedan surgir durante la ejecución del código. Estos errores pueden ser causados por diversas razones, como entradas de usuario incorrectas, problemas de red, fallos en la lógica del programa o incluso errores del sistema.
+
+El bloque try...catch en JavaScript se utiliza para envolver código que se sospecha pueda generar errores. Aquí está cómo funciona:
+
+- `Try`: El bloque try contiene el código que se desea ejecutar. Si ocurre un error durante la ejecución de este código, el control del programa salta al bloque catch.
+
+- `Catch`: El bloque catch se utiliza para manejar el error que ha sido lanzado dentro del bloque try. Aquí puedes definir cómo deseas manejar el error, ya sea mostrando un mensaje al usuario, registrando el error en algún registro, o tomando alguna otra acción adecuada.
+
+Un ejemplo sencillo de cómo se utiliza try...catch en JavaScript:
+
+```javascript
+  try {
+    // Código que puede generar un error
+    let resultado = 10 / 0; // Intentando dividir por cero
+    console.log("El resultado de la división es:", resultado);
+  } catch (error) {
+    // Manejo del error
+    console.error("Se produjo un error:", error.message);
+  }
+```
+
+Otro ejemplo:
+
+```javascript
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Basic Error</title>
+    </head>
+    <body>
+
+    </body>
+
+    <script>
+        function siteComponent(func) { // función que recibe otra función como argumentos
+          return func();
+        }
+        widget = () => { // Función que devuelve un div con el string Hi there
+          return '<div>Hi there</div>';
+        }
+        try { 
+          console.log(siteComponent('oops')); // Si no hay error 
+        } catch(e) {
+          console.log('An error occurred', e);  // Si no recibe una función como argumento daría un error
+        }
+        console.log(siteComponent(widget));  
+    </script>
+  </html>
+```
+## 40.- Crear un proyecto de Javascript en VSC
+
+1º.- Abrir el terminal de VSC y  ver si tengo instalado Node.js. 
+
+```javascript
+  npm -v
+```
+Si lo tengo saldrá el número de la versión que tengo en el terminal. Si no lo tengo deberé instalarlo desde https://nodejs.org.
+
+Descargar o instalar un generador de plantillas de devcamp desde npmjs.com buscar package de devcamp. 
+
+SIN TERMINAR VIDEO 16 modulo 5 MINU 5:38
+
+
+## 41.- Importación y exportación
+
+Supongamos que tienes un archivo llamado variables.js donde defines algunas variables que quieres exportar:
+
+```javascript
+  // variables.js
+  export const nombre = "Juan";
+  export const edad = 30;
+```
+
+Luego, en otro archivo llamado main.js, puedes importar esas variables y utilizarlas:
+
+```javascript
+  // main.js
+  import { nombre, edad } from './variables.js'; // esta ruta será si está en el mismo sitio que main.js
+
+  console.log(nombre); // Output: Juan
+  console.log(edad);   // Output: 30
+```
+Para realizar una importación de una función. Primero, vamos a definir la función en un archivo llamado operaciones.js:
+
+```javascript
+  // operaciones.js
+  export function multiplicar(num1, num2) {
+    return num1 * num2;
+  }
+```
+
+En el otro archivo llamado main.js, importaremos esa función y la utilizaremos:
+
+```javascript
+  // main.js
+  import { multiplicar } from './operaciones.js';
+
+  const resultado = multiplicar(5, 10);
+  console.log(resultado); // Output: 50
+```
+
 ##  Programas Utilizados
 
 - Visual Studio Code
