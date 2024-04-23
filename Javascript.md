@@ -3277,7 +3277,9 @@ SIN TERMINAR VIDEO 16 modulo 5 MINU 5:38
 
 ## 41.- Importación y exportación
 
-Supongamos que tienes un archivo llamado variables.js donde defines algunas variables que quieres exportar:
+### Importar una variable o una función
+
+Importar `Variables`: Supongamos que tienes un archivo llamado variables.js donde defines algunas variables que quieres exportar.
 
 ```javascript
   // variables.js
@@ -3294,11 +3296,11 @@ Luego, en otro archivo llamado main.js, puedes importar esas variables y utiliza
   console.log(nombre); // Output: Juan
   console.log(edad);   // Output: 30
 ```
-Para realizar una importación de una función. Primero, vamos a definir la función en un archivo llamado operaciones.js:
+Para realizar una importación de una `función`. Primero, vamos a definir la función en un archivo llamado operaciones.js:
 
 ```javascript
   // operaciones.js
-  export function multiplicar(num1, num2) {
+  export function multiply(num1, num2) {
     return num1 * num2;
   }
 ```
@@ -3306,12 +3308,188 @@ Para realizar una importación de una función. Primero, vamos a definir la func
 En el otro archivo llamado main.js, importaremos esa función y la utilizaremos:
 
 ```javascript
-  // main.js
-  import { multiplicar } from './operaciones.js';
+// main.js
+import { multiply } from './helper';
 
-  const resultado = multiplicar(5, 10);
-  console.log(resultado); // Output: 50
+console.log(multiply(2, 5));
 ```
+
+### Importar varias funciones y/o variables
+
+```javascript
+  // operaciones.js
+  export function multiply(num1, num2) {
+    return num1 * num2;
+  }
+```
+
+```javascript
+  // main.js
+  import { multiply, nombre, edad} from './operaciones.js';
+
+  console.log(multiply(5, 10));
+  console.log(nombre); 
+```
+### Importar con default
+
+```javascript
+// navigation.js
+  export default function () { 
+    return '<div>Logo</div>';
+  }
+```
+```javascript
+  // main.js
+  import navigation from './navigation.js';
+
+  console.log(navigation()); // al tener default delante de la funcion se le llama con el nombbre del archivo navigation.js
+```
+
+### Importar archivo 
+
+#### Una forma de importar un archivo completo:
+
+```javascript
+//operaciones.js
+export function multiply(numOne, numTwo) {
+  return numOne * numTwo;
+}
+
+export const greeting = 'Hi there';
+```
+
+```javascript
+  // main.js
+  import * as operation from './operaciones.js';
+
+  console.log(operation.multiplicar(5, 10)); // Debemos utilizar el nombre fijado al importar primero
+  console.log(operation.nombre); 
+```
+
+#### Importar archivo por partes
+
+```javascript
+// navigation.js
+  export default function () { 
+    return '<div>Logo</div>';
+  }
+
+  export function multiply(numOne, numTwo) {
+    return numOne * numTwo;
+  }
+
+  export const greeting = 'Hi there';
+```
+
+```javascript
+  // main.js
+  import navigation, {greeting, multiply} from './operaciones.js'; // lo que tenga el default delante se importa con el nombre del archivo como es este caso
+  console.log(navigation());
+  console.log(greeting);
+  console.log(multiply(5,10));
+```
+
+## Introducción a Package Management
+
+Un Administrador de paquetes se encarga de buscar, descargar e instalar todas esas "bibliotecas" que necesitas para tu proyecto de JavaScript.
+
+Además, también se asegura de que todas esas bibliotecas funcionen bien juntas, como si fueran los ingredientes adecuados para una receta específica. También puede manejar actualizaciones, así que si una de esas bibliotecas cambia o se mejora, el administrador de paquetes puede ayudarte a actualizarla fácilmente.
+
+Hay varios administradores de paquetes populares en el ecosistema de JavaScript. Dos de los más utilizados son npm (Node Package Manager) y Yarn.
+
+1. `npm` (Node Package Manager): Es el administrador de paquetes más utilizado en el ecosistema de Node.js y JavaScript en general. Viene incluido con Node.js y es muy fácil de usar. Puedes instalar paquetes utilizando el comando npm install nombre_del_paquete. También puedes crear y administrar tus propios paquetes utilizando npm.
+2. `Yarn`: Desarrollado por Facebook, Yarn es otra opción popular para administrar paquetes en proyectos de JavaScript. Ofrece algunas mejoras de rendimiento sobre npm y una sintaxis ligeramente diferente. Al igual que con npm, puedes instalar paquetes usando el comando yarn add nombre_del_paquete.
+
+Visual Studio Code, tiene una integración muy buena con npm y Yarn, así como con otros administradores de paquetes. 
+
+[npmjs.com](https://www.npmjs.com/) es el sitio web oficial donde se aloja y se comparte el registro público de paquetes de npm (Node Package Manager). Es una plataforma fundamental en el ecosistema de JavaScript donde los desarrolladores pueden encontrar, publicar y gestionar paquetes de código abierto para sus proyectos.
+
+En npmjs.com, puedes buscar paquetes por nombre, explorar sus versiones y documentación, así como ver estadísticas de descargas y contribuciones. También puedes publicar tus propios paquetes para que otros desarrolladores los utilicen en sus proyectos.
+
+### Paquete Devcamp JavaScript Project Builder
+
+Para este curso devcamp tiene un módulo que he creado en `npm`, que es una aplicación generadora de JavaScript y de reacción, por lo que te permite iniciar tu React, o realmente cualquier tipo de proyecto de JavaScript, con solo unos pocos comandos. Es el paquete Devcamp JavaScript Project Builder.
+
+Es un conjunto de archivos de código que puede descargar y, en lugar de simplemente descargar los archivos de código, los incluye dentro de un paquete javascript y, al usar el registro NPM, le resulta muy fácil recibir actualizaciones para integrar dependencias adicionales y diferentes tipos de tareas.
+
+Es como si hubiera agregado su propio código y lo estuviera importando a su programa, pero en lugar de importarlo localmente, lo hago desde el servidor de `npm`.
+
+Con el comando `ls npm root -g` podré ver los paquetes que tengo instalado globalmente en mi ordenador.
+
+Comandos para instalar el paquete creado por Devcamp:
+
+1. Abrir VSC y sin abrir ningún proyecto ni carpeta, elegir en el menú superior terminal -> New terminal. O también en CMD del sistema. Escribir `npm -v`, para saber si tengo el gestor de archivos instalado. Saldrá una numeración si lo tengo.  
+2. Si da error ir a [npmjs.com](https://nodejs.org/en/download), descargas la versión que quieres y ejecutas el exe
+3. Abriendo la web [npmjs.com](https://www.npmjs.com/).
+4. Buscar en la barra de search `devcamp-js-builder`.
+5. Instalar el paquete generador de devcamp. Se abrirá un terminal de la carpeta global del sistema. Escribir lo siguiente `npm i devcamp-js-builder`.
+6. Ahora para crear un proyecto nuevo iriamos a la carpeta en la que queremos crear el proyecto y hay que poner el siguiente comando `js-generate`
+7. Elige entre la lista de plantillas la primera  es6-starter.
+8. Poner el nombre al proyecto.
+9. Una vez el proyecto está creado, mediante cd `nombre del proyecto` entramos a la carpeta.
+10. Si ponemo `ls` en el terminal veremos la lista de archivos creados. El archivo bootstrap.js es similar a index.js
+11. Instalamos `npm install` revisará el archivo package.json las dependencias que tenemos. Si no hubiesemos usado el generador de devcamp creacria la carpeta node_modules.
+12. Para instalar cualquier librería que necesitemos según las indicaciones de la librería como hicimos en los puntos 2-5 para el paquete devcar-js-builder.
+13. Para poner en marcha el servidor `npm start`. 
+14. Abrir el navegador según el puerto que tengamos elegidos en este caso el 3000. 'http://localhost/3000/'
+15. Para pararlo `npm stop`.
+16. Si no se pone en marcha por estar ocupado ese puerto cambiar al 3001 en dev.config.js y server.js.
+  
+## Librería momento.js
+
+La librería moment.js es una herramienta muy popular en el mundo del desarrollo web en JavaScript para el manejo, manipulación y formateo de fechas y horas. Simplifica tareas como crear, analizar, validar, manipular y formatear fechas de una manera más fácil y legible que utilizando las funcionalidades nativas de JavaScript.
+
+Para importar moment.js en tu proyecto, puedes hacerlo de varias formas, dependiendo de si estás utilizando un entorno de desarrollo como Node.js o si estás trabajando directamente en el navegador.
+
+1. Con Node.js y gestores de paquetes como npm o yarn:Primero, debes asegurarte de tener moment instalado en tu proyecto. Si aún no lo has hecho, puedes instalarlo usando npm (o yarn) con el siguiente comando en la terminal:
+
+```javascript
+  npm install --save moment
+```
+Creará una carpeta moment dentro de node_modules.
+
+La documentación la puedes consultar en [moment](https://www.npmjs.com/package/moment)
+
+Hoja estilos de la librería moment -> [Resumen librería momento](moment.md)
+
+## Paquete Babel
+
+Babel es una herramienta popular en el mundo de JavaScript que se utiliza para transformar código de JavaScript escrito en una versión más nueva (como ECMAScript 6 o superior) a una versión más compatible con versiones anteriores de JavaScript que puedan ser ejecutadas en navegadores o entornos que no admiten las características más recientes.
+
+El paquete npm de Babel proporciona la infraestructura necesaria para utilizar esta herramienta en tus proyectos. Con Babel, puedes escribir tu código utilizando las últimas características de JavaScript sin preocuparte por la compatibilidad con versiones anteriores, ya que Babel se encargará de convertir tu código a una versión que sea compatible con los navegadores y entornos de destino.
+
+Aquí tienes un ejemplo simple para ilustrar cómo funciona Babel:
+
+Supongamos que tienes el siguiente código en ECMAScript 6:
+
+```javascript
+  // ECMAScript 6 (ES6) - Arrow Function
+  const greet = (name) => {
+    return `Hello, ${name}!`;
+  };
+
+  console.log(greet('Alice'));
+```
+
+Este código utiliza una característica de ES6 llamada "Arrow Function" para definir una función greet que toma un argumento name y devuelve un saludo personalizado.
+
+Sin embargo, si intentas ejecutar este código en un navegador que no admite funciones de flecha (por ejemplo, Internet Explorer 11), obtendrás un error.
+
+Aquí es donde entra Babel. Puedes configurar Babel para que transforme tu código ES6 a una versión de JavaScript más compatible. Después de la transformación, el código se verá así:
+
+```javascript
+  // JavaScript compatible with older browsers (transformed by Babel)
+  "use strict";
+
+  var greet = function greet(name) {
+    return "Hello, " + name + "!";
+  };
+
+  console.log(greet('Alice'));
+```
+
+Este código transformado es más compatible y puede ejecutarse en una amplia gama de navegadores, incluidos los que no admiten las características más recientes de JavaScript.
+
 
 ##  Programas Utilizados
 
