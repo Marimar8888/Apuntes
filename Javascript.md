@@ -3490,6 +3490,29 @@ Aquí es donde entra Babel. Puedes configurar Babel para que transforme tu códi
 
 Este código transformado es más compatible y puede ejecutarse en una amplia gama de navegadores, incluidos los que no admiten las características más recientes de JavaScript.
 
+## Crear una paquete propio en npm
+
+
+__Los paquetes en npm pueden ser tanto públicos como privados.__
+
+1. __Paquetes Públicos en npm:__
+* Los paquetes públicos están disponibles para cualquier persona para buscar, descargar e instalar a través de npmjs.com o la línea de comandos de npm.
+* Son útiles cuando deseas compartir tu código con la comunidad de desarrollo, colaboradores externos o la comunidad de código abierto en general.
+* Los paquetes públicos pueden ser útiles para crear y distribuir bibliotecas, frameworks, herramientas y otros recursos de código abierto que puedan ser útiles para otros desarrolladores.
+
+2. __Paquetes Privados en npm:__
+* Los paquetes privados están restringidos y solo pueden ser accedidos por aquellos que tengan permisos específicos.
+* Son útiles cuando deseas mantener tu código seguro y no quieres que sea accesible para el público en general.
+* Los paquetes privados pueden ser utilizados para compartir código entre equipos internos de una organización, para proyectos comerciales o para compartir código con colaboradores seleccionados de forma privada.
+
+__Crear un paquete personalizado puede ser útil por varias razones:__
+
+* __Reutilización de Código:__ Si tienes funcionalidades comunes que utilizas en varios proyectos, empaquetarlas en un paquete facilita su reutilización en diferentes contextos.
+* __Abstracción y Modularidad:__ Puedes encapsular funcionalidades específicas en un paquete, lo que promueve la modularidad y la claridad en tu código.
+* __Distribución de Código:__ Si deseas compartir tu código con otros desarrolladores, empaquetarlo en un paquete npm facilita la distribución y la instalación.
+* __Mantenimiento Centralizado:__ Al tener un paquete centralizado, puedes mantener y actualizar el código en un solo lugar, lo que simplifica el mantenimiento a largo plazo.
+
+Pasos para la creación de un paquete -> [npmjs.com](npm.md)
 
 ##  Programas Utilizados
 

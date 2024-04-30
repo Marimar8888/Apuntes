@@ -1,5 +1,68 @@
 # Documentación Sección Python, MongoDB y Postman
 
+## ¿Cuáles son los 4 tipos de datos en Python?
+
+Hay más de 4 tipos de datos en Python, pero ya que se pide sólo 4 diré los siguientes:
+
+1. `Boolean`, cuyos valores pueden ser True o False y que nos sirve para poder controlar el control del
+flujo con preguntas lógicas usando if, while, do… while etc.
+
+2. `Numbers`, divididos principalmente en enteros (int) y decimales (float).
+
+3. `String`. Cadenas cortas o largas. Estas se tienen que crear con una coma simple o compuesta al
+inicio y final de la cadena. Si dicha cadena se compusiera por un string multilinea donde existen
+saltos de linea, se tienen que utilizar 3 comillas dobles al inicio y al final, convirtiéndose en un
+Heredoc.
+
+4. `Listas`. Las cuales pueden estar compuestas por string, numeros, booleanos…. Para crear la lista
+debe iniciar y finalizar con un corchete.
+
+## ¿Cuáles son los 4 tipos de datos en Python?
+
+Hay más de 4 tipos de datos en Python, pero ya que se pide sólo 4 diré los siguientes:
+
+1. `Boolean`, cuyos valores pueden ser True o False y que nos sirve para poder controlar el control del
+flujo con preguntas lógicas usando if, while, do… while etc.
+
+2. `Numbers`, divididos principalmente en enteros (int) y decimales (float).
+
+3. `String`. Cadenas cortas o largas. Estas se tienen que crear con una coma simple o compuesta al
+inicio y final de la cadena. Si dicha cadena se compusiera por un string multilinea donde existen
+saltos de linea, se tienen que utilizar 3 comillas dobles al inicio y al final, convirtiéndose en un
+Heredoc.
+
+4. `Listas`. Las cuales pueden estar compuestas por string, numeros, booleanos…. Para crear la lista
+debe iniciar y finalizar con un corchete.
+
+## ¿Qué tipo de convención de nomenclatura debemos usar para las variables en Python?
+
+El nombre de la variable el signo igual y el dato. Dependiendo de si se trata de un número no hay que poner nada, tan sólo el número y python autómaticamente sabe de que tipo de dato se trata.Si es una string irá entre comillas, si es un Boolean, se debe poner la primera letra en mayúsculas True o False y sabrá que se trata de un booleano.
+
+No hace falta hacer ninguna mención al tipo de dato, como pasa en otros lenguajes como es el caso de java.
+
+## ¿Qué es un heredoc de Python?
+
+Se trata de una cadena multilinea, donde existen líneas en blanco entre medias. No podremos usar comillas simples o una comilla doble al inicio y final del texto, porque nos reconocería el string hasta el final del primer párrafo el resto no lo recogería.
+
+Es por eso que hay que utilizar 3 comillas dobles al inicio y final del texto.
+
+## ¿Qué es la interpolación de cadenas?
+
+Con la interpolación se consigue insertar datos de forma dinámica dentro de un texto fijo. Estos datos están guardados en variables y lo que se inserta en el texto fijo es la variable en cuestión, mediante unas `{ }`.
+
+Para que python sepa que existe interpolación se tiene que poner una f delante de las “”” comillas que van al inicio del texto y que genera un heredoc.
+
+Un ejemplo de como utilizar esta interpolación es en los emails automáticos que se recibe después de inscribirte en una web o de realizar una compra online. Normalmente esos correos llegan al usuario de forma personalizada, con su nombre real o nombre de usuario, con el importe ha pagado o datos de productos adquiridos….
+
+## ¿Cuándo debemos usar comentarios en Python?
+
+El problema principal de los comentarios es que no se suelen actualizar cuando el código varía y finalmente terminan quedando obsoletos y en lugar de ayudar pueden confundir o generar problemas.
+
+Es por eso que se recomienda que se usen sobre todo cuando se trata de comentarios que genera la aplicación y los actualiza automáticamente, ya que de esta forma estarán actualizados o para identificar la estructura en html o en las hojas de estilo css. 
+
+Normalmente la variación de la estructura no es tan a menudo como el resto de código que hace que la web o aplicación sea
+dinámica.
+
 
 ## ¿Para qué usamos Clases en Python?
 
@@ -89,180 +152,6 @@ instancia = MiClase("Hola")
 
 ```
 
-
-## ¿Cuáles son los tres verbos de API?
-
-Los "verbos" son los diferentes métodos HTTP que se utilizan para interartuar con la base de datos y sus recursos. Son la base de la comunicación entre cliente y servidor. Le indican al servidor lo que el cliente desea realizar en cada solicitud. Una consulta para recuperar datos, insertar nuevos registros, modificar o eliminar registros existentes. 
-
-Los tres verbos principales de una API son:
-
-* __GET__: Se utiliza para solicitar datos de un recurso específico.
-* __POST__: Se utiliza para enviar datos y crear un nuevo recurso en el servidor.
-* __DELETE__: Se utiliza para eliminar un recurso específico en el servidor.
-
-Existen otros "verbos" como son __OPTION__, __PATCH__ y  __PUT__. Este últimoque se utilizaría de forma frecuente en la relación cliente-servidor, ya que se modifica los datos existentes en la base de datos.
-
-
-
-## ¿Es MongoDB una base de datos SQL o NoSQL?
-
-MongoDB es un gestor de base de datos __NoSQL__. No sigue el modelo relacional de las bases de datos SQL tradicionales, sino que utiliza un modelo de documentos basado en JSON permitiendo almacenar y consultar datos de manera flexible y escalable.
-
-Utiliza como lenguaje de consulta por defecto JavaScript, pero también se puede usar con otros lenguajes como puede ser PHP, Java, C++, Ruby...., instalando los drivers correspondientes.
-
-La principal __diferenciación__ entre MongoDB y las bases de datos SQL radica en su arquitectura y modelo de datos:
-
-#### Modelo de Datos:
-
-__SQL__ (relacional): Las bases de datos SQL siguen un modelo relacional, donde los datos se organizan en tablas con filas y columnas. La estructura de los datos se define mediante un esquema fijo y estricto.
-
-__MongoDB__ (NoSQL - Documental): MongoDB es una base de datos NoSQL que sigue un modelo de datos documental. En MongoDB, los datos se almacenan en documentos JSON (BSON, en realidad) flexibles y anidados, lo que permite una mayor flexibilidad y escalabilidad, ya que no requiere un esquema predefinido y puede adaptarse fácilmente a cambios en los datos.
-
-#### Lenguaje de Consulta:
-
-__SQL__: Las bases de datos SQL utilizan SQL como lenguaje de consulta para manipular y recuperar datos. SQL es un estándar ampliamente aceptado y utilizado en la industria.
-
-__MongoDB__: MongoDB utiliza un lenguaje de consulta orientado a documentos, que es similar a la manipulación de objetos JSON. Esto permite realizar consultas y operaciones sobre documentos de manera más natural y flexible.
-
-#### Escalabilidad y Flexibilidad:
-
-__SQL__: Las bases de datos SQL suelen ser menos flexibles en términos de escalabilidad y estructura de datos. Agregar nuevas columnas o cambiar el esquema de una tabla existente puede requerir cambios significativos en la base de datos y puede ser complicado en entornos de alta concurrencia.
-
-__MongoDB__: MongoDB ofrece una mayor flexibilidad y escalabilidad. Puede manejar datos no estructurados y semiestructurados de manera más eficiente y permite escalar horizontalmente con mayor facilidad al distribuir datos a través de múltiples servidores.
-
-#### Transacciones y Consistencia:
-
-__SQL__: Las bases de datos SQL suelen ser más estrictas en cuanto a la integridad de los datos y la consistencia transaccional. Soportan transacciones ACID (Atomicidad, Consistencia, Aislamiento y Durabilidad), lo que garantiza la integridad de los datos incluso en condiciones de fallo del sistema.
-
-__MongoDB__: MongoDB proporciona cierto nivel de consistencia y soporta operaciones atómicas en documentos individuales. Sin embargo, no garantiza la misma consistencia transaccional ACID que las bases de datos SQL. En su lugar, ofrece un enfoque más flexible con opciones como la consistencia eventual.
-
-En resumen, mientras que las bases de datos SQL son ideales para aplicaciones con estructuras de datos fijas y relaciones complejas, MongoDB es más adecuado para aplicaciones que requieren escalabilidad horizontal, flexibilidad en el esquema de datos y operaciones de base de datos de alto rendimiento. La elección entre MongoDB y SQL depende de los requisitos específicos de tu aplicación y las características que más valoras en una base de datos.
-
-
-## ¿Qué es una API?
-
-Una API define cómo interactuar con un sistema informático para realizar ciertas operaciones o acceder a sus funciones y datos. Es decir, actúa como un intermediario que permite que diferentes sistemas y aplicaciones se comuniquen y trabajen juntos de manera efectiva, facilitando la interoperabilidad y la integración entre sistemas informáticos diversos.
-
-Las APIs pueden tomar diferentes formas y pueden ser utilizadas para diversos propósitos. Algunos tipos comunes de APIs incluyen:
-
-__APIs web:__ Estas son interfaces que permiten que aplicaciones y servicios web interactúen entre sí a través de Internet. Las APIs web pueden proporcionar acceso a recursos, como bases de datos, servicios de almacenamiento en la nube, sistemas de pago, redes sociales, y más.
-
-__APIs de sistema operativo:__ Estas APIs permiten que los programas accedan y utilicen las funciones del sistema operativo, como el sistema de archivos, la red, los dispositivos de entrada y salida, etc.
-
-__APIs de bibliotecas de software:__ Estas APIs proporcionan funciones y métodos que los programadores pueden utilizar para interactuar con bibliotecas de software específicas. Por ejemplo, las APIs de bibliotecas gráficas permiten a los programadores crear interfaces gráficas de usuario en sus aplicaciones.
-
-Las APIs se basan en estándares y protocolos de comunicación bien definidos, como HTTP para las APIs web, o funciones y estructuras de datos para las APIs de bibliotecas de software. Esto permite que los desarrolladores utilicen las APIs de manera consistente y confiable.
-
-### Un ejemplo de una API sencilla:
-
-___________________________________________________________________________________________________________________________________________________
-
-# Documentación de la API de Usuarios
-
-Esta API proporciona endpoints para administrar usuarios en un sistema.
-
-## Base URL
-
-```
-https://api.ejemplo.com
-
-```
-
-## Recursos Disponibles
-
-### Usuarios
-
-Endpoint: `/usuarios`:
-
-Este recurso permite realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) sobre usuarios.
-
-+ `GET /usuarios`: Obtiene todos los usuarios registrados.
-  
-+ `POST /usuarios`: Crea un nuevo usuario.
-  
-+ `GET /usuarios/{id}`: Obtiene los detalles de un usuario específico.
-  
-+ `PUT /usuarios/{id}`: Actualiza los detalles de un usuario existente.
-  
-+ `DELETE /usuarios/{id}`: Elimina un usuario específico.
-
-
-Parámetros de Consulta:
-
-* `nombre` (opcional): Filtra usuarios por nombre.
-
-Ejemplo de solicitud GET:
-
-```
-GET https://api.ejemplo.com/usuarios
-```
-
-Respuesta:
-
-```
-[
-    {
-        "id": 1,
-        "nombre": "Usuario 1",
-        "correo": "usuario1@example.com"
-    },
-    {
-        "id": 2,
-        "nombre": "Usuario 2",
-        "correo": "usuario2@example.com"
-    }
-]
-```
-
-Ejemplo de solicitud POST:
-
-```
-POST https://api.ejemplo.com/usuarios
-{
-    "nombre": "Nuevo Usuario",
-    "correo": "nuevo_usuario@example.com"
-}
-```
-
-Respuesta:
-
-```
-{
-    "id": 3,
-    "nombre": "Nuevo Usuario",
-    "correo": "nuevo_usuario@example.com"
-}
-```
-___________________________________________________________________________________________________________________________________________________
-
-
-## ¿Qué es Postman?
-
-Plataforma que ayuda en el desarrollo de APIs. Permite a los desarrolladores crear, probar, documentar y compartir APIs de manera eficiente. Postman ofrece una interfaz gráfica fácil de usar que simplifica el proceso de construir y probar peticiones a APIs.
-
-Observando las imagenes de ejemplo podremos ver como, en la parte lateral izquierda, podremos crear todas las APIs que queramos añadiendo los endpoint que necesitemos a cada una de ellas como se puede ver en la primera imagen del endpoint POST, donde se puede ver como la API Devcamp_sqlite tiene en total 5 endpoints Un __POST__ para añadir un documento nuevo, 2 __GET__ de consultas diferentes, una para recuperar todos los registros que hay en la base de datos y el otro para consultar por su id. Un __PUT__, para modificar un documento, por su id y un __DELETE__, para eliminar un documento por su id.
-
-__POST:__
-
-![alt text](image.png)
-
-__GET:__
-
-![alt text](image-1.png)
-
-__GET:__
-
-![alt text](image-2.png)
-
-__PUT:__
-
-![alt text](image-3.png)
-
-__DELETE:__
-
-![alt text](image-4.png)
-
-
 ## ¿Qué es el polimorfismo?
 
 El polimorfismo es la capacidad que tienen los objetos de diferentes clases, de responder al mismo método o función de manera diferente. Dicho de otra manera, permite tratar diferentes tipos de objetos de manera uniforme siempre y respondiendo a ciertos métodos o funciones de manera adecuada.
@@ -297,7 +186,6 @@ print(hacer_hablar(perro))  # Imprime: Guau!
 print(hacer_hablar(gato))   # Imprime: Miau!
 
 ```
-
 
 ## ¿Qué es un método dunder?
 
@@ -364,6 +252,335 @@ En este ejemplo, definimos un decorador llamado asegurar_numero_positivo que tom
 
 Al aplicar el decorador @asegurar_numero_positivo sobre la función calcular_raiz_cuadrada, nos aseguramos de que la función solo reciba números positivos como argumento. Este es un ejemplo simple pero práctico de cómo los decoradores pueden usarse para agregar funcionalidades adicionales a las funciones existentes de manera transparente y sin modificar su lógica interna.
 
+## ¿Cuál es la diferencia entre una lista y una tupla en Python?
+
+__En el `código`:__
+
+1. La tupla se crea mediante parentesis () y la lista mediante corchetes [].
+
+__Por sus `características`:__
+
+1. La lista es mutable y la tupla es inmutable.
+
+Por ejemplo una lista podría ordenarla por orden alfabético, una tupla si lo intento me dará error. Por eso también si añado un elemento a la tupla, creará un nuevo objeto, porque el original es inmutable.
+
+2. La tupla no me deja eliminar directamente un elemento que no sea el primero o el último.
+   
+Para poder hacerlo, primero tendría que convertir la tupla en una lista y eliminar el elemento en cuestion. Después tendré que volver a convertirlo en tupla (No es recomendado hacerlo).
+
+En la lista no hay ningún problema para eliminar cualquier elemento.
+
+## ¿Cuál es el orden de las operaciones?
+
+`__PEMDAS__` (Para recordar mejor el orden)
+
+    El orden será el siguiente primero se calcula lo que hay dentro de los ()
+    P → ()
+    Después los exponentes
+    E → **
+    Después las multiplicaciones
+    M → *
+    Después las divisiones
+    D → /
+    Después las adiciones
+    A → +
+    Y por último las restas aunque estas dos últimas pueden operarse según aparecen de
+    izquierda a derecha. No tienen porque ser primero las sumas y luego las restas.
+    S → -
+
+## ¿Qué es un diccionario Python?
+
+Una colección de elementos con clave:valor. Es similar a un diccionario de papel. Para buscar el valor o significado de algo lo hacemos a través de la clave. Se crea usando llaves { CLAVE: VALOR }
+
+Cada elemento puede a su vez tratarse de otro diccionario, una lista, un número o un string.
+
+## ¿Cuál es la diferencia entre el método ordenado y la función de ordenación?
+ 
+El método .sort() ordena los elementos de un listado por orden alfabético, pero no devuelve un valor y por ello, no podemos guardar en una variable la nueva lista.
+
+La función sorted() ordena los elementos de una lista por orden alfabético y lo podemos guardar en una variable porque devuelve el resultado.
+
+## ¿Qué es un operador de asignación?
+
+El operador de asignación es un símbolo que se utiliza para asignar un valor a una variable, como es el operador =.
+
+También existen otros operadores de asignación que además de asignar un valor, realizan una operación.
+
++= → Realiza una operación de suma, asignando además el resultado final a dicha variable. 
+
+Ejemplo: X = 10
+X += 1 → X pasa a valer 11 ya que le suma al valor de X, 1 y le asigna el resultado final 11.
+
+Lo mismo sucedería con el resto de operaciones posibles para la resta -=, para la multiplicación *=, para la división /= etc.
+
+## ¿Qué es un condicional?
+
+Es una estructura de control que permite tomar decisiones en función de si una condición es verdadera o falsa. Es decir, te permite ejecutar un bloque de código si la condición resulta ser verdadera u otro bloque de código, si la condición es falsa.
+
+Hay varios tipos de condicionales que te permiten controlar el flujo de ejecución del programa. Los principales son:
+
+- __if__: Es la estructura condicional básica que permite ejecutar un bloque de código si una condición es verdadera.
+
+- __if-else__: Permite ejecutar un bloque de código si la condición evaluada es verdadera, y otro bloque de código si la condición es falsa.
+
+- __if-elif-else__: Cuando necesitas evaluar múltiples condiciones de manera secuencial. Se prueba cada condición en orden y se ejecuta el bloque de código correspondiente al primer resultado verdadero. Si ninguna condición es verdadera, se ejecuta el bloque de código dentro del "else".
+
+- __Operador ternario__ (if-else en una línea): Permite escribir condicionales simples en una sola línea de código, lo que resulta útil en situaciones donde la lógica es breve y clara.
+
+- __Nested if__ (if anidados): Consiste en colocar un condicional dentro de otro condicional. Esto se usa cuando necesitas realizar pruebas adicionales dentro de una rama condicional.
+
+Ejemplo simple:
+
+Intento de autenticación de un usuario. 
+
+El usuario introduce los datos que le pide la aplicación, por ejemplo, nombre de usuario y contraseña.
+
+La aplicación realizará una consulta a la base de datos devolviendo True si esos datos son correctos, es decir, si los datos se encuentran en la base de datos y False si no los encuentró.
+
+Si el resultado es verdadero, la aplicación le permitirá acceder a las partes de la aplicación que necesitan autenticarse. Si devuelve falso, le dará un mensaje de error con la posibilidad de que recupere la contraseña y/o nombre de usuario, si ese ha sido el motivo del error, además le  propondrá que genere una cuenta de usuario, si es que aún no la tiene.
+
+Ejemplo de __código condicional__:
+
+```
+# Método para consultar los datos introducidos por el usuario
+def autenticar(usuario, contraseña):
+    # Se produce una consulta a la base de datos  donde nos devolverá True o False
+      ……….
+    # Verificamos con un condicional el resultado de la autenticación
+    if autenticado: # Si la autenticación recibida es True
+    	print("¡Bienvenido! Autenticación exitosa.")
+   else: # Si el resultado ha sido False
+    	print("Lo siento, la autenticación falló. Verifique su nombre de usuario y contraseña.")
+```
+
+Ejemplo __Operador ternario__:
+
+```
+resultado_si_verdadero if condición else resultado_si_falso
+Ejemplo sencillo:
+resultado = "par" if  X % 2 == 0 else "impar"
+```
+
+En este caso si el número X  es par el resultado guardará el string “par”, sino guardará el  string “impar”.
+
+
+## ¿Cuáles son los diferentes tipos de bucles en python? ¿Por qué son útiles?
+
+En Python hay principalmente dos tipos de bucles, “for” y “while”. Estos bucles te permiten repetir un bloque de código varias veces. Se diferencian principalmente, en la forma en que se controla dicha repetición.
+
+__“for”__
+
+El bucle “for” se utiliza para iterar sobre una secuencia, como puede ser una lista, tupla, diccionario, cadena o un objeto iterable.
+
+La sintaxis básica de un bucle `for` es la siguiente:     
+
+`for` elemento `in` `secuencia`:
+
+Un ejemplo simple:
+
+```
+	for num in range(1:11):
+		print(num) // Imprimiría los números del 1 al 10.
+```
+
+La variable “num” podría llamarse de cualquier forma, aunque lo aconsejable es que sea en singular y que además el propio nombre aporte una descripción sobre lo que se va a guardar en ella. Esta variable irá cambiando de valor, según va iterando sobre la secuencia de números del 1 al 10. Primer valor será 1 y lo imprimirá, segundo valor 2 y lo imprimirá y así hasta llegar a 10.
+
+__“while”__
+
+El bucle “while” se utiliza para repetir un bloque de código, mientras la condición del while sea verdadera. No se conoce el número de veces que se va a iterar sobre el mismo. 
+
+La sintaxis  básica de un bucle “while” es la siguiente:
+
+`while` condición:
+    # Cuerpo del bucle
+    # Se ejecuta mientras la condición sea verdadera
+
+Un ejemplo simple:
+
+```
+	import random
+
+	// Generar un número aleatorio entre 1 y 100
+	numero_secreto = random.randint(1, 100)
+
+	// Bucle para que el usuario adivine el número
+		while True:
+    		// Pedir al usuario que ingrese un número
+   			intento = int(input("Intenta adivinar el número secreto: "))
+
+    		// Comprobar si el número coincide con el número secreto
+    			if intento == numero_secreto:
+        			print("¡Felicidades! Has adivinado el número secreto.")
+        			break  # Salir del bucle si el número es correcto
+    			else:
+        			print("Número incorrecto. ¡Inténtalo de nuevo!")
+```
+
+Se trataría de un juego para adivinar el número secreto. Si no lo aciertas sigues teniendo la oportunidad de volver a introducir otro número y si lo aciertas te felicita y sales del bucle “while”. 
+
+Los bucles son útiles porque permiten ejecutar un bloque de código varias veces de manera eficiente y controlada, con las siguientes __diferencias__:
+
+Bucle `for`
+
+    • Se utiliza para iterar sobre secuencias. Perfecto cuando sabes la cantidad exacta de elementos a recorrer o deseas iterar sobre una secuencia de datos, como son listas, tuplas, diccionarios…
+    • Tiene una sintaxis simple y fácil de entender, repitiendo operaciones en cada elemento a recorrer.
+    • Es menos propenso a errores, ya que al iterar sobre una secuencia definida, es más difícil que se produzcan errores relacionados con la condición de salida del bucle.	
+
+Bucle `while`
+
+    • Es un bucle más flexible que el bucle “for”. Te permite ejecutar un bloque de código mientras la condición sea verdadera. Útil para cuando no sabes exactamente cuantas iteraciones necesitas para que se cumpla la condición de salida.
+    • Mayor control sobre la iteración, pudiendo poner una variedad de condiciones como condición de salida.
+    • Es muy útil para realizar tareas repetitivas.
+
+## ¿Qué es una comprensión de listas en python?
+
+Es una expresión concisa para crear listas a partir de cualquier tipo de secuencia o iterable, aplicando una expresión a cada elemento de la secuencia.
+
+La sintaxis básica es la siguiente:
+
+nueva_lista = [expresión for elemento in iterable if condicion]
+
+- `expresión` es la operación, elemento… que se te ocurra, que se aplica a cada elemento del iterable, creando una nueva lista.
+- `elemento` es la variable que representa cada elemento del iterable.
+- `iterable` es la secuencia, lista, rango u otro tipo de iterable sobre el cual iterar.
+- `condición` es una expresión opcional que filtra los elementos del iterable (puede ser omitida).
+
+Un ejemplo simple:
+
+```
+	cuadrados = [x ** 2 for x in range(1, 6)]
+	print(cuadrados)  // Salida: [1, 4, 9, 16, 25]
+```
+Para cada valor “x” en el rango del 1 al 5, elevamos “x” al cuadrado y agregamos el resultado a la lista cuadrados. 
+
+## ¿Qué es un argumento en Python?
+
+Un argumento es un valor que se le pasa a una función o método cuando se le llama. Se trata de información que necesita para que el método o función sea ejecutado correctamente.
+
+Hay varios `tipos` de argumentos:
+
+* Argumentos __posicionales__: Son los valores que se pasan a una función en el orden en el que aparecen en la definición de la misma. También deben cumplir con el mismo número de parámetros que están definidos.
+
+Ejemplo:		
+
+```
+	def saludar(nombre, saludo):
+    	print(f"{saludo}, {nombre}!")
+
+		saludar("Juan", "Hola") // Al llamar a la función se le pasan los parámetros definidos en la función saludar.
+```
+
+En este ejemplo, "Juan" es el primer argumento (que corresponde al primer parámetro nombre), y "Hola" es el segundo argumento (que corresponde al segundo parámetro saludo).
+
+* Argumentos de __palabra clave__ (keyword arguments):  Son argumentos que se pasan a una función con el nombre del parámetro al que se van a asignar. Por esta razón no importa el orden de los parámetros.
+
+Ejemplo: 		
+
+```
+	saludar(saludo="Hola", nombre="Juan")
+```
+			
+* Argumentos __predeterminados__ (`default arguments`): Son argumentos que tienen un valor predeterminado en la definición de la función y por tanto pueden ser omitidos al llamar a dicha función.
+
+Ejemplo:	
+
+```
+	def saludar(nombre, saludo="Hola"):
+        print(f"{saludo}, {nombre}!")
+				 
+		saludar("Juan")
+```
+				
+
+* Argumentos __indefinidos__: Cuando lo que queremos es pasar una cantidad indefinida de argumentos, se utiliza la expresión `*args`, como nombre en la definición del método o función. Si además lo que queremos es que sean argumentos clave = valor lo que se pase se usará `**kwargs`.  
+
+Ejemplo para 3 tipos de variables:
+
+```
+    def greeting(time_of_day, *args, **kwargs):
+        print(f"Hi {' '.join(args)}, I hope that you're having a good {time_of_day}.")
+
+        if kwargs:
+                print('Your tasks for the day are:')
+            for key, val in kwargs.items():
+                    print(f'{key} -> {val}')
+
+    greeting('Morning',
+                    'Kristine', 'Hudgens',
+                    first = 'Empty dishwasher', 
+                    second = 'Take pupper out',
+                    third = 'math homework')
+
+```
+
+En este ejemplo 'Morning' será un argumento posicional, tiene que ir el primero porque así está definido. Seguido van dos argumentos, 'Kristine', 'Hudgens', que se corresponden con argumentos indefinidos, que se definien en la función como *arg. Y por último en tercer lugar van los argumentos con clave, first = 'Empty dishwasher', second = 'Take pupper out',  third = 'math homework', que se corresponden con los argumentos indefinidos definidos en la función como **kwargs.
+
+## ¿Qué es una función de Python Lambda?
+
+Se trata de una función anónima, esto significa que no tiene nombre. Esta función se crea utilizando la palabra clave lambda, seguida de una lista de parámetros y una expresión que define lo que la función debe devolver.
+
+Es muy útil para pasar una función, como argumento a otra función, como son las funciones de orden superior map(), filter() y reduce(). 
+
+La sintaxis general de una función lambda es la siguiente:
+
+lambda parametros: expresion
+
+  1. `parametros` representa los parámetros que la función lambda puede tomar.
+  2. `expresion` es el valor que la función devuelve basado en esos parámetros.
+
+Un ejemplo simple:
+
+```
+suma = lambda x, y: x + y
+     print(suma(3, 5))  // 8
+```
+En este caso, la función recibe dos parámetros “x” e “y” en este caso 3 y 5 respectivamente y devuelve la suma de ambos parámetros.
+
+Ejemplo pasando como argumento a una función:
+
+```
+	numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+	even_numbers = list(filter(lambda x: x % 2 == 0, numbers)) //Filtra y crea una lista partiendo de numbers con pares
+	print(even_numbers)  // Imprime [2, 4, 6, 8, 10]
+```
+Se imprime una lista con los números que cumplen la condición, es decir los números pares.
+
+## ¿Qué es un paquete pip?
+
+Un paquete pip es un conjunto de archivos que contienen código Python, que permite que sea fácilmente distribuido e instalado usando la herramienta pip.
+
+Pip es un sistema de gestión de paquetes estándar para Python que facilita  la instalación y gestión de los paquetes y dependencias de Python.
+
+Los paquetes pip son distribuidos a través del Python Package Index (PyPI), que es un repositorio centralizado de software de Python de código abierto. PyPI contiene miles de paquetes que cubren una amplia gama de funcionalidades, desde bibliotecas para ciencia de datos y desarrollo web hasta herramientas de automatización etc...
+
+Algunos ejemplos de paquetes pip populares incluyen:
+
+    1. NumPy y pandas para computación científica y análisis de datos.
+    2. Django y Flask para desarrollo web.
+    3. TensorFlow y PyTorch para aprendizaje profundo y machine learning.
+    4. Matplotlib y Seaborn para visualización de datos.
+
+Para instalar un paquete pip, generalmente se utiliza el comando `pip install` seguido del `nombre del paquete` que se desea instalar. Por ejemplo, para instalar el paquete requests, que es comúnmente utilizado para realizar solicitudes HTTP en Python, se ejecutaría el siguiente comando en la línea de comandos:
+
+```
+    pip install requests
+```
+Una vez instalado, el paquete estará disponible para ser importado y utilizado en  el programa Python que estás desarrollando.
+
+Los paquetes pip facilitan mucho la gestión de dependencias y la distribución de software, permitiendo a los desarrolladores utilizar y compartir código de manera eficiente y efectiva.
+
+
+Áreas de mejora: (propuestas)
+
+Ejemplos más específicos: Aunque los ejemplos proporcionados son útiles, podrían ser más específicos en algunos casos. Por ejemplo, el ejemplo de la comprensión de listas podría incluir cómo se aplicaría en un escenario real, como filtrar y transformar datos en un conjunto de datos.
+Explicación de errores comunes: Aunque se mencionan los tipos de argumentos en las funciones, sería beneficioso incluir ejemplos de errores comunes que podrían ocurrir al usar argumentos, como pasar argumentos en el orden incorrecto o olvidar pasar argumentos requeridos.
+
+Mejores prácticas: Aunque se describen los conceptos, no se mencionan explícitamente las mejores prácticas en la documentación. Por ejemplo, se podría incluir recomendaciones sobre cuándo usar cada tipo de bucle o condicional, o cómo estructurar argumentos en funciones para mejorar la legibilidad y mantenibilidad del código.
+
+Uso de software para documentación: No se menciona el uso de software específico para la generación de documentación. Herramientas como Sphinx o MkDocs podrían ser útiles para crear documentación más profesional y fácil de mantener.
+
+SEGUIR POR EL CHECKPOINT 6
+
 #### Bibliografía:
 
 - Python.org. (s.f.). The Python Tutorial.
@@ -375,6 +592,44 @@ Al aplicar el decorador @asegurar_numero_positivo sobre la función calcular_rai
 - https://ellibrodepython.com/decoradores-python
 - https://geekflare.com/es/magic-methods-in-python/
   
+Puedes consultar más información sobre los condicionales con ejemplos y diagramas de flujo. Estas serían algunas de las páginas:
+
+https://www.mclibre.org/consultar/python/lecciones/python-if-else.html
+https://ellibrodepython.com/if-python
+https://docs.python.org/3/reference/compound_stmts.html#patterns
+
+
+Puedes consultar más información sobre los bucles con ejemplos, diagramas de flujo y diferencias entre for y while, en las páginas siguientes:
+
+https://ellibrodepython.com/estructuras-control-python
+https://medium.com/@diego.coder/ciclos-en-python-for-y-while-20cbe73f7193
+https://www.geeksforgeeks.org/difference-between-for-loop-and-while-loop-in-python/
+¿Qué es una comprensión de listas en python?
+
+
+Puedes consultar más información sobre las listas de comprensión en las páginas siguientes:
+
+https://ellibrodepython.com/list-comprehension-python
+https://docs.python.org/es/dev/tutorial/datastructures.html
+https://codigospython.com/listas-por-comprension-en-python-explicacion-y-ejemplos/
+
+
+Puedes consultar más información sobre las argumentos en las páginas siguientes:
+
+https://recursospython.com/guias-y-manuales/argumentos-args-kwargs/
+https://www.learnpython.org/es/Multiple%20Function%20Arguments
+
+Para consultar fundiones lambda
+
+https://www.freecodecamp.org/espanol/news/expresiones-lambda-en-python/
+https://ellibrodepython.com/lambda-python
+https://atareao.es/pyldora/las-maravillas-de-las-funciones-lambda-en-python/
+
+Documentación
+
+Para más información sobre el paquete pip, su instalación, documentación, código…:
+
+https://pypi.org/project/pip/
 
 
 #### Nota: Documentación realizada con la extension markdown de Visual Studio Code.

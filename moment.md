@@ -49,9 +49,9 @@ m.startOf('hour')
 .format('llll')   // Mon, Jun 9 2014 9:32 PM
 ```
 
-See [datetime](./datetime) for more.
+See [datetime](datetime.md) for more.
 
-{% include common/moment_format.md title="Formatting" %}
+[Enlace a formatos moment](./include/common/moment_format.md)
 
 ## References
 
