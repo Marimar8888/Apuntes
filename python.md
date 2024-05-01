@@ -17,23 +17,6 @@ Heredoc.
 4. `Listas`. Las cuales pueden estar compuestas por string, numeros, booleanos…. Para crear la lista
 debe iniciar y finalizar con un corchete.
 
-## ¿Cuáles son los 4 tipos de datos en Python?
-
-Hay más de 4 tipos de datos en Python, pero ya que se pide sólo 4 diré los siguientes:
-
-1. `Boolean`, cuyos valores pueden ser True o False y que nos sirve para poder controlar el control del
-flujo con preguntas lógicas usando if, while, do… while etc.
-
-2. `Numbers`, divididos principalmente en enteros (int) y decimales (float).
-
-3. `String`. Cadenas cortas o largas. Estas se tienen que crear con una coma simple o compuesta al
-inicio y final de la cadena. Si dicha cadena se compusiera por un string multilinea donde existen
-saltos de linea, se tienen que utilizar 3 comillas dobles al inicio y al final, convirtiéndose en un
-Heredoc.
-
-4. `Listas`. Las cuales pueden estar compuestas por string, numeros, booleanos…. Para crear la lista
-debe iniciar y finalizar con un corchete.
-
 ## ¿Qué tipo de convención de nomenclatura debemos usar para las variables en Python?
 
 El nombre de la variable el signo igual y el dato. Dependiendo de si se trata de un número no hay que poner nada, tan sólo el número y python autómaticamente sabe de que tipo de dato se trata.Si es una string irá entre comillas, si es un Boolean, se debe poner la primera letra en mayúsculas True o False y sabrá que se trata de un booleano.
@@ -70,86 +53,47 @@ Las clases en Python se utilizan para crear objetos que tienen propiedades y mé
 
 Ejemplo de una clase en Python:
 
-```
-class Calculadora:
-    """
-    Clase que representa una calculadora básica.
+```python
+    class Calculadora:
+        def __init__(self):
+            pass
 
-    Attributes:
-    -----------
-    numero1 : float
-        El primer número para realizar operaciones.
-    numero2 : float
-        El segundo número para realizar operaciones.
+        def sumar(self, a, b):
+            return a + b
 
-    Methods:
-    --------
-    sumar()
-        Retorna la suma de los dos números.
-    restar()
-        Retorna la resta de los dos números.
-    multiplicar()
-        Retorna la multiplicación de los dos números.
-    dividir()
-        Retorna la división de los dos números.
-    """
+        def restar(self, a, b):
+            return a - b
 
-    def __init__(self, numero1, numero2):
-        """
-        Inicializa la calculadora con dos números.
+        def multiplicar(self, a, b):
+            return a * b
 
-        Parameters:
-        -----------
-        numero1 : float
-            El primer número.
-        numero2 : float
-            El segundo número.
-        """
-        self.numero1 = numero1
-        self.numero2 = numero2
-
-    def sumar(self):
-        """
-        Retorna la suma de los dos números.
-        """
-        return self.numero1 + self.numero2
-
-    def restar(self):
-        """
-        Retorna la resta de los dos números.
-        """
-        return self.numero1 - self.numero2
-
-    def multiplicar(self):
-        """
-        Retorna la multiplicación de los dos números.
-        """
-        return self.numero1 * self.numero2
-
-    def dividir(self):
-        """
-        Retorna la división de los dos números.
-        Si el segundo número es 0, se levanta una excepción ZeroDivisionError.
-        """
-        if self.numero2 == 0:
-            raise ZeroDivisionError("No se puede dividir por cero.")
-        return self.numero1 / self.numero2
-
+        def dividir(self, a, b):
+            if b != 0:
+                return a / b
+            else:
+                return "Error: No se puede dividir por cero."
 ```
 
+```python
+    # Ejemplos de uso
+    calculadora = Calculadora() # instanciar un objeto Calculadora
+    print("Suma:", calculadora.sumar(5, 3))
+    print("Resta:", calculadora.restar(5, 3))
+    print("Multiplicación:", calculadora.multiplicar(5, 3))
+    print("División:", calculadora.dividir(5, 3))
+    print("División por cero:", calculadora.dividir(5, 0))
+```
 
 ## ¿Qué método se ejecuta automáticamente cuando se crea una instancia de una clase?
 
 El método que se ejecuta automáticamente cuando se crea una instancia de una clase en Python es el método `__init__()`. Este método se utiliza para inicializar los atributos de la clase y puede aceptar argumentos para configurar el estado inicial del objeto.
 
-```
+```python
+    class MiClase:
+        def __init__(self, parametro):
+            self.parametro = parametro
 
-class MiClase:
-    def __init__(self, parametro):
-        self.parametro = parametro
-
-instancia = MiClase("Hola")
-
+    instancia = MiClase("Hola")
 ```
 
 ## ¿Qué es el polimorfismo?
@@ -160,31 +104,33 @@ El polimorfismo se puede lograr a través del uso de la herencia y la sobreescri
 
 Un ejemplo de esto último sería:
 
+```python
+    class Animal:
+        def hablar(self):
+            pass
+
+    class Perro(Animal):
+        def hablar(self):
+            return "Guau!"
+
+    class Gato(Animal):
+        def hablar(self):
+            return "Miau!"
+
+    def hacer_hablar(animal):
+        return animal.hablar()
 ```
-class Animal:
-    def hablar(self):
-        pass
-
-class Perro(Animal):
-    def hablar(self):
-        return "Guau!"
-
-class Gato(Animal):
-    def hablar(self):
-        return "Miau!"
-
-def hacer_hablar(animal):
-    return animal.hablar()
-
 # Se crean instancias de las clases guardandolas en una variable llamando a la clase correspondiente:
 
-perro = Perro()
-gato = Gato()
-
+```python
+    perro = Perro()
+    gato = Gato()
+```
 # Se llama a la función hacer_hablar con diferentes tipos de animales:
-print(hacer_hablar(perro))  # Imprime: Guau!
-print(hacer_hablar(gato))   # Imprime: Miau!
 
+```python
+    print(hacer_hablar(perro))  # Imprime: Guau!
+    print(hacer_hablar(gato))   # Imprime: Miau!
 ```
 
 ## ¿Qué es un método dunder?
@@ -195,24 +141,29 @@ Los métodos dunder son especiales porque Python los utiliza internamente para r
 
 Aquí hay un ejemplo simple que muestra cómo usar algunos métodos dunder en una clase:
 
-```
-class mi_clase:
-    def __init__(self, nombre):
-        self.nombre = nombre
-    
-    def __str__(self):
-        return f'Objeto de MiClase con nombre: {self.nombre}'
+```python
+    class mi_clase:
+        def __init__(self, nombre):
+            self.nombre = nombre
+        
+        def __str__(self):
+            return f'Objeto de MiClase con nombre: {self.nombre}'
 
-    def __len__(self):
-        return len(self.nombre)
+        def __len__(self):
+            return len(self.nombre)
+```
 
 # Creo una instancia de la clase
-objeto = mi_clase('Ejemplo')
+
+```python
+    objeto = mi_clase('Ejemplo')
+```
 
 # Utilizar los métodos dunder
-print(objeto)   # Imprime: Objeto de mi_clase con nombre: Ejemplo
-print(len(objeto))  # Imprime: 7
 
+```python
+    print(objeto)   # Imprime: Objeto de mi_clase con nombre: Ejemplo
+    print(len(objeto))  # Imprime: 7
 ```
 
 En este ejemplo, ```__init__()``` se llama cuando se crea un nuevo objeto de la __clase mi_clase__, ```__str__()``` se llama cuando el objeto se convierte en una cadena, por ejemplo al imprimirlo, y ``` __len__()``` se llama cuando se solicita la longitud del objeto. Estos métodos dunder permiten que los objetos de la clase se comporten de manera más intuitiva y se integren mejor con el resto del código de Python.
@@ -228,25 +179,23 @@ Los decoradores se utilizan comúnmente en Python para agregar funcionalidades c
 
 Aquí hay un ejemplo básico de cómo se ve un decorador en Python:
 
-```
-def asegurar_numero_positivo(funcion):
-    def wrapper(numero):
-        if numero < 0:
-            print("Error: El número debe ser positivo.")
-            return None
-        else:
-            return funcion(numero)
-    return wrapper
+```python
+    def asegurar_numero_positivo(funcion):
+        def wrapper(numero):
+            if numero < 0:
+                print("Error: El número debe ser positivo.")
+                return None
+            else:
+                return funcion(numero)
+        return wrapper
 
-@asegurar_numero_positivo
-def calcular_raiz_cuadrada(numero):
-    return numero ** 0.5
+    @asegurar_numero_positivo
+    def calcular_raiz_cuadrada(numero):
+        return numero ** 0.5
 
-# Probando la función decorada
-print(calcular_raiz_cuadrada(25))  # Imprime: 5.0
-print(calcular_raiz_cuadrada(-25))  # Imprime: Error: El número debe ser positivo. None
-
-
+    # Probando la función decorada
+    print(calcular_raiz_cuadrada(25))  # Imprime: 5.0
+    print(calcular_raiz_cuadrada(-25))  # Imprime: Error: El número debe ser positivo. None
 ```
 En este ejemplo, definimos un decorador llamado asegurar_numero_positivo que toma una función como argumento y define una función interna llamada wrapper. Esta función wrapper verifica si el número pasado a la función original (calcular_raiz_cuadrada) es positivo. Si lo es, llama a la función original y devuelve su resultado. Si no lo es, imprime un mensaje de error y devuelve None.
 
@@ -341,24 +290,24 @@ Si el resultado es verdadero, la aplicación le permitirá acceder a las partes 
 
 Ejemplo de __código condicional__:
 
-```
-# Método para consultar los datos introducidos por el usuario
-def autenticar(usuario, contraseña):
-    # Se produce una consulta a la base de datos  donde nos devolverá True o False
-      ……….
-    # Verificamos con un condicional el resultado de la autenticación
-    if autenticado: # Si la autenticación recibida es True
-    	print("¡Bienvenido! Autenticación exitosa.")
-   else: # Si el resultado ha sido False
-    	print("Lo siento, la autenticación falló. Verifique su nombre de usuario y contraseña.")
+```python
+    # Método para consultar los datos introducidos por el usuario
+    def autenticar(usuario, contraseña):
+        # Se produce una consulta a la base de datos  donde nos devolverá True o False
+        ……….
+        # Verificamos con un condicional el resultado de la autenticación
+        if autenticado: # Si la autenticación recibida es True
+            print("¡Bienvenido! Autenticación exitosa.")
+    else: # Si el resultado ha sido False
+            print("Lo siento, la autenticación falló. Verifique su nombre de usuario y contraseña.")
 ```
 
 Ejemplo __Operador ternario__:
 
-```
-resultado_si_verdadero if condición else resultado_si_falso
-Ejemplo sencillo:
-resultado = "par" if  X % 2 == 0 else "impar"
+```python
+    resultado_si_verdadero if condición else resultado_si_falso
+    Ejemplo sencillo:
+    resultado = "par" if  X % 2 == 0 else "impar"
 ```
 
 En este caso si el número X  es par el resultado guardará el string “par”, sino guardará el  string “impar”.
@@ -378,7 +327,7 @@ La sintaxis básica de un bucle `for` es la siguiente:
 
 Un ejemplo simple:
 
-```
+```python
 	for num in range(1:11):
 		print(num) // Imprimiría los números del 1 al 10.
 ```
@@ -391,13 +340,14 @@ El bucle “while” se utiliza para repetir un bloque de código, mientras la c
 
 La sintaxis  básica de un bucle “while” es la siguiente:
 
+```python
 `while` condición:
     # Cuerpo del bucle
     # Se ejecuta mientras la condición sea verdadera
-
+```
 Un ejemplo simple:
 
-```
+```python
 	import random
 
 	// Generar un número aleatorio entre 1 y 100
@@ -447,7 +397,7 @@ nueva_lista = [expresión for elemento in iterable if condicion]
 
 Un ejemplo simple:
 
-```
+```python
 	cuadrados = [x ** 2 for x in range(1, 6)]
 	print(cuadrados)  // Salida: [1, 4, 9, 16, 25]
 ```
@@ -463,7 +413,7 @@ Hay varios `tipos` de argumentos:
 
 Ejemplo:		
 
-```
+```python
 	def saludar(nombre, saludo):
     	print(f"{saludo}, {nombre}!")
 
@@ -476,7 +426,7 @@ En este ejemplo, "Juan" es el primer argumento (que corresponde al primer parám
 
 Ejemplo: 		
 
-```
+```python
 	saludar(saludo="Hola", nombre="Juan")
 ```
 			
@@ -484,7 +434,7 @@ Ejemplo:
 
 Ejemplo:	
 
-```
+```python
 	def saludar(nombre, saludo="Hola"):
         print(f"{saludo}, {nombre}!")
 				 
@@ -496,7 +446,7 @@ Ejemplo:
 
 Ejemplo para 3 tipos de variables:
 
-```
+```python
     def greeting(time_of_day, *args, **kwargs):
         print(f"Hi {' '.join(args)}, I hope that you're having a good {time_of_day}.")
 
@@ -530,7 +480,7 @@ lambda parametros: expresion
 
 Un ejemplo simple:
 
-```
+```python
 suma = lambda x, y: x + y
      print(suma(3, 5))  // 8
 ```
@@ -538,7 +488,7 @@ En este caso, la función recibe dos parámetros “x” e “y” en este caso 
 
 Ejemplo pasando como argumento a una función:
 
-```
+```python
 	numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 	even_numbers = list(filter(lambda x: x % 2 == 0, numbers)) //Filtra y crea una lista partiendo de numbers con pares
 	print(even_numbers)  // Imprime [2, 4, 6, 8, 10]
@@ -569,17 +519,6 @@ Una vez instalado, el paquete estará disponible para ser importado y utilizado 
 
 Los paquetes pip facilitan mucho la gestión de dependencias y la distribución de software, permitiendo a los desarrolladores utilizar y compartir código de manera eficiente y efectiva.
 
-
-Áreas de mejora: (propuestas)
-
-Ejemplos más específicos: Aunque los ejemplos proporcionados son útiles, podrían ser más específicos en algunos casos. Por ejemplo, el ejemplo de la comprensión de listas podría incluir cómo se aplicaría en un escenario real, como filtrar y transformar datos en un conjunto de datos.
-Explicación de errores comunes: Aunque se mencionan los tipos de argumentos en las funciones, sería beneficioso incluir ejemplos de errores comunes que podrían ocurrir al usar argumentos, como pasar argumentos en el orden incorrecto o olvidar pasar argumentos requeridos.
-
-Mejores prácticas: Aunque se describen los conceptos, no se mencionan explícitamente las mejores prácticas en la documentación. Por ejemplo, se podría incluir recomendaciones sobre cuándo usar cada tipo de bucle o condicional, o cómo estructurar argumentos en funciones para mejorar la legibilidad y mantenibilidad del código.
-
-Uso de software para documentación: No se menciona el uso de software específico para la generación de documentación. Herramientas como Sphinx o MkDocs podrían ser útiles para crear documentación más profesional y fácil de mantener.
-
-SEGUIR POR EL CHECKPOINT 6
 
 #### Bibliografía:
 
