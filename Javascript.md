@@ -1462,14 +1462,22 @@ En el paso por valor, se pasa una copia del valor original a la función, por lo
 Ejemplo:
 
 ```javascript
-function duplicar(x) {
-  x = x * 2;
-  return x;
+// Objeto que vamos a intentar modificar
+var someUser = {
+    name: 'Jordan'
+};
+
+// Función que intenta modificar el valor pasado por valor
+function nameFormatter(name) {
+    // Intentamos modificar la cadena, pero esto crea una nueva referencia local
+    name = 'Oops';
 }
 
-let numero = 5;
-console.log(duplicar(numero)); // Output: 10
-console.log(numero); // Output: 5 (el valor original no se modifica)
+// Llamamos a la función y pasamos el valor someUser.name
+nameFormatter(someUser.name);
+
+// Imprimimos el valor original
+console.log(someUser.name); // Output: 'Jordan'
 ```
 #### Paso por referencia:
 
@@ -1478,14 +1486,37 @@ En el paso por referencia, se pasa una referencia a la ubicación de memoria del
 Ejemplo:
 
 ```javascript
-function agregarElemento(arr) {
-  arr.push(4);
-  return arr;
+// Objeto que vamos a modificar
+var someUser = {
+    name: 'Jordan'
+};
+
+// Función que modifica el objeto original
+function nameChanger(user) {
+    // Modificamos el objeto que recibimos como argumento
+    user.name = 'Oops';
 }
 
-let array = [1, 2, 3];
-console.log(agregarElemento(array)); // Output: [1, 2, 3, 4]
-console.log(array); // Output: [1, 2, 3, 4] (el valor original se modifica)
+// Llamamos a la función y pasamos el objeto someUser
+nameChanger(someUser);
+
+// Imprimimos el objeto original
+console.log(someUser); // Output: { name: 'Oops' }
+
+// Cadena de texto que vamos a intentar modificar
+var name = 'Jordan';
+
+// Función que intenta modificar la cadena de texto
+function nameFormatter(name) {
+    // Intentamos modificar la cadena, pero esto crea una nueva referencia local
+    name = 'Oops';
+}
+
+// Llamamos a la función y pasamos la cadena de texto
+nameFormatter(name);
+
+// Imprimimos la cadena original
+console.log(name); // Output: 'Jordan'
 ```
 
 Puedes evitar que un objeto se modifique dentro de una función al pasar una copia del objeto en lugar de una referencia directa. Puedes lograr esto usando técnicas como la desestructuración o creando un nuevo objeto y copiando las propiedades del original. Aquí te muestro dos formas comunes de lograrlo:
@@ -1493,23 +1524,24 @@ Puedes evitar que un objeto se modifique dentro de una función al pasar una cop
 Usando la desestructuración para crear una copia del objeto:
 
 ```javascript
-var someUser = {
-    name: 'Jordan'
-}
+// Objeto original
+var originalObject = {
+    name: 'John',
+    age: 30,
+    city: 'New York'
+};
 
-function nameFormatter (userName) {
-    return userName = 'Oops';
-}
-//Modificado
-someUser.name; // "Oops"
+// Desestructuración para crear una copia del objeto
+var copiedObject = { ...originalObject };
 
-function nameFormatter (userName) {
-    return userName = 'Oops';
-}
+// Modificamos la copia
+copiedObject.name = 'Jane';
+copiedObject.age = 25;
+copiedObject.city = 'Los Angeles';
 
-nameFormatter(someUser.name); // "Oops"
-//No modifica el original
-someUser.name; // "Kristine"
+// Imprimimos ambos objetos para verificar
+console.log(originalObject); // Output: { name: 'John', age: 30, city: 'New York' }
+console.log(copiedObject);   // Output: { name: 'Jane', age: 25, city: 'Los Angeles' }
 ```
 
 ### Cierres de Javascript (Clousures)
