@@ -1,5 +1,107 @@
 # APUNTES JAVASCRIPT
 
+# 0.- Guía para Principiantes: Cómo Ejecutar JavaScript en el Navegador
+
+Esta guía te enseñará cómo hacer que tu navegador ejecute un script JavaScript. Aprenderás a incluir JavaScript directamente en un archivo HTML y a enlazar un archivo JavaScript externo.
+
+## Requisitos
+
+- Un navegador web (como Chrome, Firefox, Edge, etc.)
+- Un editor de texto (como Notepad, VSCode, Sublime Text, etc.)
+
+## 1. Incluir JavaScript Directamente en HTML
+
+Primero, veamos cómo incluir JavaScript directamente en un archivo HTML.
+
+### Paso 1: Crear un archivo HTML
+
+Crea un archivo con el nombre `index.html` y ábrelo con tu editor de texto. 
+
+### Paso 2: Escribir el HTML Básico
+
+Escribe el siguiente código HTML básico:
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Primera Página</title>
+</head>
+<body>
+    <h1>¡Hola, mundo!</h1>
+
+    <!-- Aquí es donde incluiremos nuestro script -->
+    <script>
+        // Esto es un comentario en JavaScript
+        alert('¡Hola desde JavaScript!');
+    </script>
+</body>
+</html>
+```
+
+### Explicación
+
+- `<script>`: Este elemento se utiliza para incluir código JavaScript directamente en el HTML.
+- `alert('¡Hola desde JavaScript!');`: Esta línea de código JavaScript muestra una alerta en el navegador con el mensaje "¡Hola desde JavaScript!".
+
+### Paso 3: Abrir el archivo en el Navegador
+
+Guarda el archivo y ábrelo con tu navegador. Deberías ver una alerta con el mensaje "¡Hola desde JavaScript!".
+
+## 2. Incluir JavaScript desde un Archivo Externo
+
+Ahora, veamos cómo enlazar un archivo JavaScript externo a tu archivo HTML.
+
+### Paso 1: Crear un archivo JavaScript
+
+Crea un archivo con el nombre `script.js` y ábrelo con tu editor de texto.
+
+### Paso 2: Escribir el Código JavaScript
+
+Escribe el siguiente código JavaScript en el archivo `script.js`:
+
+```javascript
+// Esto es un comentario en JavaScript
+alert('¡Hola desde un archivo externo de JavaScript!');
+```
+
+### Paso 3: Modificar el Archivo HTML para Enlazar el Archivo JavaScript
+
+Abre tu archivo `index.html` y modifícalo para que incluya el archivo JavaScript externo:
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Primera Página</title>
+</head>
+<body>
+    <h1>¡Hola, mundo!</h1>
+
+    <!-- Aquí enlazamos nuestro archivo JavaScript externo -->
+    <script src="script.js"></script>
+</body>
+</html>
+```
+
+### Explicación
+
+- `<script src="script.js"></script>`: Este elemento enlaza el archivo `script.js` al HTML. El navegador cargará y ejecutará el código JavaScript contenido en `script.js`.
+
+### Paso 4: Abrir el Archivo HTML en el Navegador
+
+Guarda ambos archivos (`index.html` y `script.js`) y abre `index.html` con tu navegador. Deberías ver una alerta con el mensaje "¡Hola desde un archivo externo de JavaScript!".
+
+## Resumen
+
+- Puedes incluir JavaScript directamente en un archivo HTML utilizando el elemento `<script>`.
+- También puedes enlazar un archivo JavaScript externo utilizando el atributo `src` en el elemento `<script>`.
+- Los navegadores ejecutan el código JavaScript para interactuar con las páginas web y hacerlas más dinámicas.
+
 ## 1.- ¿Qué diferencia a Javascript de cualquier otro lenguaje de programación?
 
 Algunas de las diferencias entre JavaScript y otros lenguajes:
@@ -1462,22 +1564,20 @@ En el paso por valor, se pasa una copia del valor original a la función, por lo
 Ejemplo:
 
 ```javascript
-// Objeto que vamos a intentar modificar
-var someUser = {
-    name: 'Jordan'
-};
+// Cadena de texto que vamos a intentar modificar
+var name = 'Jordan';
 
-// Función que intenta modificar el valor pasado por valor
+// Función que intenta modificar la cadena de texto
 function nameFormatter(name) {
     // Intentamos modificar la cadena, pero esto crea una nueva referencia local
     name = 'Oops';
 }
 
-// Llamamos a la función y pasamos el valor someUser.name
-nameFormatter(someUser.name);
+// Llamamos a la función y pasamos la cadena de texto
+nameFormatter(name);
 
-// Imprimimos el valor original
-console.log(someUser.name); // Output: 'Jordan'
+// Imprimimos la cadena original
+console.log(name); // Output: 'Jordan'
 ```
 #### Paso por referencia:
 
@@ -1502,21 +1602,6 @@ nameChanger(someUser);
 
 // Imprimimos el objeto original
 console.log(someUser); // Output: { name: 'Oops' }
-
-// Cadena de texto que vamos a intentar modificar
-var name = 'Jordan';
-
-// Función que intenta modificar la cadena de texto
-function nameFormatter(name) {
-    // Intentamos modificar la cadena, pero esto crea una nueva referencia local
-    name = 'Oops';
-}
-
-// Llamamos a la función y pasamos la cadena de texto
-nameFormatter(name);
-
-// Imprimimos la cadena original
-console.log(name); // Output: 'Jordan'
 ```
 
 Puedes evitar que un objeto se modifique dentro de una función al pasar una copia del objeto en lugar de una referencia directa. Puedes lograr esto usando técnicas como la desestructuración o creando un nuevo objeto y copiando las propiedades del original. Aquí te muestro dos formas comunes de lograrlo:
@@ -3681,3 +3766,63 @@ __VSC__
 1. **MDN Web Docs**:
    - La documentación oficial de JavaScript proporcionada por Mozilla Developer Network (MDN) ofrece una explicación detallada
    - [Documentación sobre async y await en MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
+
+## Cómo Crear Snippets en Visual Studio Code
+
+### Paso 1: Abrir la Paleta de Comandos
+
+1. Abre Visual Studio Code.
+2. Presiona `Ctrl+Shift+P` (o `Cmd+Shift+P` en macOS) para abrir la Paleta de Comandos.
+
+### Paso 2: Acceder a la Configuración de Snippets
+
+1. En la Paleta de Comandos, escribe `snippets` y selecciona la opción **"Preferences: Configure User Snippets"**.
+2. Aparecerá una lista de opciones. Puedes elegir:
+    - **New Global Snippets file...** para crear un nuevo archivo de snippets que estará disponible en todos los lenguajes.
+    - Seleccionar un lenguaje específico, por ejemplo, **JavaScript**, **HTML**, etc., para crear snippets solo para ese lenguaje.
+
+### Paso 3: Crear un Archivo de Snippets
+
+1. Si eliges **New Global Snippets file...**, se te pedirá que nombres el archivo. Por ejemplo, puedes llamarlo `misSnippets`.
+2. VS Code creará un archivo JSON donde puedes definir tus snippets.
+3. Si eliges un lenguaje, te abrirá un archivo con los snippets preparados de base. Quitando los comentarios consigues un ejemplo de como hacerlo, como el paso 4.
+
+### Paso 4: Definir un Snippet
+
+Aquí tienes un ejemplo de cómo definir un snippet en el archivo JSON:
+
+```json
+{
+    "Print to console": {
+        "prefix": "log",
+        "body": [
+            "console.log('$1');",
+            "$2"
+        ],
+        "description": "Log output to console"
+    }
+}
+```
+### Paso 5: Utilizarlo
+
+Una vez lo tienes creado, en el archivo HTML, al comenzar a escribir el prefix log, si lo seleccionamos, nos saltará todo el código escrito dentro del body. En este caso un console.log y el puntero estará dentro para que escribamos lo que queramos y al dar a enter continuara el puntero en una nueva linea.
+
+### Explicación
+
+- **Print to console**: Nombre del snippet.
+- **prefix**: La abreviatura que escribirás para activar el snippet (`log` en este caso).
+- **body**: El código que se insertará. Puedes usar `$1`, `$2`, etc., para definir los puntos donde el cursor se colocará después de insertar el snippet.
+- **description**: Una descripción opcional para el snippet.
+
+### Paso 5: Usar el Snippet
+
+1. Abre un archivo del lenguaje para el cual has creado el snippet (por ejemplo, un archivo `.js` para JavaScript).
+2. Escribe el prefijo del snippet (`log`) y presiona `Tab`. El snippet se expandirá al bloque de código definido.
+
+## Resumen
+
+- Los snippets son bloques de código predefinidos que puedes insertar rápidamente.
+- Se crean y gestionan a través de la opción **"Preferences: Configure User Snippets"** en la Paleta de Comandos.
+- Puedes crear snippets globales o específicos para un lenguaje.
+- Los snippets se definen en un archivo JSON con propiedades como `prefix`, `body` y `description`.
+
