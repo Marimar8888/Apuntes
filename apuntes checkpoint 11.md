@@ -2269,9 +2269,6 @@ El código proporcionado demuestra un enfoque de reutilización del código medi
 - containerDiv.appendChild(newParagraph); // Inserta el nuevo párrafo dentro del div seleccionado
 ```
 
-
-
-
 ## Crear atajos de teclado en Javascript:
 
 Este documento HTML incluye un campo de entrada (`input`) y un script en JavaScript que define un comportamiento específico cuando se presionan ciertas teclas (combinación de teclas). A continuación se desglosa el código y su funcionalidad:
@@ -2358,5 +2355,5 @@ Cuando el usuario presiona la combinación de teclas `Ctrl + B` en cualquier lug
 
 Este script es útil para mejorar la accesibilidad y la usabilidad del sitio web, permitiendo a los usuarios navegar rápidamente al campo de búsqueda mediante una combinación de teclas, sin necesidad de usar el mouse.
 
-## Inserción de elementos en el DOM
+
 
