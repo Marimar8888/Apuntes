@@ -83,7 +83,6 @@ Claro, aquí tienes una explicación de los elementos del diagrama de despliegue
 
 ## Ejemplo completo un reproductor de canciones
 
-
 ![Ejemplo diagrama de despliegue asociaciones](/images/uml/uml_diagrama_despliegue_7.png)
 
 Aquí tenemos un servicio de solicitud de música, este servicio permitirá a los usuarios iniciar sesión y luego crear listas de reproducción basadas en diferentes canciones que quieran elegir. Esta es una aplicación del mundo real. 
