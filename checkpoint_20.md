@@ -218,7 +218,7 @@ Ahora que hemos instalado MySQL y configurado MySQL Workbench, podemos comenzar 
      - Configuración: No nulo. Permite flexibilidad para códigos postales con guiones o extensiones.
    - **addresses_users_id**:
      - Tipo: `INT`
-     - Configuración: No clave principal, no único. Conecta con la tabla de usuarios.
+     - Configuración: No clave principal, no único, no nula.. Conecta con la tabla de usuarios.
 
 3. **Definición de la Clave Externa**:
    - Ve a la pestaña de **Claves Externas** en el cuadro de diálogo de creación de la tabla.
