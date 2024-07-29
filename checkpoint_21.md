@@ -2765,4 +2765,1071 @@ La **normalización** es un proceso crucial para diseñar bases de datos eficien
 3. Facilitar el mantenimiento y la gestión de datos.
 4. Optimizar el rendimiento de las consultas.
 
+## **Modelado de Diagramas en Bases de Datos**
 
+El **modelado de diagramas** es una técnica para representar gráficamente la estructura de una base de datos. Generalmente, se utilizan **Diagramas Entidad-Relación (ER)** para mostrar las tablas de una base de datos y las relaciones entre ellas.
+
+### **¿Por Qué Usar Diagramas?**
+
+1. **Visualización Clara:**
+   - Los diagramas proporcionan una vista visual de cómo están organizadas las tablas y cómo se relacionan entre sí, facilitando la comprensión del esquema de la base de datos.
+
+2. **Facilita el Diseño y la Planificación:**
+   - Puedes planificar y diseñar la estructura de la base de datos antes de implementarla, lo que ayuda a evitar problemas de diseño más adelante.
+
+3. **Mantenimiento y Documentación:**
+   - Los diagramas sirven como documentación útil para entender y mantener la base de datos, especialmente en proyectos grandes o heredados.
+
+4. **Identificación de Problemas:**
+   - Ayuda a identificar problemas de diseño, como relaciones faltantes o redundancias, y facilita la implementación de cambios.
+
+### **Uso del Diagrama en Herramientas de Modelado**
+
+Aquí te explico cómo utilizar una herramienta de modelado de bases de datos, como **MySQL Workbench**, para generar y trabajar con diagramas ER.
+
+#### **Generación de Diagramas con MySQL Workbench**
+
+1. **Acceso al Cuadro de Diálogo de Ingeniería Inversa:**
+   - Presiona `Comando + R` (o `Ctrl + R` en Windows) o ve al menú **Base de Datos** y selecciona **Ingeniería Inversa**.
+
+2. **Selecciona la Conexión de la Base de Datos:**
+   - Elige la conexión a la base de datos que deseas modelar. En tu caso, selecciona la conexión correspondiente, como el "curso de Dev Camp".
+
+3. **Selecciona la Base de Datos:**
+   - Elige la base de datos que quieres analizar y haz clic en **Continuar**. La herramienta conectará y obtendrá los detalles de la base de datos.
+
+4. **Revisión y Ejecución:**
+   - Revisa la información que la herramienta presenta y haz clic en **Ejecutar**. Esto generará el diagrama ER basado en las tablas y relaciones actuales en la base de datos.
+
+5. **Visualización del Diagrama:**
+   - Una vez completado, podrás ver el diagrama con todas las tablas y sus relaciones. Esto te proporciona una vista gráfica de cómo se estructuran los datos.
+
+#### **Componentes del Diagrama ER**
+
+- **Tablas:** Representadas como rectángulos, muestran los nombres de las tablas y sus columnas.
+- **Relaciones:** Las líneas entre las tablas representan las relaciones entre ellas, como claves foráneas y referencias.
+- **Índices:** Puedes ver los índices en el diagrama, lo cual es útil para entender cómo se optimizan las consultas.
+- **Claves Primarias y Foráneas:** Están claramente marcadas, facilitando la comprensión de las relaciones entre tablas.
+
+#### **Exploración Adicional en el Diagrama**
+
+- **Detalles de Relaciones:**
+  - Puedes hacer clic en las flechas o líneas para ver detalles sobre las relaciones. Esto te muestra cómo una tabla está conectada con otras, como en el caso de la relación entre `usuarios` y `direcciones`.
+
+- **Índices y Restricciones:**
+  - Puedes ver los índices y restricciones aplicados en cada tabla, lo que es útil para verificar cómo se está optimizando el rendimiento y asegurando la integridad de los datos.
+
+- **Modificar el Diagrama:**
+  - Puedes cambiar los valores, tipos de datos y relaciones directamente en el diagrama si lo deseas. Esto puede ser una forma más visual y a menudo más intuitiva de gestionar el diseño de la base de datos.
+
+### **Ventajas y Desventajas del Modelado Visual**
+
+- **Ventajas:**
+  - **Claridad:** La visualización facilita la comprensión de la estructura de la base de datos.
+  - **Interactividad:** Puedes hacer cambios y ver los resultados de inmediato.
+  - **Documentación:** Sirve como una documentación visual útil para el equipo de desarrollo.
+
+- **Desventajas:**
+  - **Complejidad:** En bases de datos muy grandes, los diagramas pueden volverse complicados y difíciles de manejar.
+  - **Herramientas:** Dependiendo de la herramienta, puede haber limitaciones en cuanto a las funciones de modelado y edición.
+
+### **Conclusión**
+
+El modelado de diagramas es una herramienta poderosa para diseñar, visualizar y mantener bases de datos. Usar diagramas ER te permite tener una comprensión clara de la estructura y las relaciones de tus datos, facilitando el diseño y el mantenimiento de la base de datos. Ya sea que prefieras trabajar con herramientas visuales o con comandos directos, entender cómo utilizar y leer estos diagramas puede mejorar significativamente tu eficiencia y efectividad en el trabajo con bases de datos.
+
+# REDIS
+
+## **¿Qué es Redis?**
+
+Redis es un **sistema de gestión de bases de datos en memoria**. Es conocido por ser extremadamente rápido porque guarda los datos en la **memoria RAM** en lugar de en disco, lo que permite acceder a los datos muy rápidamente.
+
+### **Características Clave:**
+
+1. **Almacenamiento en Memoria:** Los datos se guardan en la RAM, lo que lo hace muy rápido para leer y escribir datos.
+   
+2. **Estructuras de Datos Avanzadas:** Redis no solo guarda simples valores clave, sino que también puede manejar estructuras de datos como listas, conjuntos, y hashes. Esto facilita la manipulación de datos complejos.
+
+3. **Persistencia Opcional:** Aunque Redis es en memoria, puede guardar datos en disco para que no se pierdan en caso de reinicio.
+
+4. **Soporte para Pub/Sub:** Permite enviar y recibir mensajes entre diferentes partes de una aplicación en tiempo real.
+
+5. **Alta Disponibilidad y Escalabilidad:** Redis puede configurarse para funcionar en clústeres y replicar datos, lo que ayuda a manejar grandes cantidades de tráfico y mantener el servicio disponible.
+
+### **Usos Comunes:**
+
+- **Caché:** Se usa para almacenar datos temporalmente y acelerar el acceso a información que se consulta con frecuencia.
+- **Gestión de Sesiones:** Almacena datos de sesión de usuario para aplicaciones web.
+- **Colas de Mensajes:** Maneja tareas en segundo plano y comunicación entre servicios.
+- **Contadores y Estadísticas:** Mantiene contadores en tiempo real y estadísticas para aplicaciones.
+
+En resumen, Redis es una herramienta muy rápida y flexible para manejar datos que requieren un acceso y procesamiento veloz.
+
+## **Instalación de Redis usando Homebrew en macOS**
+
+**1. Instalar Homebrew:**
+   - Si aún no tienes Homebrew instalado, abre tu terminal y pega la siguiente línea de código para instalarlo:
+
+     ```bash
+     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+     ```
+
+   - Esto instalará Homebrew, un sistema de gestión de paquetes para macOS. 
+
+**2. Instalar Redis:**
+   - Una vez que Homebrew esté instalado, puedes instalar Redis con el siguiente comando:
+
+     ```bash
+     brew install redis
+     ```
+
+   - Homebrew se encargará de descargar e instalar Redis y todas sus dependencias. Este proceso puede tardar unos minutos dependiendo de tu conexión a Internet.
+
+**3. Iniciar el Servidor Redis:**
+   - Después de la instalación, puedes iniciar el servidor Redis con el comando:
+
+     ```bash
+     redis-server
+     ```
+
+   - Deberías ver un mensaje similar a este en la terminal, indicando que Redis está funcionando y escuchando en el puerto 6379:
+
+     ```plaintext
+     1:C 27 Jul 2024 10:00:00.000 # Server started, Redis version 6.2.6
+     1:M 27 Jul 2024 10:00:00.000 * DB loaded from disk: 0.000 seconds
+     1:M 27 Jul 2024 10:00:00.000 * Ready to accept connections
+     ```
+
+**4. Abrir una Nueva Terminal para la Interfaz de Línea de Comandos (CLI) de Redis:**
+   - Abre una nueva pestaña en la terminal o abre otra ventana de terminal. Luego, ejecuta:
+
+     ```bash
+     redis-cli
+     ```
+
+   - Esto abrirá la interfaz de línea de comandos de Redis, permitiéndote interactuar con el servidor Redis. 
+
+   - Verás un prompt que se ve así:
+
+     ```plaintext
+     127.0.0.1:6379>
+     ```
+
+   - Aquí puedes comenzar a ejecutar comandos Redis. Por ejemplo, puedes probar con el comando `PING` para verificar que el servidor está funcionando:
+
+     ```plaintext
+     127.0.0.1:6379> PING
+     PONG
+     ```
+
+     - La respuesta `PONG` confirma que el servidor Redis está activo y funcionando correctamente.
+
+### **Resumen de los Pasos:**
+
+1. **Instalar Homebrew** (si aún no está instalado).
+2. **Instalar Redis** usando Homebrew (`brew install redis`).
+3. **Iniciar el servidor Redis** (`redis-server`).
+4. **Abrir la interfaz de línea de comandos de Redis** (`redis-cli`).
+
+Claro, aquí tienes los pasos para instalar y comprobar la instalación de Redis en Windows en formato Markdown:
+
+
+## Instalación de Redis en Windows
+
+### Paso 1: Descargar Redis para Windows
+
+Redis no tiene soporte oficial para Windows, pero puedes usar una versión no oficial mantenida por la comunidad. Descárgala desde:
+
+[Redis para Windows en GitHub](https://github.com/microsoftarchive/redis/releases).
+
+1. Ve a la página de [releases](https://github.com/microsoftarchive/redis/releases) en el repositorio de GitHub.
+2. Descarga el archivo `.msi` más reciente (por ejemplo, `Redis-x64-xxx.msi`).
+
+### Paso 2: Instalar Redis
+
+1. Haz doble clic en el archivo `.msi` descargado.
+2. Sigue las instrucciones del asistente de instalación para completar la instalación de Redis en tu sistema.
+
+### Paso 3: Configuración Inicial
+
+1. **Abrir una ventana de terminal:** Presiona `Win + R`, escribe `cmd` y presiona Enter.
+2. **Iniciar el servidor Redis:** Navega al directorio donde se instaló Redis (por defecto suele ser `C:\Program Files\Redis`) y ejecuta el siguiente comando:
+   ```sh
+   redis-server
+   ```
+   Esto iniciará el servidor Redis.
+
+### Paso 4: Verificar que Redis Está Corriendo
+
+1. **Abrir una nueva ventana de terminal:** Presiona `Win + R`, escribe `cmd` y presiona Enter.
+2. **Conectarse al cliente Redis:** Navega al mismo directorio y ejecuta:
+   ```sh
+   redis-cli
+   ```
+   Esto abrirá la interfaz de línea de comandos de Redis.
+
+### Paso 5: Comprobar la Instalación
+
+1. En la interfaz de línea de comandos de Redis (`redis-cli`), prueba algunos comandos básicos para asegurarte de que todo está funcionando correctamente. Por ejemplo:
+   ```sh
+   set test "Hello, Redis!"
+   get test
+   ```
+   Deberías ver `Hello, Redis!` como resultado del comando `get`.
+
+Si ves el mensaje esperado, ¡tu instalación de Redis en Windows está completa y funcionando correctamente!
+
+## Comandos Básicos de Redis: `SET` y `GET`
+
+### Comando `SET`
+
+El comando `SET` en Redis se usa para almacenar un valor asociado a una clave. La sintaxis básica es:
+
+```sh
+SET <clave> <valor>
+```
+
+- **Clave:** El identificador único para el valor que deseas almacenar.
+- **Valor:** El dato que deseas almacenar.
+
+**Ejemplo:**
+
+```sh
+SET page_name "About us"
+```
+
+Si el comando se ejecuta correctamente, Redis responderá con `OK`. Si ocurre un error, se te indicará para que lo resuelvas.
+
+### Comando `GET`
+
+El comando `GET` se utiliza para recuperar el valor asociado a una clave. La sintaxis básica es:
+
+```sh
+GET <clave>
+```
+
+- **Clave:** El identificador único cuyo valor deseas recuperar.
+
+**Ejemplo:**
+
+```sh
+GET page_name
+```
+
+Esto devolverá el valor asociado a `page_name`. Si la clave no existe, Redis devolverá `(nil)` en lugar de un mensaje de error.
+
+### Comportamiento de Redis
+
+- **Sin Mensajes de Error Detallados:** Redis no proporciona mensajes de error descriptivos para claves no existentes; simplemente devuelve `(nil)`.
+- **Velocidad:** Redis es extremadamente rápido en la recuperación y almacenamiento de datos.
+
+Estos comandos básicos te permiten manejar datos en Redis de manera eficiente y rápida. Para más detalles sobre opciones avanzadas y configuraciones, consulta la documentación oficial de Redis.
+
+Aquí tienes el resumen del texto en formato Markdown para tu documentación:
+
+```markdown
+## Estrategia para Estructurar Claves en Redis
+
+Cuando trabajas con Redis, es importante desarrollar una estrategia para estructurar tus claves de manera efectiva, especialmente si vienes de un entorno SQL. En Redis, no utilizamos tablas; en su lugar, trabajamos con pares clave-valor almacenados en memoria. A continuación, se presenta una práctica común para estructurar las claves en Redis.
+
+### Estrategia de Claves
+
+1. **Uso de Identificadores Únicos**:
+   - En una base de datos SQL, es común tener una columna de ID para identificar registros únicos.
+   - En Redis, también podemos utilizar un identificador único al estructurar nuestras claves para garantizar que sean únicas y fáciles de referenciar.
+
+2. **Ejemplo de Estructuración de Claves**:
+   - Supongamos que deseas rastrear el número de "Me gusta" en una guía dentro de una red social.
+   - En lugar de utilizar una clave genérica como `guide_like_count`, es más útil incluir un identificador único en la clave.
+   - Por ejemplo, si el ID de la guía en la base de datos es `105`, podrías estructurar la clave como `105:guide_like_count`.
+
+   **Comando para Establecer el Valor:**
+
+   ```sh
+   SET 105:guide_like_count 0
+   ```
+
+   **Comando para Obtener el Valor:**
+
+   ```sh
+   GET 105:guide_like_count
+   ```
+
+   Esto devolverá `0` si aún no se ha incrementado.
+
+### Beneficios de Esta Estrategia
+
+- **Claves Únicas**: Utilizar identificadores en las claves ayuda a evitar colisiones y asegura que cada clave sea única.
+- **Fácil Referencia**: La estructura `ID:atributo` permite una referencia rápida y clara a datos específicos.
+
+Esta estrategia es ampliamente utilizada en Redis y te ayudará a gestionar tus datos de manera más eficiente en el resto del curso.
+
+### Ejemplo de Uso:
+- **`SET`**: `SET 105:guide_like_count 0`  
+  Esto almacena un valor inicial de `0` para la clave `105:guide_like_count`.
+- **`GET`**: `GET 105:guide_like_count`  
+  Esto recupera el valor asociado con la clave `105:guide_like_count`.
+
+### Incrementar y Decrementar Valores:
+Redis permite incrementar y decrementar valores asociados a claves.
+
+- **Incrementar**: `INCR post_like_count:42`  
+  Incrementa el valor de la clave `post_like_count:42` en `1`. Devuelve el nuevo valor actualizado.
+- **Decrementar**: `DECR post_like_count:42`  
+  Decrementa el valor de la clave `post_like_count:42` en `1`. Devuelve el nuevo valor actualizado.
+
+### Incrementar y Decrementar en Cantidades Específicas:
+También puedes incrementar o decrementar valores por cantidades específicas.
+
+- **Incrementar por Cantidad**: `INCRBY post_like_count:42 100`  
+  Incrementa el valor de la clave `post_like_count:42` en `100`. Devuelve el nuevo valor actualizado.
+- **Decrementar por Cantidad**: `DECRBY post_like_count:42 21`  
+  Decrementa el valor de la clave `post_like_count:42` en `21`. Devuelve el nuevo valor actualizado.
+
+Este enfoque de estructuración de claves con IDs únicos y la capacidad de incrementar/decrementar valores facilita la gestión y actualización de datos en Redis.
+
+### Resumen
+En Redis, puedes **establecer** valores para claves específicas y **eliminar** múltiples claves al mismo tiempo. A continuación, se muestra cómo hacerlo:
+
+1. **Establecer Valores**: Utiliza el comando `SET` para asignar valores a claves específicas.
+   - Ejemplo:
+     ```plaintext
+     SET name "Jordan"
+     SET surname "Hudgens"
+     SET middle_name "David"
+     ```
+
+2. **Eliminar Claves**: El comando `DEL` permite eliminar una o más claves a la vez. Esto es eficiente cuando necesitas eliminar múltiples claves.
+   - Ejemplo para eliminar varias claves:
+     ```plaintext
+     DEL name surname 
+     ```
+   - El resultado indica cuántas claves se eliminaron (en este caso, 2).
+
+3. **Recuperar Valores**: Si intentas obtener el valor de una clave eliminada, Redis devolverá `nil` en lugar de un error. Esto puede significar que la clave nunca se configuró correctamente o que ha sido eliminada.
+   - Ejemplo para obtener el valor de una clave:
+     ```plaintext
+     GET name
+     ```
+     - Si la clave fue eliminada, devolverá `nil`.
+
+Recuerda que Redis es rápido y no proporciona errores descriptivos como las bases de datos SQL tradicionales. Si obtienes `nil`, puede significar que la clave no existe o fue eliminada.
+
+### Comandos en Inglés
+
+- **Set Values**:
+  ```plaintext
+  SET name "Jordan"
+  SET surname "Hudgens"
+  SET middle_name "David"
+  ```
+
+- **Delete Keys**:
+  ```plaintext
+  DEL name surname
+  ```
+
+- **Get Values**:
+  ```plaintext
+  GET name
+  ```
+
+Este enfoque te permite manejar eficientemente las claves y valores en Redis, así como gestionar la eliminación de datos.
+
+## EXISTS
+
+En Redis, el comando `EXISTS` se utiliza para verificar si una clave existe en la base de datos. Esto es útil para diferenciar entre una clave que ha sido eliminada y una que nunca fue creada. Aquí se detalla cómo usar `EXISTS` y por qué es importante:
+
+1. **Comprobar Existencia de una Clave**:
+   - El comando `EXISTS` permite verificar si una clave está presente en Redis.
+   - Si la clave existe, `EXISTS` devuelve `1`. Si no existe, devuelve `0`.
+
+   - Ejemplo:
+     ```plaintext
+     SET title "My Post"
+     EXISTS title
+     ```
+     - Devuelve `1` porque la clave `title` existe.
+
+2. **Claves No Existentes**:
+   - Si intentas verificar una clave que no ha sido creada, `EXISTS` devolverá `0`.
+
+   - Ejemplo:
+     ```plaintext
+     EXISTS a_key_that_has_not_been_created
+     ```
+     - Devuelve `0` porque la clave no existe.
+
+3. **Diferencia con `GET`**:
+   - Utilizar `GET` en una clave que no existe devuelve `nil`, lo que puede ser confuso.
+   - Usar `EXISTS` proporciona una forma más clara de saber si una clave está presente en la base de datos o si simplemente su valor es `nil`.
+
+4. **Aplicación Práctica**:
+   - `EXISTS` es útil para operaciones como la comprobación de caché. Puedes verificar si un valor está en caché y, si no está, proceder a configurar o actualizar el caché.
+
+### Comandos en Inglés
+
+- **Set Value**:
+  ```plaintext
+  SET title "My Post"
+  ```
+
+- **Check If Key Exists**:
+  ```plaintext
+  EXISTS title
+  EXISTS a_key_that_has_not_been_created
+  ```
+
+El uso del comando `EXISTS` te ayuda a gestionar datos en Redis de manera más precisa y a evitar confusiones con los valores `nil`.
+
+## EXPIRE
+
+En Redis, puedes usar el comando `EXPIRE` para establecer un tiempo de caducidad para una clave. Esto es útil para gestionar el almacenamiento en caché, ya que permite que los datos caducados se eliminen automáticamente después de un período determinado. Aquí tienes una explicación y ejemplos de cómo usar los comandos relacionados con la caducidad:
+
+1. **Establecer una Clave con Expiración**:
+   - Usa el comando `SET` para guardar una clave con un valor.
+   - Usa el comando `EXPIRE` para definir el tiempo de vida en segundos.
+
+   - Ejemplo:
+     ```plaintext
+     SET featured_image "somepicture.png"
+     EXPIRE featured_image 21
+     ```
+
+2. **Comprobar el Tiempo de Vida Restante**:
+   - Usa el comando `TTL` para verificar el tiempo restante antes de que la clave expire.
+   
+   - Ejemplo:
+     ```plaintext
+     TTL featured_image
+     ```
+
+3. **Clave Expirada**:
+   - Después de que la clave haya expirado, `TTL` devuelve `-2`.
+   - Al intentar obtener el valor de una clave que ha expirado, `GET` devolverá `nil`.
+
+   - Ejemplos:
+     ```plaintext
+     TTL featured_image
+     GET featured_image
+     ```
+
+   - `TTL` devolverá `-2` cuando la clave haya expirado.
+   - `GET` devolverá `nil` después de que la clave haya expirado.
+
+### Comandos en Inglés
+
+- **Set Key**:
+  ```plaintext
+  SET featured_image "somepicture.png"
+  ```
+
+- **Set Expiration**:
+  ```plaintext
+  EXPIRE featured_image 21
+  ```
+
+- **Check Time to Live (TTL)**:
+  ```plaintext
+  TTL featured_image
+  ```
+
+- **Get Value**:
+  ```plaintext
+  GET featured_image
+  ```
+
+El uso del comando `EXPIRE` permite que los datos en Redis sean temporales, facilitando la gestión del almacenamiento en caché y evitando que los datos obsoletos permanezcan en la base de datos.
+
+## GETSET
+
+En Redis, puedes gestionar y actualizar valores de claves de diferentes maneras. Aquí se explica cómo puedes anular y obtener el valor anterior de una clave, así como manejar casos en los que la clave no existe.
+
+1. **Establecer y Obtener Claves**:
+   - Puedes establecer un nuevo valor para una clave existente y luego obtener ese valor.
+   - Ejemplo:
+     ```plaintext
+     SET current_batter 'Altuve'
+     GET current_batter
+     ```
+
+2. **Anular el Valor de una Clave**:
+   - Puedes sobrescribir el valor de una clave existente con un nuevo valor sin recibir errores.
+   - Ejemplo:
+     ```plaintext
+     SET current_batter 'Correa'
+     GET current_batter
+     ```
+
+3. **Usar el Comando `GETSET`**:
+   - `GETSET` te permite actualizar el valor de una clave y al mismo tiempo obtener el valor anterior antes de la actualización.
+   - Ejemplo:
+     ```plaintext
+     GETSET current_batter 'Bregman'
+     GET current_batter
+     ```
+
+4. **Comportamiento de `GETSET` con Claves No Existentes**:
+   - Si usas `GETSET` en una clave que no existe, devolverá `nil` y luego almacenará el nuevo valor.
+   - Ejemplo:
+     ```plaintext
+     GETSET nonexistent_key 'Hello'
+     GET nonexistent_key
+     ```
+
+Estos comandos te permiten manejar de manera eficiente la actualización de valores en Redis, y el comando `GETSET` es útil cuando necesitas tanto el nuevo valor como el anterior en un solo paso.
+
+## Buscar una clave
+
+En Redis, puedes usar el comando `KEYS` para buscar y listar claves en la base de datos. Hay varias formas de usar este comando para filtrar y encontrar claves según patrones específicos.
+
+1. **Listar Todas las Claves**:
+   - Usa `KEYS *` para listar todas las claves en la base de datos.
+   - Ejemplo:
+     ```plaintext
+     KEYS *
+     ```
+
+2. **Buscar Claves por Patrón**:
+   - Usa `KEYS *pattern*` para encontrar todas las claves que contienen un patrón específico.
+   - Ejemplo:
+     ```plaintext
+     KEYS *post*
+     KEYS *user*
+     ```
+
+3. **Buscar Claves que Empiezan con un Patrón**:
+   - Usa `KEYS pattern*` para buscar claves que comienzan con un patrón específico.
+   - Ejemplo:
+     ```plaintext
+     KEYS user*
+     ```
+
+4. **Buscar Claves que Terminan con un Patrón**:
+   - Usa `KEYS *pattern` para buscar claves que terminan con un patrón específico.
+   - Ejemplo:
+     ```plaintext
+     KEYS *name
+     ```
+
+5. **Buscar Claves con un Patrón en Medio**:
+   - Usa `KEYS *pattern*` para buscar claves que contienen un patrón en cualquier parte.
+   - Ejemplo:
+     ```plaintext
+     KEYS *batter*
+     ```
+
+Estos comandos son útiles para depuración y administración, especialmente en bases de datos con muchas claves. Ten en cuenta que el comando `KEYS` puede no ser eficiente en bases de datos grandes, por lo que es recomendable usarlo con precaución en entornos de producción.
+
+## HASH
+
+Un **hash** en Redis es una estructura de datos tipo clave-valor que permite almacenar múltiples pares clave-valor bajo una sola clave. Esto es útil para organizar datos relacionados en una única entidad.
+
+### **Comandos para Trabajar con Hashes**
+
+1. **Crear o Modificar un Hash**:
+   - Usa `HSET` para añadir o actualizar campos en un hash.
+   - Sintaxis: `HSET <hash> <field> <value>`
+   - Ejemplo:
+     ```plaintext
+     HSET user:123 name "Kristine"
+     HSET user:123 email "kristine@devcamp.com"
+     ```
+
+2. **Obtener un Campo del Hash**:
+   - Usa `HGET` para recuperar el valor de un campo específico en un hash.
+   - Sintaxis: `HGET <hash> <field>`
+   - Ejemplo:
+     ```plaintext
+     HGET user:123 name
+     "Kristine"
+     HGET user:123 email
+     "kristine@devcamp.com"
+     ```
+
+3. **Obtener Todos los Campos y Valores del Hash**:
+   - Usa `HGETALL` para recuperar todos los campos y valores de un hash.
+   - Sintaxis: `HGETALL <hash>`
+   - Ejemplo:
+     ```plaintext
+     HGETALL user:123
+     ```
+
+4. **Agregar o Modificar Múltiples Campos a la Vez**:
+   - Usa `HMSET` para añadir o actualizar múltiples campos en un hash simultáneamente (nota: `HMSET` está obsoleto en versiones más recientes y se recomienda usar `HSET` para múltiples campos).
+   - Sintaxis: `HMSET <hash> <field1> <value1> <field2> <value2> ...`
+   - Ejemplo:
+     ```plaintext
+     HMSET user:123 name "Kristine" email "kristine@devcamp.com"
+     ```
+
+5. **Eliminar un Campo del Hash**:
+   - Usa `HDEL` para eliminar uno o más campos de un hash.
+   - Sintaxis: `HDEL <hash> <field1> <field2> ...`
+   - Ejemplo:
+     ```plaintext
+     HDEL user:123 email
+     ```
+
+### **Ejemplos de Uso**
+
+- **Añadir Datos a un Hash**:
+  ```plaintext
+  127.0.0.1:6379> HSET user:123 name "Kristine"
+  (integer) 1
+  127.0.0.1:6379> HSET user:123 email "kristine@devcamp.com"
+  (integer) 1
+  ```
+
+- **Obtener Datos del Hash**:
+  ```plaintext
+  127.0.0.1:6379> HGET user:123 name
+  "Kristine"
+  127.0.0.1:6379> HGET user:123 email
+  "kristine@devcamp.com"
+  ```
+
+Con los hashes, puedes almacenar y gestionar de manera eficiente conjuntos de datos relacionados bajo una única clave, lo que es ideal para mantener datos organizados y fácilmente accesibles.
+
+Aquí tienes un resumen detallado de los comandos para trabajar con hashes en Redis, con ejemplos para que puedas entender cómo se utilizan:
+
+## **Más comandos para Trabajar con Hashes en Redis**
+
+1. **Crear o Modificar Múltiples Campos en un Hash**:
+   - **HMSET** (obsoleto, se recomienda usar `HSET` para múltiples campos)
+   - Sintaxis: `HMSET <hash> <field1> <value1> <field2> <value2> ...`
+   - Ejemplo:
+     ```plaintext
+     127.0.0.1:6379> HMSET user:42 name "Darth" email "darth@vader.com"
+     OK
+     ```
+
+2. **Obtener el Valor de Campos Específicos en un Hash**:
+   - **HMGET**
+   - Sintaxis: `HMGET <hash> <field1> <field2> ...`
+   - Ejemplo:
+     ```plaintext
+     127.0.0.1:6379> HMGET user:42 name email
+     1) "Darth"
+     2) "darth@vader.com"
+     ```
+
+3. **Obtener Todos los Campos y Valores en un Hash**:
+   - **HGETALL**
+   - Sintaxis: `HGETALL <hash>`
+   - Ejemplo:
+     ```plaintext
+     127.0.0.1:6379> HGETALL user:42
+     1) "name"
+     2) "Darth"
+     3) "email"
+     4) "darth@vader.com"
+     ```
+
+4. **Obtener Solo las Claves de un Hash**:
+   - **HKEYS**
+   - Sintaxis: `HKEYS <hash>`
+   - Ejemplo:
+     ```plaintext
+     127.0.0.1:6379> HKEYS user:42
+     1) "name"
+     2) "email"
+     ```
+
+5. **Verificar la Existencia de un Campo en un Hash**:
+   - **HEXISTS**
+   - Sintaxis: `HEXISTS <hash> <field>`
+   - Ejemplo:
+     ```plaintext
+     127.0.0.1:6379> HEXISTS user:42 email
+     (integer) 1
+     127.0.0.1:6379> HEXISTS user:42 alternate_email
+     (integer) 0
+     ```
+
+6. **Incrementar el Valor de un Campo Numérico en un Hash**:
+   - **HINCRBY**
+   - Sintaxis: `HINCRBY <hash> <field> <increment>`
+   - Ejemplo:
+     ```plaintext
+     127.0.0.1:6379> HINCRBY user:42 id 123
+     (integer) 124
+     ```
+
+7. **Eliminar un Campo de un Hash**:
+   - **HDEL**
+   - Sintaxis: `HDEL <hash> <field>`
+   - Ejemplo:
+     ```plaintext
+     127.0.0.1:6379> HDEL user:42 id
+     (integer) 1
+     ```
+
+8. **Contar el Número de Campos en un Hash**:
+   - **HLEN**
+   - Sintaxis: `HLEN <hash>`
+   - Ejemplo:
+     ```plaintext
+     127.0.0.1:6379> HLEN user:42
+     (integer) 2
+     ```
+
+### **Ejemplos de Uso**
+
+- **Agregar Múltiples Campos a un Hash**:
+  ```plaintext
+  127.0.0.1:6379> HMSET user:42 name "Darth" email "darth@vader.com"
+  OK
+  ```
+
+- **Obtener Valores de Campos Específicos**:
+  ```plaintext
+  127.0.0.1:6379> HMGET user:42 name email
+  1) "Darth"
+  2) "darth@vader.com"
+  ```
+
+- **Obtener Todos los Campos y Valores**:
+  ```plaintext
+  127.0.0.1:6379> HGETALL user:42
+  1) "name"
+  2) "Darth"
+  3) "email"
+  4) "darth@vader.com"
+  ```
+
+- **Obtener Solo las Claves**:
+  ```plaintext
+  127.0.0.1:6379> HKEYS user:42
+  1) "name"
+  2) "email"
+  ```
+
+- **Verificar Existencia de un Campo**:
+  ```plaintext
+  127.0.0.1:6379> HEXISTS user:42 email
+  (integer) 1
+  127.0.0.1:6379> HEXISTS user:42 alternate_email
+  (integer) 0
+  ```
+
+- **Incrementar un Valor en un Campo**:
+  ```plaintext
+  127.0.0.1:6379> HINCRBY user:42 id 123
+  (integer) 124
+  ```
+
+- **Eliminar un Campo**:
+  ```plaintext
+  127.0.0.1:6379> HDEL user:42 id
+  (integer) 1
+  ```
+
+- **Contar Campos en un Hash**:
+  ```plaintext
+  127.0.0.1:6379> HLEN user:42
+  (integer) 2
+  ```
+## EJERCICIO CON REDIS
+
+**Resumen del Proyecto Redis: Acortador de Enlaces**
+
+Este proyecto es un acortador de enlaces basado en Redis, diseñado para ser implementado en el lenguaje o marco de programación de tu elección. El objetivo principal del proyecto es aprender a trabajar con Redis y no enfocarse en el diseño o en el lenguaje de programación específico. Aquí están los puntos clave del proyecto:
+
+1. **Independencia del Lenguaje**: El proyecto debe ser implementado en el lenguaje o marco que prefieras, ya sea C#, Rails, Sinatra, o cualquier otro. La solución se proporcionará en Sinatra (Ruby) para mantenerla lo más simple y cercana al uso puro de Redis.
+
+2. **Funcionalidad Principal**:
+   - **Acortar URLs**: Tendrás una interfaz donde podrás ingresar una URL larga y recibir una URL corta.
+   - **Redirección**: La URL corta redirigirá a la URL original cuando se acceda a ella.
+   - **Lista de Enlaces**: Habrá una página que muestra todos los enlaces acortados.
+
+3. **Implementación**:
+   - **Uso de Redis**: Se utilizarán varios comandos de Redis para gestionar los enlaces acortados.
+     - **Búsqueda de Claves**: Para recuperar URLs a partir de sus versiones cortas.
+     - **Listar Claves y Valores**: Para obtener todos los enlaces acortados.
+     - **Algoritmo de Aleatorización**: Para generar URLs cortas aleatorias que redirijan a las URLs originales.
+   - **Estructuras de Datos en Redis**: Se trabajará con estructuras básicas de Redis, como strings y hashes.
+
+4. **Interfaz de Usuario**:
+   - **Páginas**: El proyecto tendrá dos páginas principales:
+     - **Página de Índice**: Para ingresar URLs largas y recibir URLs cortas.
+     - **Página de Enlaces**: Para ver todos los enlaces acortados.
+
+No, el usuario final no necesita tener Redis instalado para que tu aplicación funcione. Redis se usa en el backend de la aplicación, no en el cliente. Aquí está una explicación más detallada:
+
+### Cómo Funciona Redis en tu Aplicación
+
+1. **Instalación y Configuración en el Servidor**:
+   - **Redis**: Redis debe estar instalado y configurado en el servidor donde está ejecutándose tu aplicación backend. Es un servicio que corre en el servidor y es responsable de almacenar datos en caché o realizar operaciones rápidas en memoria.
+
+2. **Interacción del Cliente**:
+   - **Frontend (React)**: El usuario final interactúa con la interfaz web de tu aplicación (la parte que ves en el navegador). En esta interfaz, el usuario puede hacer clic en un botón de "Me gusta", que envía una solicitud al servidor.
+
+3. **Backend (Servidor)**:
+   - **Procesamiento**: Cuando el servidor recibe la solicitud de "Me gusta", el backend maneja esta solicitud. Si estás usando Redis para contar los "me gusta", el backend se comunica con Redis para actualizar el conteo.
+
+4. **Redis en el Servidor**:
+   - **Operación**: Redis realiza operaciones en el servidor y almacena los datos en caché o actualiza los contadores según las solicitudes que recibe. Redis es extremadamente rápido para estas operaciones y no requiere interacción directa por parte del usuario.
+
+5. **Comunicación del Backend con el Frontend**:
+   - **Respuestas**: Una vez que Redis ha actualizado los datos (por ejemplo, incrementando el conteo de "me gusta"), el backend envía una respuesta al frontend. El frontend, a su vez, actualiza la interfaz de usuario para mostrar el nuevo conteo de "me gusta".
+
+### Resumen:
+
+- **Redis** es una parte del backend y solo necesita estar instalado en el servidor donde corre tu aplicación.
+- **El usuario final** no interactúa directamente con Redis y no necesita tenerlo instalado en su dispositivo.
+- **Tu aplicación frontend (React)** y **tu servidor backend** trabajan juntos para manejar la funcionalidad de "me gusta" utilizando Redis en el servidor.
+
+La idea es que Redis actúe como una herramienta para mejorar el rendimiento y la eficiencia del backend, sin requerir que el usuario final esté consciente de su existencia o necesite interactuar con él.
+
+## Proyecto ejemplo 
+
+El proyecto está diseñado para ser simple y enfocado en el uso de Redis, sin preocuparse demasiado por el diseño o el marco de trabajo. La solución final debería demostrar cómo trabajar con Redis para almacenar y recuperar datos de manera eficiente.
+
+**Resumen del Código para el Acortador de Enlaces en Redis**
+
+Este código implementa un acortador de enlaces usando Redis y Sinatra en Ruby. Aquí están los puntos clave sobre cómo se construye el sistema y cómo se utiliza Redis:
+
+1. **Conexión a Redis**:
+   - Se importan las gemas `Redis` y `Sinatra`.
+   - Se crea una instancia de Redis para interactuar con la base de datos Redis.
+
+2. **Generación de Códigos Cortos**:
+   - Se define un método para generar cadenas aleatorias que servirán como códigos cortos para las URLs.
+   - Este código corto se usará como parte de la clave en Redis para almacenar la URL original.
+
+3. **Creación de Enlaces Cortos**:
+   - Se verifica que el parámetro de entrada (URL) no esté vacío.
+   - Se genera un código corto aleatorio.
+   - Se utiliza el comando `redis.setnx` para almacenar la URL en Redis bajo la clave `links:<shortcode>`, donde `<shortcode>` es el código corto generado. `setnx` asegura que la clave se establezca solo si no existe previamente.
+
+4. **Visualización de Enlaces**:
+   - Se usa el comando `redis.keys` con un patrón `links:*` para recuperar todas las claves que comienzan con `links:`.
+   - Se itera sobre estas claves para crear un hash en Ruby, donde se eliminan las partes no necesarias de las claves (como `links:`) para mostrar solo las URLs.
+
+5. **Redirección de Enlaces Cortos**:
+   - Para redirigir a los usuarios, se utiliza `redis.get` para recuperar la URL original asociada con un código corto dado.
+   - La URL recuperada se usa para redirigir al usuario a la URL original.
+
+6. **Páginas de Interfaz**:
+   - La aplicación tiene dos páginas principales:
+     - **Página de Índice**: Permite a los usuarios ingresar una URL para acortarla y muestra el enlace corto generado.
+     - **Página de Enlaces**: Muestra una lista de todos los enlaces acortados.
+
+7. **Aspectos Avanzados**:
+   - La parte más compleja es la consulta de todas las claves en Redis y la creación de un objeto que contiene la lista de enlaces acortados, lo cual requiere manejar patrones de claves y procesamiento de datos en Ruby.
+
+**Código Clave**:
+- **Conexión a Redis**:
+  ```ruby
+  require 'redis'
+  require 'sinatra'
+  
+  redis = Redis.new
+  ```
+
+- **Generación de Código Corto**:
+  ```ruby
+  def random_string(length)
+    # Genera una cadena aleatoria de longitud especificada
+  end
+  ```
+
+- **Almacenamiento en Redis**:
+  ```ruby
+  shortcode = random_string(5)
+  redis.setnx("links:#{shortcode}", url)
+  ```
+
+- **Consulta y Visualización**:
+  ```ruby
+  redis.keys("links:*").each do |key|
+    shortened_url = key.sub("links:", "")
+    original_url = redis.get(key)
+    # Almacena y muestra shortened_url y original_url
+  end
+  ```
+
+- **Redirección**:
+  ```ruby
+  url = redis.get("links:#{shortcode}")
+  redirect to(url)
+  ```
+
+Correcto, Redis se ejecuta en el backend, igual que MySQL o PostgreSQL, y no necesita ser instalado en el cliente. A continuación, te explico cómo podrías implementar un sistema de acortamiento de URL usando Redis en el backend con Python y Java Spring Boot. Te proporcionaré una descripción general del código necesario para cada caso.
+
+### **Python con Flask**
+
+#### 1. **Instalación de Dependencias**
+
+Primero, necesitas instalar las bibliotecas necesarias, como Flask para el servidor web y redis-py para interactuar con Redis. Puedes hacerlo usando `pip`:
+
+```bash
+pip install Flask redis
+```
+
+#### 2. **Configuración de Redis**
+
+En tu código Python, debes configurar la conexión a Redis y definir las rutas de la aplicación Flask.
+
+#### 3. **Código Ejemplo**
+
+Aquí tienes un código de ejemplo para un acortador de URL básico con Flask y Redis:
+
+```python
+from flask import Flask, request, redirect, jsonify
+import redis
+import random
+import string
+
+app = Flask(__name__)
+r = redis.StrictRedis(host='localhost', port=6379, db=0)
+
+def generate_short_code(length=5):
+    """Genera una cadena aleatoria de caracteres"""
+    characters = string.ascii_letters + string.digits
+    return ''.join(random.choice(characters) for _ in range(length))
+
+@app.route('/shorten', methods=['POST'])
+def shorten_url():
+    original_url = request.form.get('url')
+    if not original_url:
+        return jsonify({'error': 'No URL provided'}), 400
+    
+    short_code = generate_short_code()
+    r.set(f'url:{short_code}', original_url)
+    
+    return jsonify({'short_url': f'http://localhost:5000/{short_code}'}), 200
+
+@app.route('/<short_code>')
+def redirect_to_url(short_code):
+    original_url = r.get(f'url:{short_code}')
+    if original_url:
+        return redirect(original_url)
+    else:
+        return jsonify({'error': 'URL not found'}), 404
+
+@app.route('/links', methods=['GET'])
+def get_all_links():
+    keys = r.keys('url:*')
+    links = {key.decode('utf-8').split(':')[1]: r.get(key).decode('utf-8') for key in keys}
+    return jsonify(links), 200
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+#### Explicación:
+- **`generate_short_code`**: Genera un código corto aleatorio.
+- **`/shorten`**: Ruta para acortar la URL. Toma la URL original y genera un código corto que se almacena en Redis.
+- **`/<short_code>`**: Ruta para redirigir a la URL original usando el código corto.
+- **`/links`**: Ruta para obtener todas las URLs acortadas almacenadas en Redis.
+
+### **Java con Spring Boot**
+
+#### 1. **Dependencias**
+
+En tu archivo `pom.xml`, debes agregar dependencias para Spring Boot y Jedis (cliente Redis para Java):
+
+```xml
+<dependencies>
+    <!-- Spring Boot Starter Web -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!-- Jedis Redis Client -->
+    <dependency>
+        <groupId>redis.clients</groupId>
+        <artifactId>jedis</artifactId>
+        <version>3.6.0</version>
+    </dependency>
+</dependencies>
+```
+
+#### 2. **Configuración de Redis**
+
+Configura la conexión a Redis en tu aplicación Spring Boot.
+
+#### 3. **Código Ejemplo**
+
+Aquí tienes un código de ejemplo para un acortador de URL básico con Spring Boot y Jedis:
+
+```java
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.*;
+import redis.clients.jedis.Jedis;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
+@SpringBootApplication
+public class UrlShortenerApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(UrlShortenerApplication.class, args);
+    }
+}
+
+@RestController
+@RequestMapping("/api")
+class UrlShortenerController {
+
+    private final Jedis jedis = new Jedis("localhost");
+
+    private String generateShortCode(int length) {
+        String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder shortCode = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            shortCode.append(characters.charAt(random.nextInt(characters.length())));
+        }
+        return shortCode.toString();
+    }
+
+    @PostMapping("/shorten")
+    public Map<String, String> shortenUrl(@RequestParam String url) {
+        String shortCode = generateShortCode(5);
+        jedis.set("url:" + shortCode, url);
+        Map<String, String> response = new HashMap<>();
+        response.put("short_url", "http://localhost:8080/" + shortCode);
+        return response;
+    }
+
+    @GetMapping("/{shortCode}")
+    public String redirectToUrl(@PathVariable String shortCode) {
+        String originalUrl = jedis.get("url:" + shortCode);
+        if (originalUrl != null) {
+            return "redirect:" + originalUrl;
+        } else {
+            throw new RuntimeException("URL not found");
+        }
+    }
+
+    @GetMapping("/links")
+    public Map<String, String> getAllLinks() {
+        Map<String, String> links = new HashMap<>();
+        for (String key : jedis.keys("url:*")) {
+            String shortCode = key.substring(4);
+            String url = jedis.get(key);
+            links.put(shortCode, url);
+        }
+        return links;
+    }
+}
+```
+
+#### Explicación:
+- **`generateShortCode`**: Genera un código corto aleatorio.
+- **`/shorten`**: Ruta para acortar la URL. Toma la URL original y genera un código corto que se almacena en Redis.
+- **`/{shortCode}`**: Ruta para redirigir a la URL original usando el código corto.
+- **`/links`**: Ruta para obtener todas las URLs acortadas almacenadas en Redis.
+
+### Resumen
+
+- **Python**: Usa Flask y `redis-py` para interactuar con Redis. Proporciona rutas para acortar URLs, redirigir, y listar todos los enlaces.
+- **Java Spring Boot**: Usa Spring Boot y Jedis para interactuar con Redis. Implementa funcionalidades similares con anotaciones de Spring MVC.
+
+En ambos casos, el código en el backend maneja la lógica de acortar URLs y almacenar en Redis, mientras que el frontend (React, por ejemplo) se encarga de interactuar con estas rutas para mostrar los resultados y permitir al usuario interactuar con la aplicación.
