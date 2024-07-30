@@ -69,7 +69,7 @@ Condicionar la visibilidad del botón que abre el modal para crear registros en 
 
 ## Reorganización y limpieza código en app.js
 
-Aagregar íconos directamente en el componente principal de una aplicación, lno es ideal para mantener un código organizado y limpio. La solución propuesta es crear un módulo auxiliar específico para gestionar los íconos. Aquí están los pasos resumidos para lograr esto:
+Agregar íconos directamente en el componente principal de una aplicación, lno es ideal para mantener un código organizado y limpio. La solución propuesta es crear un módulo auxiliar específico para gestionar los íconos. Aquí están los pasos resumidos para lograr esto:
 
 1. **Crear un Directorio de Helpers**:
    - Directorio: `src/helpers`
@@ -1262,7 +1262,463 @@ El `withRouter` es un ejemplo de un HOC proporcionado por la biblioteca react-ro
 [Estilos css](https://css-tricks.com/snippets/css/complete-guide-grid/)
 
 
+Aquí tienes el resumen del texto para tu documentación en Markdown, con comentarios en el código para facilitar la comprensión y un flujo claro:
 
+---
+
+# Resumen del Código: Integración de Axios y Redux en una Aplicación React
+
+## Descripción General
+
+En esta guía, se detalla cómo integrar Axios para realizar solicitudes HTTP y cómo manejar los datos recibidos en una aplicación React utilizando Redux. El enfoque incluye la instalación de Axios, la creación de acciones y reductores en Redux, y la visualización de los datos en la interfaz de usuario.
+
+## Flujo del Código
+
+1. **Instalación de Axios**: Utiliza npm para instalar Axios, una biblioteca para hacer solicitudes HTTP.
+2. **Solicitud de Datos con Axios**: Realiza una solicitud GET a una API externa y maneja la respuesta.
+3. **Gestión de Datos con Redux**: Configura acciones y reductores para almacenar y manejar los datos en el estado de Redux.
+4. **Visualización de Datos**: Usa los datos almacenados en Redux para renderizar la interfaz de usuario.
+
+## Código y Comentarios
+
+### **Instalación de Axios**
+
+```bash
+# Instala Axios usando npm
+npm install --save axios
+```
+
+### **Uso de Axios para Solicitar Datos**
+
+```javascript
+// Importa Axios en el archivo index.js
+import axios from 'axios';
+
+// Realiza una solicitud GET a la API
+axios.get('https://api.dailysmarty.com/posts')
+  .then(response => {
+    // Imprime los datos de la respuesta en la consola
+    console.log(response.data.posts);
+  })
+  .catch(error => {
+    // Maneja errores, si los hay
+    console.error('Error al obtener datos:', error);
+  });
+```
+
+**Comentarios:**
+- `axios.get()`: Realiza una solicitud GET a la URL especificada.
+- `.then(response => {...})`: Maneja la respuesta de la solicitud. Aquí, `response.data.posts` contiene los datos que queremos.
+- `.catch(error => {...})`: Captura y maneja cualquier error que ocurra durante la solicitud.
+
+### **Acción en Redux para Manejar Datos**
+
+```javascript
+// Archivo: actions/types.js
+export const SET_RECENT_POSTS = 'SET_RECENT_POSTS';
+
+// Archivo: actions/index.js
+import { SET_RECENT_POSTS } from './types';
+
+export function fetchRecentPosts() {
+  return dispatch => {
+    axios.get('https://api.dailysmarty.com/posts')
+      .then(response => {
+        // Envía una acción a Redux con los datos de las publicaciones
+        dispatch({
+          type: SET_RECENT_POSTS,
+          payload: response.data.posts
+        });
+      });
+  };
+}
+```
+
+**Comentarios:**
+- `SET_RECENT_POSTS`: Tipo de acción que indica que los datos recientes de publicaciones están disponibles.
+- `fetchRecentPosts()`: Acción que realiza la solicitud y despacha los datos recibidos a Redux.
+
+### **Reductor para Manejar el Estado**
+
+```javascript
+// Archivo: reducers/postsReducer.js
+import { SET_RECENT_POSTS } from '../actions/types';
+
+const INIT_STATE = {
+  posts: [],
+  recentPosts: []
+};
+
+export default function postsReducer(state = INIT_STATE, action) {
+  switch(action.type) {
+    case SET_RECENT_POSTS:
+      // Actualiza el estado con las publicaciones recientes
+      return {
+        ...state,
+        recentPosts: action.payload
+      };
+    default:
+      return state;
+  }
+}
+```
+
+**Comentarios:**
+- `INIT_STATE`: Estado inicial del reductor con arrays vacíos para `posts` y `recentPosts`.
+- `postsReducer()`: Función que maneja las acciones y actualiza el estado en consecuencia.
+
+### **Integración en la Interfaz de Usuario**
+
+```javascript
+// Archivo: components/Home.js
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchRecentPosts } from '../actions';
+
+const Home = () => {
+  const dispatch = useDispatch();
+  const recentPosts = useSelector(state => state.posts.recentPosts);
+
+  useEffect(() => {
+    // Obtiene las publicaciones recientes al montar el componente
+    dispatch(fetchRecentPosts());
+  }, [dispatch]);
+
+  return (
+    <div>
+      <h1>Publicaciones Recientes</h1>
+      <ul>
+        {recentPosts.map(post => (
+          <li key={post.id}>{post.title}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default Home;
+```
+
+**Comentarios:**
+- `useDispatch()`: Hook para obtener la función `dispatch` de Redux.
+- `useSelector()`: Hook para seleccionar el estado de Redux.
+- `useEffect()`: Hook que realiza la solicitud de datos cuando el componente se monta.
+
+## Conclusión
+
+Este resumen proporciona una visión general de cómo integrar Axios con Redux en una aplicación React. Axios se usa para hacer solicitudes HTTP y Redux se encarga de manejar el estado de los datos recibidos, que luego se visualizan en la interfaz de usuario.
+
+
+[Codigo recepción posts la api no funciona uso otra de personas](https://github.com/Marimar8888/dailySmarty/commit/ab2389f810fb3b91bc466be0b5a3b80248d6a8d7)
+
+Aquí tienes un resumen de la guía para tu documentación en Markdown, incluyendo los comentarios relevantes y el flujo de trabajo para la integración y depuración en Redux:
+
+---
+
+# Resumen del Proceso: Integración y Depuración de Redux en una Aplicación React
+
+## Descripción General
+
+En esta guía, cubrimos la integración de las herramientas de desarrollo de Redux y la depuración de un reductor en una aplicación React. Se exploran los pasos para configurar Redux DevTools, solucionar problemas comunes y ajustar el reductor para manejar los datos correctamente.
+
+## Flujo del Código
+
+1. **Instalación y Configuración de Redux DevTools**: Asegúrate de tener la extensión Redux DevTools instalada y configurada.
+2. **Configuración del Middleware**: Configura `createStore` con `applyMiddleware` y `compose` para integrar Redux DevTools.
+3. **Depuración del Receptor (Reducer)**: Ajusta el reductor para asegurar que maneje correctamente los datos recibidos.
+4. **Visualización de Datos**: Usa Redux DevTools para inspeccionar el estado y las acciones en la aplicación.
+
+## Código y Comentarios
+
+### **Configuración de Redux DevTools**
+
+1. **Instalación de la Extensión Redux DevTools**
+
+   - Busca e instala Redux DevTools desde la [Chrome Web Store](https://chrome.google.com/webstore/detail/redux-devtools).
+
+2. **Configuración en `bootstrap.js`**
+
+   ```javascript
+   import { createStore, applyMiddleware, compose } from 'redux';
+   import thunk from 'redux-thunk';
+   import rootReducer from './reducers';
+
+   // Configura Redux DevTools
+   const createStoreWithMiddleware = compose(
+     applyMiddleware(thunk),
+     window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
+   )(createStore);
+
+   // Crea el store con middleware y DevTools
+   const store = createStoreWithMiddleware(rootReducer);
+   ```
+
+   **Comentarios:**
+   - `compose`: Permite combinar múltiples funciones de middleware y enhancers.
+   - `window.__REDUX_DEVTOOLS_EXTENSION__`: Verifica si la extensión Redux DevTools está instalada y la utiliza.
+
+### **Ajuste del Receptor (Reducer)**
+
+1. **Ajuste en `postsReducer.js`**
+
+   ```javascript
+   import { SET_RECENT_POSTS } from '../actions/types';
+
+   const INIT_STATE = {
+     posts: [],
+     recentPosts: []
+   };
+
+   export default function postsReducer(state = INIT_STATE, action) {
+     switch(action.type) {
+       case SET_RECENT_POSTS:
+         // Asegura que `recentPosts` sea una matriz
+         return {
+           ...state,
+           recentPosts: action.payload
+         };
+       default:
+         return state;
+     }
+   }
+   ```
+
+   **Comentarios:**
+   - `recentPosts: action.payload`: Actualiza el estado con los datos de `action.payload` asegurando que sea una matriz.
+
+### **Visualización en Redux DevTools**
+
+1. **Verificación de Estado y Acciones**
+
+   - Abre la extensión Redux DevTools en tu navegador.
+   - Navega a la pestaña de **"State"** para ver el estado actual.
+   - Navega a la pestaña de **"Actions"** para revisar las acciones despachadas.
+
+2. **Ajustes y Pruebas**
+
+   - Si encuentras problemas con el estado, revisa el reductor para asegurar que maneje correctamente los datos.
+   - Asegúrate de que el estado de `recentPosts` sea una matriz en lugar de un objeto.
+
+### **Solución de Problemas Comunes**
+
+1. **Error de `createStore` no definido**
+
+   ```javascript
+   const createStoreWithMiddleware = compose(
+     applyMiddleware(thunk),
+     window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
+   )(createStore);
+   ```
+
+   **Corrección:**
+   - Verifica que `createStore` esté incluido en `compose`.
+
+2. **Datos Desordenados en el Estado**
+
+   ```javascript
+   const recentPosts = action.payload;
+   return {
+     ...state,
+     recentPosts
+   };
+   ```
+
+   **Corrección:**
+   - Asegúrate de que `action.payload` sea una matriz y no un objeto.
+
+## Conclusión
+
+Este resumen cubre la integración y configuración de Redux DevTools, así como la depuración del reductor en una aplicación React. Asegúrate de que Redux DevTools esté configurado correctamente para inspeccionar el estado y las acciones, y ajusta el reductor para manejar los datos recibidos de forma adecuada.
+
+
+Aquí tienes un resumen del texto para incluir los cambios en el proyecto y renderizar los posts recientes:
+
+---
+
+## Resumen del Proceso para Renderizar Publicaciones Recientes
+
+1. **Configurar `mapStateToProps`**:
+   - Implementa la función `mapStateToProps` en `recentPosts.js` para conectar el estado de la aplicación con las propiedades del componente.
+   - La función debe devolver `recentPosts` del estado, permitiendo que el componente acceda a las publicaciones recientes.
+
+2. **Renderizar Publicaciones**:
+   - Crea una función `renderPosts` en el componente que mapea `this.props.recentPosts` para generar una lista de publicaciones.
+   - En esta función, utiliza el índice de cada publicación como clave y muestra el título de la publicación.
+
+3. **Solucionar Problemas Comunes**:
+   - Asegúrate de que `this.props.recentPosts` no sea `undefined` y maneja el caso en que la lista puede estar vacía.
+   - Verifica que los elementos se rendericen correctamente y corrige errores relacionados con propiedades vacías o problemas con el mapeo.
+
+4. **Mostrar un Número Limitado de Publicaciones**:
+   - Ajusta la lógica para que solo se muestren las primeras 3 publicaciones, en lugar de todas las publicaciones disponibles. Utiliza una condición para limitar el número de elementos renderizados.
+
+[Codigo renderizar el título de los posts recientes](https://github.com/Marimar8888/dailySmarty/commit/db7f70c7acad83d1c96f43d832556b3a4800f160)
+
+Aquí tienes un resumen del proceso para crear un componente `Post` en tu proyecto y utilizarlo para renderizar publicaciones:
+
+---
+
+## Resumen del Proceso para Crear y Usar el Componente `Post`
+
+1. **Crear el Componente `Post`**:
+   - Dirígete al directorio de componentes y crea un archivo llamado `Post.js`.
+   - Implementa el componente `Post` para renderizar un elemento de lista que muestre el título de la publicación.
+   - El código del componente `Post` debe ser algo como:
+     ```javascript
+     import React, { Component } from 'react';
+
+     class Post extends Component {
+       render() {
+         return (
+           <li>{this.props.title}</li>
+         );
+       }
+     }
+
+     export default Post;
+     ```
+
+2. **Actualizar el Componente de Publicaciones Recientes**:
+   - En el archivo de publicaciones recientes, importa el componente `Post`:
+     ```javascript
+     import Post from './Post';
+     ```
+   - Reemplaza la lógica existente de renderizado de listas con el nuevo componente `Post`. Asegúrate de pasar la clave y las propiedades adecuadas al componente `Post`:
+     ```javascript
+     <Post key={index} title={post.title} />
+     ```
+
+3. **Verificar la Implementación**:
+   - Asegúrate de que el componente `Post` esté importado correctamente y que no haya errores de definición.
+   - Si se presenta un error, verifica que el componente `Post` reciba correctamente las propiedades necesarias. Corrige la referencia a `this.props.title` en el componente `Post`.
+
+4. **Proporcionar Propiedades Correctas**:
+   - En el componente de publicaciones recientes, pasa la propiedad `title` al componente `Post`. Utiliza el operador de propagación si necesitas pasar todos los atributos de la publicación:
+     ```javascript
+     <Post key={index} {...post} />
+     ```
+
+
+[Codigo creando componente post](https://github.com/Marimar8888/dailySmarty/commit/5f8b73b3100277fe291d073cd1cd578ce3cbfaf3)
+
+Aquí tienes un resumen del proceso para mejorar el componente `Post` y agregar la funcionalidad de renderizar temas asociados:
+
+---
+
+## Resumen para Mejorar el Componente `Post` y Renderizar Temas Asociados
+
+1. **Objetivo**:
+   - Mejorar el componente `Post` para no solo mostrar el título de la publicación, sino también los temas asociados debajo del título.
+
+2. **Uso del Operador de Propagación**:
+   - Utiliza el operador de propagación (`...`) para pasar todos los atributos de una publicación al componente `Post`. Esto asegura que cualquier nuevo atributo agregado a las publicaciones en el futuro se maneje sin necesidad de cambiar el código en el componente `Post`.
+
+3. **Actualizar el Componente `Post`**:
+   - **Agregar Etiquetas**: Modifica el componente `Post` para incluir una sección para los temas asociados debajo del título.
+   - **Función `renderTopics`**: Crea una función en `Post.js` para mapear y renderizar los temas asociados como elementos `span`.
+     ```javascript
+     renderTopics() {
+       const topics = this.props.associated_topics.map((topic, index) => (
+         <span className="post-topic" key={index}>{topic}</span>
+       ));
+       return topics;
+     }
+     ```
+
+4. **Integrar la Función `renderTopics`**:
+   - Llama a la función `renderTopics` dentro del método `render` del componente `Post` para que los temas asociados se muestren debajo del título.
+     ```javascript
+     render() {
+      
+      return (
+         <li className="recent-post">
+           <div className="recent-post__title">
+             {this.props.title}
+           </div>
+           <div className="recent-post__topics">
+             {this.renderTopics()}
+           </div>
+         </li>
+       );
+     }
+     ```
+
+5. **Estilos**:
+   - Aplica estilos básicos para mejorar la apariencia de los temas asociados. Por ejemplo, añade un margen entre los temas en `main.scss`:
+     ```scss
+     .post-topic {
+       margin: 0 4px;
+     }
+     ```
+
+[Codigo renderizando otra parte del post](https://github.com/Marimar8888/dailySmarty/commit/a7edc3a1a516ea766793366c8f7b0d07c3256ca1)
+[Codigo renderizando otra parte del post](https://github.com/Marimar8888/dailySmarty/commit/b486db14564c30de9e7815a9b9a74087aac12b01)
+
+Aquí tienes un resumen del proceso para modificar el componente `Logo` y agregar funcionalidades adicionales a tu aplicación, incluyendo la barra de búsqueda y el componente `ResultsPost`:
+
+---
+
+## Resumen de Modificaciones y Funcionalidades
+
+### 1. **Modificar el Componente `Logo`**
+
+**Objetivo**: Hacer que el componente `Logo` pueda adaptarse a diferentes tamaños en diferentes páginas.
+
+- **Paso 1**: Cambiar el componente `Logo` para que acepte un tamaño personalizado mediante una propiedad (`prop`).
+- **Paso 2**: Implementar estilos en línea para controlar el tamaño del logotipo en función de la propiedad `size`.
+
+  ```javascript
+  import React, { Component } from 'react';
+
+  class Logo extends Component {
+    render() {
+      const size = {
+        height: this.props.size ? this.props.size : 105,
+        width: this.props.size ? this.props.size : 105
+      };
+      return (
+        <div className="logo-main">
+          <img style={size} alt="Logo" src="/assets/ds_circle_logo.png" />
+        </div>
+      );
+    }
+  }
+
+  export default Logo;
+  ```
+
+- **Paso 3**: Aplicar el componente `Logo` con diferentes tamaños en diferentes páginas.
+  - En la página de inicio (`Home`), el tamaño por defecto será 105.
+  - En la página de resultados (`Results`), pasar una propiedad `size` de 55.
+
+### 2. **Eliminar el Elemento H1 de la Página de Resultados**
+
+- **Paso 1**: Encontrar y eliminar la etiqueta `<h1>` en `results.js` para limpiar la interfaz de usuario.
+
+### 3. **Agregar la Barra de Búsqueda**
+
+- **Paso 1**: Importar el componente `SearchBar` y colocarlo en la página adecuada.
+
+  ```javascript
+  import SearchBar from './searchBar';
+  ```
+
+- **Paso 2**: Asegúrate de que la barra de búsqueda funcione correctamente. Puede requerir ajustes si la funcionalidad no es la misma que en la pantalla principal.
+
+### 4. **Agregar el Componente `ResultsPost`**
+
+**Objetivo**: Crear un nuevo componente `ResultsPost` para manejar la visualización de publicaciones en la página de resultados.
+
+- **Paso 1**: Crear un archivo llamado `ResultsPost.js`.
+- **Paso 2**: Implementar el componente `ResultsPost` para mostrar publicaciones de manera diferente a `RecentPost`.
+
+- **Paso 3**: Reutilizar el componente `Post` con diferentes configuraciones para mostrar el contenido adecuado.
+
+
+
+[Codigo customización logo en función del componente en el que me encuentro](https://github.com/Marimar8888/dailySmarty/commit/0fc9064942348ff013681b3f25d4579bbef7ea29)
+[Codigo ]()
+[Codigo ]()
 [Codigo ]()
 [Codigo ]()
 [Codigo ]()
