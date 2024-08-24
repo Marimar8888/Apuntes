@@ -889,74 +889,10 @@ Actualizamos el método `render` en el archivo `blog.js` para incluir el icono d
 
 ## RENDER
 
-### **Pasos para Desplegar una Aplicación React en Render**
-
-#### 1. **Preparar tu Aplicación React**
-
-Antes de comenzar con el despliegue, asegúrate de que tu aplicación React esté lista para producción. Esto incluye:
-
-- **Construir tu Aplicación**:
-  - Asegúrate de que tu aplicación React esté construida y lista para ser desplegada.
-  - En el directorio raíz de tu proyecto, ejecuta:
-
-    ```bash
-    npm run build
-    ```
-
-  - Esto creará una carpeta `build` que contiene los archivos listos para producción.
-
-#### 2. **Crear una Cuenta en Render**
-
-1. **Registrarse en Render**:
-   - Ve a [Render](https://render.com) y regístrate para una cuenta si aún no tienes una.
-
-2. **Iniciar Sesión**:
-   - Una vez registrado, inicia sesión en tu cuenta de Render.
-
-#### 3. **Configurar el Repositorio**
-
-Render se integra con sistemas de control de versiones como GitHub, GitLab, y Bitbucket. Asegúrate de que tu código esté en un repositorio de Git antes de continuar.
-
-1. **Subir tu Código a un Repositorio**:
-   - Si aún no lo has hecho, sube tu aplicación React a un repositorio en GitHub, GitLab o Bitbucket.
-
-#### 4. **Crear un Nuevo Servicio en Render**
-
-1. **Ir a la Página de Servicios**:
-   - En el panel de Render, ve a la pestaña **"New+"** y selecciona **"Web Service"**.
-
-2. **Conectar tu Repositorio**:
-   - Elige el proveedor de Git (GitHub, GitLab, o Bitbucket) y autoriza a Render a acceder a tus repositorios.
-   - Selecciona el repositorio que contiene tu aplicación React.
-
-3. **Configurar el Servicio**:
-   - **Nombre del Servicio**: Escribe un nombre para tu servicio (puede ser el nombre de tu aplicación o algo descriptivo).
-   - **Región**: Selecciona la región en la que deseas desplegar tu aplicación.
-   - **Rama de Git**: Selecciona la rama que deseas desplegar (por lo general, `main` o `master`).
-
-4. **Configuración de Construcción y Ejecución**:
-   - **Build Command**:
-     - Especifica el comando para construir tu aplicación React. Normalmente, para aplicaciones React, esto es `npm run build`.
-
-   - **Start Command**:
-     - Render no requiere un comando de inicio específico para aplicaciones estáticas, pero puede configurarse como `serve -s build` si usas el paquete `serve` de npm para servir archivos estáticos.
-     - Si no estás seguro, puedes usar `npx serve -s build` para ejecutar la aplicación en un entorno de producción local.
-
-   - **Build & Start Commands**:
-     - En la mayoría de los casos para aplicaciones React estáticas, solo necesitas el comando de construcción.
-
-5. **Configurar Variables de Entorno** (Opcional):
-   - Si tu aplicación React necesita variables de entorno, configúralas en la sección correspondiente. Puedes agregar variables de entorno como claves API o configuraciones específicas.
-
-6. **Desplegar la Aplicación**:
-   - Revisa la configuración y haz clic en **"Create Web Service"** para comenzar el proceso de despliegue.
-   - Render comenzará a construir y desplegar tu aplicación. Puedes ver el progreso en el panel de Render.
-
-## Desplegar una Aplicación React en Render
-
 ### 1. Pre-requisitos
 - Tener una cuenta en [Render](https://render.com/).
 - Tener tu código fuente de la aplicación React listo en un repositorio de GitHub.
+
 
 ### 2. Preparar la Aplicación React
 Asegúrate de que tu aplicación React esté lista para producción. Puedes hacerlo ejecutando el siguiente comando en tu terminal:
@@ -965,11 +901,7 @@ npm run build
 ```
 Este comando creará una carpeta `build` con los archivos optimizados para producción. Incluir la carpeta dist en el archivo `.gitignore`.
 
-### 3. Crear un Repositorio en GitHub
-1. Inicia sesión en tu cuenta de GitHub.
-2. Crea un nuevo repositorio y sube tu código fuente.
-
-### 4. Configurar Render
+### 3. Configurar Render
 
 #### Paso 1: Crear un nuevo Static Site
 1. Ve a tu [tablero de Render](https://dashboard.render.com/).
@@ -1013,9 +945,6 @@ Aquí hay algunos comandos útiles que puedes necesitar durante este proceso:
   ```bash
   npm run build
   ```
-
-### Consideraciones Adicionales
-- Si tu aplicación utiliza rutas dinámicas, asegúrate de configurar las reglas de redireccionamiento en Render para manejar correctamente las rutas.
 
 ## Datos de la aplicación publicada en render
 
@@ -1658,7 +1587,7 @@ Aquí tienes un resumen del proceso para modificar el componente `Logo` y agrega
 
 ---
 
-## Resumen de Modificaciones y Funcionalidades
+## CUSTOMIZACION DEL LOGO DINAMICO
 
 ### 1. **Modificar el Componente `Logo`**
 
@@ -1714,9 +1643,179 @@ Aquí tienes un resumen del proceso para modificar el componente `Logo` y agrega
 
 - **Paso 3**: Reutilizar el componente `Post` con diferentes configuraciones para mostrar el contenido adecuado.
 
-
-
 [Codigo customización logo en función del componente en el que me encuentro](https://github.com/Marimar8888/dailySmarty/commit/0fc9064942348ff013681b3f25d4579bbef7ea29)
+
+Para implementar la funcionalidad en tu aplicación y hacer que la barra de búsqueda sea reutilizable en diferentes contextos, sigamos estos pasos de manera detallada:
+
+## Captura de la consulta del SearchBar
+
+Claro, aquí tienes el resumen sin el código:
+
+### **Resumen del Proceso de Refactorización**
+
+1. **Modificar `SearchBar`**:
+   - En el componente `SearchBar`, se actualiza para recibir una propiedad llamada `onSubmit`.
+   - En lugar de manejar el envío del formulario internamente, `SearchBar` ahora llama a esta función `onSubmit` con el valor de la búsqueda.
+
+2. **Actualizar `Home`**:
+   - Se define la función `handleFormSubmit` en `Home`, que recibe la consulta de búsqueda.
+   - Esta función se encarga de redirigir a la página de resultados utilizando la consulta recibida.
+   - Se pasa `handleFormSubmit` a `SearchBar` como la propiedad `onSubmit`.
+
+3. **Actualizar `Results`**:
+   - Se define la función `handleSearchbarSubmit` en `Results`, que maneja la consulta de búsqueda cuando se envía el formulario.
+   - Esta función debe implementar la lógica para buscar y mostrar los resultados en la página de resultados.
+   - Se pasa `handleSearchbarSubmit` a `SearchBar` como la propiedad `onSubmit`.
+
+4. **Implementar la Lógica de Búsqueda**:
+   - En el componente `Results`, debes implementar la lógica para realizar la búsqueda de publicaciones basada en la consulta recibida.
+   - Esto puede involucrar hacer solicitudes a una API o filtrar datos en el estado local.
+
+5. **Confirmar y Cometer Cambios**:
+   - Verifica que la aplicación funcione correctamente con las nuevas modificaciones.
+   - Luego, confirma y comete los cambios en tu repositorio para asegurar que todo está guardado y documentado.
+
+Estos pasos aseguran que la `SearchBar` sea reutilizable y flexible, permitiendo que diferentes componentes (`Home` y `Results`) manejen la búsqueda de manera efectiva según sus necesidades específicas.
+
+
+[Codigo captura de consulta en el searchbar sin acabar](https://github.com/Marimar8888/dailySmarty/commit/605713443645b318f602033cfe9f040bfe519c42)
+
+
+### **Resumen del Proceso de Implementación de Búsqueda con API**
+
+1. **Consulta de API**:
+   - Utiliza Postman para explorar la API y copiar la URL para buscar publicaciones. Por ejemplo, una búsqueda en la API puede ser realizada a través de una URL como `https://dailysmarty.com/search?q=python`.
+
+2. **Actualizar Función en `actions/index.js`**:
+   - Modifica la función existente para buscar publicaciones (`fetchRecentPosts`) y crea una nueva función `fetchPostsWithQuery` que realiza una solicitud GET a la API con la consulta proporcionada.
+   - Esta función envía la consulta a la API y obtiene los datos de las publicaciones. Los datos deben ser manipulados o despachados a un reductor en el futuro.
+
+3. **Integrar Función en `searchBar.js`**:
+   - La función `handleFormSubmit` en `SearchBar` se actualiza para usar la función `onSubmit` pasada como propiedad. Esta función debe llamar a `fetchPostsWithQuery` cuando se envíe el formulario.
+
+4. **Actualizar `home.js`**:
+   - Conecta `home.js` con Redux para poder despachar la acción `fetchPostsWithQuery`.
+   - Llama a esta acción en el `handleFormSubmit` cuando se reciba una consulta de búsqueda desde `SearchBar`.
+
+5. **Actualizar `results.js`**:
+   - Agrega la misma funcionalidad en `results.js` para manejar la búsqueda y recibir los resultados.
+   - Asegúrate de que `SearchBar` en `results.js` también pase la consulta a `fetchPostsWithQuery`.
+
+6. **Manejo de Estado y Renderización**:
+   - Verifica que los datos se obtienen correctamente y que se registran en la consola.
+   - Implementa un componente de resultados que maneje la visualización de publicaciones y asegúrate de que los datos se muestren correctamente.
+   - Considera agregar una gestión de estado para manejar la carga y la visualización de datos para evitar problemas de renderización cuando los datos se cargan asíncronamente.
+
+7. **Pruebas y Verificación**:
+   - Realiza pruebas para asegurarte de que la búsqueda y la renderización funcionan correctamente tanto en `home.js` como en `results.js`.
+   - Verifica que los datos se muestran adecuadamente en la página de resultados y que no hay errores en la consola.
+
+### **Próximos Pasos**
+- Implementar el componente de resultados en `results.js`.
+- Asegurarse de que la visualización de los datos de búsqueda esté correctamente manejada y optimizada para una buena experiencia de usuario. 
+
+Esto cubre los pasos necesarios para integrar la búsqueda con la API y manejar los datos obtenidos.
+
+[Codigo recepción datos por busqueda-query](https://github.com/Marimar8888/dailySmarty/commit/52ea0f3b0f16ab7ac43594047018821c2fb2842b)
+
+### **Configurar el Componente de Resultados**
+
+1. **Crear el Componente `ResultsPosts`**:
+   - **Archivo**: `resultsPosts.js`
+   - **Descripción**: Define un componente de React que renderiza una lista desordenada (`<ul>`) dentro de un contenedor div.
+   - **Contenido Inicial**: Incluye un texto estático "RESULTADOS VAN AQUÍ" para verificar que el componente se renderiza correctamente.
+
+2. **Integrar `ResultsPosts` en `results.js`**:
+   - **Archivo**: `results.js`
+   - **Descripción**: Importa y utiliza el componente `ResultsPosts` para mostrar los resultados en la página de resultados.
+
+3. **Conectar `ResultsPosts` con Redux**:
+   - **Archivo**: `resultsPosts.js`
+   - **Descripción**: Conecta el componente `ResultsPosts` al estado global de Redux usando `connect` de `react-redux`.
+   - **Acción**: Implementa la función `mapStateToProps` para mapear el estado a las propiedades del componente.
+   - **Nota**: Por ahora, el reductor aún no está configurado para manejar los datos de resultados, por lo que el estado de `resultsPosts` estará vacío.
+
+4. **Actualizar Reducador para Manejar Resultados**:
+   - **Descripción**: La funcionalidad actual está configurada para manejar publicaciones recientes pero no para publicaciones de búsqueda.
+   - **Acción**: Necesitas configurar el reductor para que pueda almacenar y manejar los datos obtenidos de la búsqueda.
+
+5. **Verificación y Pruebas**:
+   - **Verificación**: Asegúrate de que los datos de búsqueda se recuperen correctamente en Redux.
+   - **Prueba**: Realiza búsquedas y verifica en las herramientas de desarrollo de Redux si los datos se están almacenando y gestionando adecuadamente.
+
+### **Próximos Pasos**
+- **Configurar el Reducador**: Ajusta el reductor para manejar los datos de búsqueda y permitir que `ResultsPosts` muestre correctamente los resultados.
+- **Probar la Integración**: Verifica que los datos de búsqueda se visualicen correctamente en el componente `ResultsPosts` y asegúrate de que no haya errores en la aplicación.
+
+Este resumen cubre la creación y configuración del componente `ResultsPosts`, su integración en la aplicación y los pasos necesarios para conectar con Redux y manejar los datos de búsqueda.
+
+
+[Codigo poner juntos en resultspost](https://github.com/Marimar8888/dailySmarty/commit/b254c93e0e6e30196ea12a64768d1560b1f19156)
+
+### **Manejar Publicaciones de Resultados de consulta**
+
+1. **Verificar Datos en DevTools**:
+   - **Descripción**: Asegúrate de que los datos de `RecentPosts` y `Posts` se están manejando correctamente en DevTools. Los datos deben ser visibles y no vacíos. Si los datos no aparecen como se espera, revisa que la configuración y el estado sean correctos.
+
+2. **Actualizar Tipos de Acción**:
+   - **Archivo**: `types.js`
+   - **Descripción**: Define los tipos de acción necesarios para manejar publicaciones recientes y publicaciones de resultados. Agrega un nuevo tipo de acción para `SET_RESULTS_POSTS`.
+
+3. **Modificar Acciones**:
+   - **Archivo**: `actions/index.js`
+   - **Descripción**: Importa y utiliza el nuevo tipo de acción `SET_RESULTS_POSTS` para manejar las publicaciones de búsqueda. Asegúrate de que las acciones envíen los datos adecuados al estado global.
+
+4. **Actualizar el Reductor (`postsReducer`)**:
+   - **Archivo**: `reducers/postsReducer.js`
+   - **Descripción**: Añade casos para manejar las nuevas acciones `SET_RESULTS_POSTS` y `SET_RECENT_POSTS`. Actualiza el estado del reductor para reflejar las publicaciones de resultados y recientes correctamente.
+
+5. **Configurar el Estado Inicial**:
+   - **Descripción**: Ajusta el estado inicial del reductor para distinguir entre `recentPosts` y `resultsPosts`. Cambia el nombre del estado si es necesario para mejorar la claridad y separación de datos.
+
+6. **Importar y Usar Reducidor**:
+   - **Descripción**: Asegúrate de que el nuevo caso para `SET_RESULTS_POSTS` esté correctamente importado y utilizado en el archivo de reductores para que los datos se gestionen adecuadamente.
+
+7. **Probar la Aplicación**:
+   - **Descripción**: Realiza búsquedas para verificar que las publicaciones de resultados se muestren y se manejen de manera correcta en la aplicación. Asegúrate de que los datos de `ResultsPosts` se muestren de manera adecuada y que `RecentPosts` mantenga sus datos sin sobrescribir los resultados de búsqueda.
+
+8. **Mapeo del Estado a Props**:
+   - **Descripción**: Configura el mapeo del estado global a las propiedades del componente `ResultsPosts` para asegurarte de que los datos se pasen correctamente y se muestren en el componente.
+
+[Codigo  ](https://github.com/Marimar8888/dailySmarty/commit/2d85f8b3b1a7a2f461f086d7a64aa95f27f0da69)
+
+### **Resumen del Proceso para Configurar y Manejar Resultados de Búsqueda y Navegación en la Aplicación**
+
+1. **Configurar `ResultsPosts` para Mostrar Datos**:
+   - **Archivo**: `resultsPosts.js`
+   - **Descripción**: 
+     - Implementa la función `mapStateToProps` para mapear el estado global de Redux (`resultsPosts`) a las props del componente `ResultsPosts`.
+     - En el método `renderPosts`, mapea las publicaciones (`posts`) a componentes `Post` y renderiza una lista de estos componentes.
+     - Asegúrate de importar el componente `Post` y usarlo para mostrar cada publicación.
+
+2. **Verificar la Visualización de Datos**:
+   - **Descripción**: 
+     - Comprueba que al realizar una búsqueda (por ejemplo, "Rails") se muestren los resultados correctamente en la interfaz de usuario.
+     - Verifica que los datos se rendericen como se espera en el navegador y que cada publicación tenga sus títulos y temas asociados.
+
+3. **Agregar Navegación de Regreso a la Página de Inicio**:
+   - **Archivo**: `logo.js`
+   - **Descripción**: 
+     - Modifica el componente `Logo` para que incluya un enlace (`Link`) que dirija a la página de inicio (`/`).
+     - Utiliza el enrutador de `react-router-dom` para permitir la navegación entre páginas sin recargar la aplicación.
+     - Asegúrate de que al hacer clic en el logotipo, la aplicación navegue correctamente a la página de inicio y mantenga el estado adecuado.
+
+4. **Mejorar la Representación del Contenido**:
+   - **Descripción**:
+     - En lugar de renderizar el contenido de la misma manera en todas las páginas, ajusta la representación para mostrar información diferente según el contexto.
+     - Considera mostrar los títulos y enlaces con un estilo que permita interactuar con ellos al pasar el cursor.
+     - Asegúrate de que los temas asociados se muestren adecuadamente y se actualicen de forma dinámica cuando sea necesario.
+
+
+[Codigo ]()
+[Codigo ]()
+[Codigo ]()
+[Codigo ]()
+[Codigo ]()
 [Codigo ]()
 [Codigo ]()
 [Codigo ]()
